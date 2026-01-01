@@ -14,3 +14,7 @@ Route::get('/theme-1', function () {
 Route::get('/theme-2', function () {
     return view('public/template/theme-2/theme-2');
 });
+
+Route::get('/theme-3', function () {
+    return view('public/template/theme-3/theme-3');
+});
