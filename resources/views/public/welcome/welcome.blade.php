@@ -25,7 +25,7 @@
             </div>
             <div class="relative animate-float hidden md:block">
                 <div class="w-full h-96 bg-gradient-to-br from-rose-200 via-pink-200 to-purple-200 rounded-3xl shadow-2xl flex items-center justify-center text-9xl overflow-hidden">
-                    <img src="{{ asset('assets/image/img-1.JPG') }}" alt="" class="w-full h-full object-cover">
+                    <img src="{{ asset('assets/image/img-1.webp') }}" alt="" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -353,7 +353,7 @@
 
             <div class="group relative bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-rose-200 hover:shadow-2xl hover:-translate-y-3 transition-all duration-300">
                 <div class="relative overflow-hidden aspect-[4/5]">
-                    <img src="{{ asset('assets/image/img-2.JPG') }}" alt="Project 1"
+                    <img src="{{ asset('assets/image/img-2.webp') }}" alt="Project 1"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
 
                     <div class="absolute inset-0 bg-gradient-to-t from-rose-500/80 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
@@ -380,7 +380,7 @@
 
             <div class="group relative bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-rose-200 hover:shadow-2xl hover:-translate-y-3 transition-all duration-300">
                 <div class="relative overflow-hidden aspect-[4/5]">
-                    <img src="{{ asset('assets/image/img-4.JPG') }}" alt="Project 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <img src="{{ asset('assets/image/img-4.webp') }}" alt="Project 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-rose-500/80 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
                         <p class="text-white font-bold text-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Juna & Furi</p>
                         <p class="text-rose-100 text-sm opacity-0 group-hover:opacity-100 transition-opacity delay-100">Romantic Floral Theme</p>
@@ -404,7 +404,7 @@
 
             <div class="group relative bg-white rounded-[2.5rem] overflow-hidden border border-gray-100 hover:border-rose-200 hover:shadow-2xl hover:-translate-y-3 transition-all duration-300">
                 <div class="relative overflow-hidden aspect-[4/5]">
-                    <img src="{{ asset('assets/image/img-3.JPG') }}" alt="Project 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <img src="{{ asset('assets/image/img-3.webp') }}" alt="Project 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute inset-0 bg-gradient-to-t from-rose-500/80 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-8">
                         <p class="text-white font-bold text-2xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Juna & Furi</p>
                         <p class="text-rose-100 text-sm opacity-0 group-hover:opacity-100 transition-opacity delay-100">Luxury Wedding Theme</p>

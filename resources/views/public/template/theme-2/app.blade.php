@@ -22,6 +22,7 @@
             --gold: #d4af37;
             --stone: #1c1917;
             --cream: #fcfbf7;
+            --batik-overlay: rgba(255, 255, 255, 0.9);
         }
 
         .font-sunda {
@@ -34,32 +35,157 @@
             font-family: 'Great Vibes', cursive;
         }
 
-        .bg-mega-mendung {
-            background-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
+        /* Batik Mega Mendung Pattern */
+        .bg-batik {
+            position: relative;
             background-color: var(--cream);
+            background-image: url("{{ asset('assets/image/mega-mendung.jpg') }}");
+            background-repeat: repeat;
+            background-size: 500px;
+            z-index: 1; /* Establish stacking context */
+        }
+        
+        /* Overlay to soften the heavy batik image */
+        .bg-batik::before {
+             content: "";
+             position: absolute;
+             inset: 0;
+             background: rgba(252, 251, 247, 0.92); /* Strong Cream overlay */
+             z-index: -1;
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
         }
 
         .sunda-border {
-            border: 1px solid var(--gold);
+            border: double 4px var(--gold);
             position: relative;
-            padding: 20px;
+            padding: 24px;
+            margin: 10px;
         }
 
-        .sunda-border::before {
-            content: '';
+        .sunda-border::before, .sunda-border::after {
+            content: '⬥';
+            color: var(--gold);
             position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border: 1px solid var(--gold);
-            opacity: 0.3;
+            font-size: 24px;
+            background: var(--cream);
+            padding: 0 10px;
+        }
+
+        .sunda-border::before { top: -18px; left: 50%; transform: translateX(-50%); }
+        .sunda-border::after { bottom: -18px; left: 50%; transform: translateX(-50%); }
+
+        .divider-kujang {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .divider-kujang::before, .divider-kujang::after {
+            content: '';
+            height: 1px;
+            width: 80px;
+            background: var(--gold);
+        }
+
+        .ornament-corner {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid var(--gold);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .ornament-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .ornament-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+        .ornament-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+        .ornament-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        /* Fixed Side Ornaments (Wayang/Gunungan Silhouette) */
+        .side-ornament {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px; /* Adjust based on image ratio */
+            height: 80vh;
+            background-repeat: repeat-y;
+            background-size: contain;
+            opacity: 0.4;
+            z-index: 50;
+            pointer-events: none;
+        }
+        .side-left {
+            left: 10px;
+            background-image: url("{{ asset('assets/image/gunungan.jpg') }}"); 
+        }
+        .side-right {
+            right: 10px;
+            background-image: url("{{ asset('assets/image/gunungan.jpg') }}");
+            transform: translateY(-50%) scaleX(-1); /* Mirror for right side */
+        }
+        
+        /* Ensure content doesn't hit the sides heavily */
+        main {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        @media (min-width: 768px) {
+            .side-ornament {
+                width: 100px;
+            }
+        }
+
+        /* Hero Gapura (Gate) Effect */
+        .gapura-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 5;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end; /* Align to bottom for Gunungan entering from sides */
+            overflow: hidden;
+        }
+
+        .gapura-side {
+            width: 120px;
+            height: 100%; /* Full height to frame */
+            background-image: url("{{ asset('assets/image/gunungan.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            opacity: 0.8;
+            filter: sepia(100%) hue-rotate(5deg) saturate(150%); /* Gold/Brown tint */
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0)); /* Fade out at bottom */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
+        }
+
+        .gapura-left {
+            transform: scaleX(1); 
+            /* Clip path to shape it like a silhouette if image is square */
+            clip-path: polygon(0 0, 100% 0, 70% 100%, 0% 100%); 
+        }
+
+        .gapura-right {
+             transform: scaleX(-1);
+             clip-path: polygon(0 0, 100% 0, 70% 100%, 0% 100%);
+        }
+
+        .batik-border-y {
+            height: 20px;
+            width: 100%;
+            background-image: url("{{ asset('assets/image/batik-pattern.jpg') }}");
+            background-repeat: repeat-x;
+            background-size: auto 100%;
+            opacity: 0.7;
+            border-top: 1px solid var(--gold);
+            border-bottom: 1px solid var(--gold);
         }
     </style>
 </head>
@@ -69,7 +195,7 @@
         <source src="{{ asset('assets/audio/audio-1.mp3') }}" type="audio/mpeg">
     </audio>
     <div class="app">
-        <main>
+        <main class="relative">
             @yield('content')
         </main>
     </div>
