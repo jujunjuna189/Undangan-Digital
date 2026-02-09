@@ -42,16 +42,18 @@
             background-image: url("{{ asset('assets/image/mega-mendung.jpg') }}");
             background-repeat: repeat;
             background-size: 500px;
-            z-index: 1; /* Establish stacking context */
+            z-index: 1;
+            /* Establish stacking context */
         }
-        
+
         /* Overlay to soften the heavy batik image */
         .bg-batik::before {
-             content: "";
-             position: absolute;
-             inset: 0;
-             background: rgba(252, 251, 247, 0.92); /* Strong Cream overlay */
-             z-index: -1;
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(252, 251, 247, 0.92);
+            /* Strong Cream overlay */
+            z-index: -1;
         }
 
         .glass {
@@ -68,7 +70,8 @@
             margin: 10px;
         }
 
-        .sunda-border::before, .sunda-border::after {
+        .sunda-border::before,
+        .sunda-border::after {
             content: '⬥';
             color: var(--gold);
             position: absolute;
@@ -77,8 +80,17 @@
             padding: 0 10px;
         }
 
-        .sunda-border::before { top: -18px; left: 50%; transform: translateX(-50%); }
-        .sunda-border::after { bottom: -18px; left: 50%; transform: translateX(-50%); }
+        .sunda-border::before {
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .sunda-border::after {
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
         .divider-kujang {
             display: flex;
@@ -88,7 +100,8 @@
             margin: 2rem 0;
         }
 
-        .divider-kujang::before, .divider-kujang::after {
+        .divider-kujang::before,
+        .divider-kujang::after {
             content: '';
             height: 1px;
             width: 80px;
@@ -103,17 +116,42 @@
             opacity: 0.6;
             pointer-events: none;
         }
-        .ornament-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
-        .ornament-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
-        .ornament-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
-        .ornament-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        .ornament-tl {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .ornament-tr {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .ornament-bl {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .ornament-br {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
 
         /* Fixed Side Ornaments (Wayang/Gunungan Silhouette) */
         .side-ornament {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 60px; /* Adjust based on image ratio */
+            width: 60px;
+            /* Adjust based on image ratio */
             height: 80vh;
             background-repeat: repeat-y;
             background-size: contain;
@@ -121,21 +159,25 @@
             z-index: 50;
             pointer-events: none;
         }
+
         .side-left {
             left: 10px;
-            background-image: url("{{ asset('assets/image/gunungan.jpg') }}"); 
+            background-image: url("{{ asset('assets/image/gunungan.jpg') }}");
         }
+
         .side-right {
             right: 10px;
             background-image: url("{{ asset('assets/image/gunungan.jpg') }}");
-            transform: translateY(-50%) scaleX(-1); /* Mirror for right side */
+            transform: translateY(-50%) scaleX(-1);
+            /* Mirror for right side */
         }
-        
+
         /* Ensure content doesn't hit the sides heavily */
         main {
             padding-left: 0;
             padding-right: 0;
         }
+
         @media (min-width: 768px) {
             .side-ornament {
                 width: 100px;
@@ -150,31 +192,35 @@
             z-index: 5;
             display: flex;
             justify-content: space-between;
-            align-items: flex-end; /* Align to bottom for Gunungan entering from sides */
+            align-items: flex-end;
+            /* Align to bottom for Gunungan entering from sides */
             overflow: hidden;
         }
 
         .gapura-side {
             width: 120px;
-            height: 100%; /* Full height to frame */
+            height: 100%;
+            /* Full height to frame */
             background-image: url("{{ asset('assets/image/gunungan.jpg') }}");
             background-size: cover;
             background-position: center;
             opacity: 0.8;
-            filter: sepia(100%) hue-rotate(5deg) saturate(150%); /* Gold/Brown tint */
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0)); /* Fade out at bottom */
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0));
+            filter: sepia(100%) hue-rotate(5deg) saturate(150%);
+            /* Gold/Brown tint */
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+            /* Fade out at bottom */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
         }
 
         .gapura-left {
-            transform: scaleX(1); 
+            transform: scaleX(1);
             /* Clip path to shape it like a silhouette if image is square */
-            clip-path: polygon(0 0, 100% 0, 70% 100%, 0% 100%); 
+            clip-path: polygon(0 0, 100% 0, 70% 100%, 0% 100%);
         }
 
         .gapura-right {
-             transform: scaleX(-1);
-             clip-path: polygon(0 0, 100% 0, 70% 100%, 0% 100%);
+            transform: scaleX(-1);
+            clip-path: polygon(0 0, 100% 0, 70% 100%, 0% 100%);
         }
 
         .batik-border-y {

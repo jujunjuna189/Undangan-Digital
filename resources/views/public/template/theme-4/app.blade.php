@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Tema-4 Undangan Pernikahan</title>
-    
+
+    <!-- Preload -->
+    <link rel="preload" href="{{ asset('assets/audio/audio-4.mp3') }}" as="audio">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -30,9 +34,11 @@
         ::-webkit-scrollbar {
             width: 5px;
         }
+
         ::-webkit-scrollbar-track {
             background: #001f3f;
         }
+
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(to bottom, #d4af37, #b8860b);
             border-radius: 10px;
@@ -60,7 +66,7 @@
         }
 
         body {
-            font-family: 'Playfair Display', serif;
+            font-family: "Philosopher", serif;
             background-color: var(--navy);
             color: var(--gold-light);
             overflow-x: hidden;
@@ -109,8 +115,15 @@
         }
 
         @keyframes floatAnim {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
 
         .animate-pulse-light {
@@ -118,8 +131,15 @@
         }
 
         @keyframes pulseLightAnim {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         .separator-gold {
@@ -131,15 +151,37 @@
             text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
         }
 
-        .font-pinyon { font-family: 'Pinyon Script', cursive; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
+        .font-pinyon {
+            font-family: "Philosopher", cursive;
+        }
+
+        .font-playfair {
+            font-family: "Philosopher", serif;
+        }
+
+        .yt-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        }
+
+        .yt-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        }
+
+        .yt-overlay {
+        position: absolute;
+        inset: 0;
+        }
     </style>
 </head>
+
 <body class="navy-bg antialiased">
     <audio id="bgMusic" loop preload="none">
-        <source src="{{ asset('assets/audio/audio-1.mp3') }}" type="audio/mpeg">
+        <source src="{{ asset('assets/audio/audio-4.mp3') }}" type="audio/mpeg">
     </audio>
-    
+
     @yield('content')
 
     <!-- AOS Script -->
@@ -157,16 +199,16 @@
             window.scrollTo(0, 0);
             const coverSection = document.getElementById('cover');
             const audio = document.getElementById('bgMusic');
-            
+
             if (coverSection) {
                 coverSection.style.opacity = '0';
                 coverSection.style.pointerEvents = 'none';
-                
+
                 if (audio) {
                     audio.volume = 0.5;
                     audio.play().catch(err => console.log("Autoplay blocked by browser"));
                 }
-                
+
                 setTimeout(() => {
                     coverSection.style.display = 'none';
                     document.getElementById('main-content').style.display = 'block';
@@ -189,9 +231,12 @@
         function scrollToSection(id) {
             const element = document.getElementById(id);
             if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
             }
         }
     </script>
 </body>
+
 </html>
