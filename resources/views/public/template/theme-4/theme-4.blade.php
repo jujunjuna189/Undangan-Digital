@@ -10,15 +10,7 @@
             class="w-full h-full object-cover opacity-60 scale-105 object-[50%_20%]"
             alt="Background">
         <div class="absolute inset-0 bg-gradient-to-t from-[#001f3f] via-[#001f3f]/40 to-black/30"></div>
-        <!-- Subtle Pattern Overlay -->
-        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,<svg xmlns=\" http://www.w3.org/2000/svg\" width=\"100\" height=\"100\">
-            <defs>
-                <pattern id=\"p\" x=\"0\" y=\"0\" width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\">
-                    <path d=\"M50,10 Q75,40 50,70 Q25,40 50,10\" fill=\"none\" stroke=\"%23d4af37\" stroke-width=\"0.5\" />
-                </pattern>
-            </defs>
-            <rect width=\"100%\" height=\"100%\" fill=\"%23001f3f\" />
-            <rect width=\"100%\" height=\"100%\" fill=\"url(%23p)\" /></svg>
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><defs><pattern id=%22p%22 x=%220%22 y=%220%22 width=%22100%22 height=%22100%22 patternUnits=%22userSpaceOnUse%22><path d=%22M50,10 Q75,40 50,70 Q25,40 50,10%22 fill=%22none%22 stroke=%22%23b8860b%22 stroke-width=%220.5%22 /></pattern></defs><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23001f3f%22 /><rect width=%22100%25%22 height=%22100%25%22 fill=%22url(%23p)%22 /></svg>')">
         </div>
     </div>
 
@@ -38,28 +30,35 @@
     </div>
 
     <!-- Main Content -->
-    <div class="relative z-10 text-center px-6 py-20">
+    <div class="relative z-50 text-center px-6 py-20 flex flex-col items-center justify-center h-full w-full">
         <!-- Title -->
-        <div class="animate-float" data-aos="zoom-in" data-aos-duration="1500">
+        <div class="animate-float">
             <p class="text-[#d4af37] text-xs md:text-sm tracking-[0.5em] uppercase font-light mb-6">The Wedding of</p>
 
             <!-- Couple Names with Gold Styling -->
             <h1 class="font-serif text-5xl md:text-7xl mb-4 text-[#f7e7ce] italic leading-tight text-shadow-gold">
-                Ilham <span class="text-[#d4af37] mx-2 text-4xl md:text-5xl">&</span> Muthia
+                {{ $invitation->groom_name ?? 'Mempelai Pria' }} <span class="text-[#d4af37] mx-2 text-4xl md:text-5xl">&</span> {{ $invitation->bride_name ?? 'Mempelai Wanita' }}
             </h1>
 
             <!-- Date & Location -->
             <div class="flex justify-center items-center gap-4 mb-12 mt-8">
                 <div class="h-px w-12 bg-[#d4af37]/50"></div>
-                <p class="text-[#f7e7ce] text-xs md:text-sm tracking-[0.3em] uppercase font-light">03 Mei 2026 • Bogor</p>
+                <p class="text-[#f7e7ce] text-xs md:text-sm tracking-[0.3em] uppercase font-light">
+                    @if($invitation->wedding_date)
+                        {{ $invitation->wedding_date->translatedFormat('d F Y') }}
+                    @else
+                        30 Desember 2026
+                    @endif
+                    • {{ $invitation->location ?? 'Kota Anda' }}
+                </p>
                 <div class="h-px w-12 bg-[#d4af37]/50"></div>
             </div>
         </div>
 
         <!-- Couple Image with Gold Border (Circular) -->
-        <div class="relative mb-12 inline-block" data-aos="fade-up" data-aos-delay="300">
+        <div class="relative mb-12 inline-block">
             <div class="w-40 h-40 md:w-56 md:h-56 mx-auto relative">
-                <div class="absolute inset-0 border-4 border-[#d4af37] rounded-full opacity-60"></div>
+                <div class="absolute inset-0 border-4 border-[#d4af37] rounded-full opacity-80"></div>
                 <div class="absolute inset-2 rounded-full overflow-hidden border-2 border-[#d4af37]">
                     <img src="{{ asset('assets/image/theme-4-profile.jpeg') }}" class="w-full h-full object-cover">
                 </div>
@@ -72,9 +71,10 @@
         </div>
 
         <!-- Invitation Prompt -->
-        <div class="mt-12" data-aos="fade-up" data-aos-delay="600">
-            <p class="text-[#f7e7ce] text-sm mb-6 tracking-[0.2em] uppercase">Kepada Yth. Tamu Undangan</p>
-            <p class="text-[#f7e7ce] text-sm mb-6 tracking-[0.2em]">“Khawatir dan gelisah soal pernikahan itu wajar. Tapi akan ada masanya kamu sampai di titik itu. Saat waktunya datang, hadapi dg bismillah pokoknya mah guys"</p>
+        <div class="mt-12">
+            <p class="text-[#f7e7ce] text-sm mb-2 tracking-[0.2em] uppercase">Kepada Yth.</p>
+            <p class="text-[#d4af37] text-2xl font-serif italic mb-6 tracking-wide">{{ request('to', 'Tamu Undangan') }}</p>
+            <p class="text-[#f7e7ce] text-sm mb-6 tracking-[0.2em]">“Tanpa mengurangi rasa hormat, kami mengundang Anda untuk hadir di hari bahagia kami.”</p>
             <button onclick="openInvitation()" class="relative px-10 py-4 text-[#d4af37] border-2 border-[#d4af37] rounded-full text-sm tracking-[0.3em] uppercase font-semibold hover:bg-[#d4af37] hover:text-[#001f3f] transition-all duration-500 glass-effect">
                 Buka Undangan
             </button>
@@ -102,14 +102,7 @@
                 alt="Background">
             <div class="absolute inset-0 bg-gradient-to-t from-[#001f3f] via-[#001f3f]/40 to-black/30"></div>
             <!-- Subtle Pattern Overlay -->
-            <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,<svg xmlns=\" http://www.w3.org/2000/svg\" width=\"100\" height=\"100\">
-                <defs>
-                    <pattern id=\"p\" x=\"0\" y=\"0\" width=\"100\" height=\"100\" patternUnits=\"userSpaceOnUse\">
-                        <path d=\"M50,10 Q75,40 50,70 Q25,40 50,10\" fill=\"none\" stroke=\"%23d4af37\" stroke-width=\"0.5\" />
-                    </pattern>
-                </defs>
-                <rect width=\"100%\" height=\"100%\" fill=\"%23001f3f\" />
-                <rect width=\"100%\" height=\"100%\" fill=\"url(%23p)\" /></svg>
+            <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><defs><pattern id=%22p%22 x=%220%22 y=%220%22 width=%22100%22 height=%22100%22 patternUnits=%22userSpaceOnUse%22><path d=%22M50,10 Q75,40 50,70 Q25,40 50,10%22 fill=%22none%22 stroke=%22%23d4af37%22 stroke-width=%220.5%22 /></pattern></defs><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23001f3f%22 /><rect width=%22100%25%22 height=%22100%25%22 fill=%22url(%23p)%22 /></svg>')">
             </div>
         </div>
 
@@ -128,13 +121,18 @@
             </p>
 
             <h1 class="text-6xl md:text-8xl font-serif text-[#f7e7ce] mb-4 italic drop-shadow-lg leading-none">
-                Ilham <span class="text-[#d4af37] mx-1 md:mx-2">&</span> Muthia
+                {{ $invitation->groom_name ?? 'Pria' }} <span class="text-[#d4af37] mx-1 md:mx-2">&</span> {{ $invitation->bride_name ?? 'Wanita' }}
             </h1>
 
             <div class="flex justify-center items-center gap-4 mb-8 md:mb-12">
                 <div class="h-px w-8 md:w-16 bg-[#d4af37]/60"></div>
                 <p class="text-[#f7e7ce] font-light tracking-[0.2em] text-[10px] md:text-sm uppercase">
-                    03 Mei 2026 • Bogor
+                    @if($invitation->wedding_date)
+                        {{ $invitation->wedding_date->translatedFormat('d F Y') }}
+                    @else
+                        30 Desember 2026
+                    @endif
+                    • {{ $invitation->location ?? 'Kota Anda' }}
                 </p>
                 <div class="h-px w-8 md:w-16 bg-[#d4af37]/60"></div>
             </div>
@@ -184,13 +182,13 @@
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <!-- Text Side -->
                     <div class="order-2 md:order-1" data-aos="fade-right">
-                        <h1 class="font-serif text-5xl md:text-6xl text-[#d4af37] italic mb-6">Ilham & Muthia</h1>
+                        <h1 class="font-serif text-5xl md:text-6xl text-[#d4af37] italic mb-6">{{ $invitation->groom_name }} & {{ $invitation->bride_name }}</h1>
                         <p class="text-[#f7e7ce] text-lg leading-relaxed mb-8 font-light">
                             Bersyukur atas segala nikmat yang telah diberikan, dengan hati yang tulus kami berbagi kebahagiaan dengan orang-orang terkasih.
                         </p>
                         <div class="flex justify-start items-center gap-4 mb-8">
                             <div class="h-px w-8 bg-[#d4af37]/50"></div>
-                            <p class="text-[#d4af37] text-sm tracking-[0.2em] uppercase">03 Mei 2026</p>
+                            <p class="text-[#d4af37] text-sm tracking-[0.2em] uppercase">{{ $invitation->wedding_date->translatedFormat('d F Y') }}</p>
                         </div>
                     </div>
 
@@ -240,9 +238,9 @@
             <div class="glass-effect rounded-3xl p-8 md:p-16" data-aos="fade-up">
                 <!-- Header Section -->
                 <div class="text-center mb-12">
-                    <p class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-6">Calon Pangantin</p>
+                    <p class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-6">Calon Panganten</p>
                     <h1 class="text-5xl md:text-7xl font-serif text-[#f7e7ce] italic leading-tight">
-                        Ilham <span class="text-[#d4af37] mx-3 text-4xl md:text-5xl">&</span> Muthia
+                        {{ $invitation->groom_name ?? 'Mempelai Pria' }} <span class="text-[#d4af37] mx-3 text-4xl md:text-5xl">&</span> {{ $invitation->bride_name ?? 'Mempelai Wanita' }}
                     </h1>
                 </div>
 
@@ -261,7 +259,7 @@
                             </div>
                             <!-- Combined Names Badge -->
                             <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-[#d4af37] text-[#001f3f] px-8 py-3 rounded-full font-serif italic text-lg shadow-lg whitespace-nowrap">
-                                Ilham & Muthia
+                                {{ $invitation->groom_name ?? 'Prial' }} & {{ $invitation->bride_name ?? 'Wanita' }}
                             </div>
                         </div>
                     </div>
@@ -278,12 +276,12 @@
                 <div class="grid md:grid-cols-2 gap-8 mt-16">
                     <!-- Groom Info -->
                     <div class="text-center md:text-right border-r-0 md:border-r md:border-[#d4af37]/30 pr-0 md:pr-8" data-aos="fade-up">
-                        <h3 class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-3">Calon Panganten Pameget</h3>
-                        <p class="text-[#d4af37] text-lg mb-4">Ilham Jaya Kusumah</p>
+                        <h3 class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-3">Panganten Pameget</h3>
+                        <p class="text-[#d4af37] text-lg mb-4 font-serif">{{ $invitation->groom_name ?? 'Nama Mempelai Pria' }}</p>
 
                         <div class="space-y-3 mb-6">
-                            <p class="text-[#f7e7ce] font-light text-sm">Putra tersayang dari :</p>
-                            <p class="text-[#d4af37] font-serif text-lg leading-tight">Bapak Ato Rochmana & Ibu Erlin Nilasari</p>
+                            <p class="text-[#f7e7ce] font-light text-sm">Putra dari :</p>
+                            <p class="text-[#d4af37] font-serif text-lg leading-tight">{{ $invitation->groom_parents ?? 'Bapak & Ibu' }}</p>
                         </div>
 
                         <!-- Instagram Account -->
@@ -293,20 +291,20 @@
                                 <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
                                 <circle cx="17.5" cy="6.5" r=".5" fill="#d4af37"></circle>
                             </svg>
-                            <a href="https://instagram.com/aka_hamdun24" target="_blank" class="text-[#d4af37] hover:text-[#f7e7ce] transition text-sm font-light">
-                                @aka_hamdun24
+                            <a href="https://instagram.com/{{ str_replace('@', '', $invitation->groom_ig ?? 'groom') }}" target="_blank" class="text-[#d4af37] hover:text-[#f7e7ce] transition text-sm font-light">
+                                {{ $invitation->groom_ig ?? '@instagram_groom' }}
                             </a>
                         </div>
                     </div>
 
                     <!-- Bride Info -->
                     <div class="text-center md:text-left border-l-0 md:border-l md:border-[#d4af37]/30 pl-0 md:pl-8" data-aos="fade-up">
-                        <h3 class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-3">Calon Panganten Pamere</h3>
-                        <p class="text-[#d4af37] text-lg mb-4">Muthia Damayanti</p>
+                        <h3 class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-3">Panganten Istri</h3>
+                        <p class="text-[#d4af37] text-lg mb-4 font-serif">{{ $invitation->bride_name ?? 'Nama Mempelai Wanita' }}</p>
 
                         <div class="space-y-3 mb-6">
-                            <p class="text-[#f7e7ce] font-light text-sm">Putri tersayang dari :</p>
-                            <p class="text-[#d4af37] font-serif text-lg leading-tight">Bapak Deni Ramdani & Ibu Nining</p>
+                            <p class="text-[#f7e7ce] font-light text-sm">Putri dari :</p>
+                            <p class="text-[#d4af37] font-serif text-lg leading-tight">{{ $invitation->bride_parents ?? 'Bapak & Ibu' }}</p>
                         </div>
 
                         <!-- Instagram Account -->
@@ -316,8 +314,8 @@
                                 <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
                                 <circle cx="17.5" cy="6.5" r=".5" fill="#d4af37"></circle>
                             </svg>
-                            <a href="https://instagram.com/muthiadmynt" target="_blank" class="text-[#d4af37] hover:text-[#f7e7ce] transition text-sm font-light">
-                                @muthiadmynt
+                            <a href="https://instagram.com/{{ str_replace('@', '', $invitation->bride_ig ?? 'bride') }}" target="_blank" class="text-[#d4af37] hover:text-[#f7e7ce] transition text-sm font-light">
+                                {{ $invitation->bride_ig ?? '@instagram_bride' }}
                             </a>
                         </div>
                     </div>
@@ -561,13 +559,12 @@
                 <div class="glass-effect rounded-xl p-6 md:p-8 hover:border-[#d4af37] transition" data-aos="fade-up">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div>
-                            <h3 class="text-xl font-serif text-[#d4af37] italic mb-2">Akad Nikah</h3>
-                            <p class="text-[#f7e7ce] text-sm">Prosesi pernikahan secara agama</p>
+                            <h3 class="text-xl font-serif text-[#d4af37] italic mb-2">Prosesi Akad Nikah</h3>
+                            <p class="text-[#f7e7ce] text-sm">{{ $invitation->akad_location }}</p>
                         </div>
                         <div class="flex items-center gap-4">
                             <div class="text-right">
-                                <p class="text-[#d4af37] font-serif text-lg">08.00 - 10.00</p>
-                                <p class="text-[#f7e7ce] text-xs">Pagi</p>
+                                <p class="text-[#d4af37] font-serif text-lg">{{ $invitation->akad_time }}</p>
                             </div>
                         </div>
                     </div>
@@ -578,12 +575,11 @@
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div>
                             <h3 class="text-xl font-serif text-[#d4af37] italic mb-2">Resepsi</h3>
-                            <p class="text-[#f7e7ce] text-sm">Makan bersama dan berkumpul dengan keluarga</p>
+                            <p class="text-[#f7e7ce] text-sm">{{ $invitation->resepsi_location }}</p>
                         </div>
                         <div class="flex items-center gap-4">
                             <div class="text-right">
-                                <p class="text-[#d4af37] font-serif text-lg">10.00 - 14.00</p>
-                                <p class="text-[#f7e7ce] text-xs">Siang</p>
+                                <p class="text-[#d4af37] font-serif text-lg">{{ $invitation->resepsi_time }}</p>
                             </div>
                         </div>
                     </div>
@@ -630,27 +626,26 @@
             <div class="glass-effect rounded-xl p-8 md:p-12" data-aos="fade-up">
                 <div class="grid md:grid-cols-2 gap-8">
                     <div>
-                        <h3 class="text-xl font-serif text-[#d4af37] italic mb-4">Akad Nikah</h3>
+                        <h3 class="text-xl font-serif text-[#d4af37] italic mb-4">Prosesi Akad Nikah</h3>
                         <p class="text-[#f7e7ce] font-light mb-4">
-                            Masjid Nurul Ihsan Ciherang<br>
-                            Kab. Bogor
+                            {{ $invitation->akad_location }}<br>
+                            {{ $invitation->akad_address }}
                         </p>
-                        <a href="#" class="text-[#d4af37] text-sm hover:text-[#f7e7ce] transition">📍 Buka di Maps</a>
+                        <a href="{{ $invitation->maps_url }}" target="_blank" class="text-[#d4af37] text-sm hover:text-[#f7e7ce] transition">📍 Buka di Maps</a>
                     </div>
                     <div>
                         <h3 class="text-xl font-serif text-[#d4af37] italic mb-4">Resepsi</h3>
                         <p class="text-[#f7e7ce] font-light mb-4">
-                            Ciherang Peuntas Rt 002 Rw 005 Desa Ciherang<br>
-                            Kec. Dramaga Kab. Bogor<br>
-                            (Patokan Pemancingan Citas)
+                            {{ $invitation->resepsi_location }}<br>
+                            {{ $invitation->resepsi_address }}
                         </p>
-                        <a href="#" class="text-[#d4af37] text-sm hover:text-[#f7e7ce] transition">📍 Buka di Maps</a>
+                        <a href="{{ $invitation->maps_url }}" target="_blank" class="text-[#d4af37] text-sm hover:text-[#f7e7ce] transition">📍 Buka di Maps</a>
                     </div>
                 </div>
 
                 <!-- Map Embed -->
                 <div class="mt-8 rounded-lg overflow-hidden">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3963.531439345435!2d106.7457176749934!3d-6.580658193412858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMzQnNTAuNCJTIDEwNsKwNDQnNTMuOSJF!5e0!3m2!1sid!2sid!4v1767968547448!5m2!1sid!2sid" width="100%" height="300" style="border:0; border-radius: 0.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="{{ $invitation->maps_url }}" width="100%" height="300" style="border:0; border-radius: 0.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -673,10 +668,6 @@
                         <input type="text" class="w-full bg-transparent border-b border-[#d4af37]/30 text-[#f7e7ce] py-2 focus:outline-none focus:border-[#d4af37] transition" placeholder="Masukkan nama Anda">
                     </div>
 
-                    <div>
-                        <label class="block text-[#d4af37] text-sm mb-2">Email</label>
-                        <input type="email" class="w-full bg-transparent border-b border-[#d4af37]/30 text-[#f7e7ce] py-2 focus:outline-none focus:border-[#d4af37] transition" placeholder="Masukkan email Anda">
-                    </div>
 
                     <div>
                         <label class="block text-[#d4af37] text-sm mb-2">Kehadiran</label>
@@ -834,7 +825,7 @@
             </p>
 
             <p class="text-[#d4af37] font-serif text-2xl italic mb-8">
-                Ilham & Muthia
+                {{ $invitation->groom_name ?? 'Pria' }} & {{ $invitation->bride_name ?? 'Wanita' }}
             </p>
 
             <div class="flex justify-center gap-6 mb-8">
@@ -858,37 +849,11 @@
             </div>
 
             <p class="text-[#f7e7ce]/60 text-xs">
-                © 2025 Juna & Furi Wedding. Made with <span class="text-[#d4af37]">❤</span> by QUICT Digital Solutions
+                © 2026 {{ $invitation->groom_name ?? 'Pria' }} & {{ $invitation->bride_name ?? 'Wanita' }} Wedding.
             </p>
         </div>
     </footer>
 
-
-    <script>
-        // Countdown Logic
-        const targetDate = new Date("2026-05-03T08:00:00").getTime();
-        
-        const countdownInterval = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            if (document.getElementById("days")) {
-                document.getElementById("days").innerHTML = String(Math.max(0, days)).padStart(2, '0');
-                document.getElementById("hours").innerHTML = String(Math.max(0, hours)).padStart(2, '0');
-                document.getElementById("minutes").innerHTML = String(Math.max(0, minutes)).padStart(2, '0');
-                document.getElementById("seconds").innerHTML = String(Math.max(0, seconds)).padStart(2, '0');
-            }
-
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-            }
-        }, 1000);
-    </script>
 </main>
 
 @endsection

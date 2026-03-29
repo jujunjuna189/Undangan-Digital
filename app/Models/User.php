@@ -21,7 +21,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'package_id',
     ];
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

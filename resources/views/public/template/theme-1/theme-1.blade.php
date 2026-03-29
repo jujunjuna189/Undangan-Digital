@@ -22,19 +22,25 @@
         </div>
 
         <h1 class="text-7xl md:text-9xl font-[Pinyon_Script] mb-6 text-white drop-shadow-[0_4px_4px_rgba(0,0,0,0.3)] leading-none">
-            Juna <span class="text-[#FFD700] mx-2">&</span> Furi
+            {{ $invitation->groom_name ?? 'Pria' }} <span class="text-[#FFD700] mx-2">&</span> {{ $invitation->bride_name ?? 'Wanita' }}
         </h1>
         
         <div class="flex items-center justify-center gap-4 mb-12 opacity-90">
             <div class="h-px w-8 bg-white/50"></div>
-            <p class="font-[Playfair_Display] italic text-xl md:text-2xl font-light tracking-wide">26 Desember 2025</p>
+            <p class="font-[Playfair_Display] italic text-xl md:text-2xl font-light tracking-wide">
+                @if($invitation->wedding_date)
+                    {{ $invitation->wedding_date->format('d F Y') }}
+                @else
+                    30 Desember 2026
+                @endif
+            </p>
             <div class="h-px w-8 bg-white/50"></div>
         </div>
         
         <div class="space-y-4">
             <p class="font-[Poppins] text-[10px] uppercase tracking-widest opacity-70">Kepada Yth. Bapak/Ibu/Saudara/i</p>
             <div class="bg-white/10 backdrop-blur-md px-8 py-3 rounded-xl border border-white/20 inline-block min-w-[200px]">
-                <p class="font-[Playfair_Display] text-lg italic">Tamu Undangan</p>
+                <p class="font-[Playfair_Display] text-lg italic">{{ request('to', 'Tamu Undangan') }}</p>
             </div>
         </div>
 
@@ -117,16 +123,16 @@
             
             <div class="relative py-2 md:py-4">
                  <h1 class="font-[Playfair_Display] text-5xl md:text-8xl text-stone-800 leading-[1.1] tracking-tight drop-shadow-sm flex flex-col md:block" data-aos="zoom-in" data-aos-delay="300">
-                    <span>Juna</span> 
+                    <span>{{ $invitation->groom_name ?? 'Mempelai Pria' }}</span> 
                     <span class="font-[Pinyon_Script] text-4xl md:text-7xl text-[#D4888D] mx-2 font-thin my-2">&</span>
-                    <span>Furi</span>
+                    <span>{{ $invitation->bride_name ?? 'Mempelai Wanita' }}</span>
                 </h1>
             </div>
 
             <div class="flex items-center justify-center gap-4 md:gap-8 text-[#D4888D]" data-aos="fade-up" data-aos-delay="400">
                 <svg class="w-8 md:w-10" height="2" viewBox="0 0 40 2"><path d="M0 1h40" stroke="currentColor" stroke-opacity="0.3"/></svg>
                 <p class="font-[Playfair_Display] text-lg md:text-3xl text-stone-700 italic font-medium whitespace-nowrap">
-                    26 . 12 . 2025
+                    {{ $invitation->wedding_date->format('d . m . Y') }}
                 </p>
                 <svg class="w-8 md:w-10" height="2" viewBox="0 0 40 2"><path d="M0 1h40" stroke="currentColor" stroke-opacity="0.3"/></svg>
             </div>
@@ -134,7 +140,7 @@
             <div class="pt-4 md:pt-6" data-aos="fade-up" data-aos-delay="500">
                  <div class="inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-2 md:py-3 border border-[#D4888D]/20 rounded-full bg-white/50 backdrop-blur-sm shadow-sm group hover:border-[#D4888D]/50 transition-colors cursor-default">
                     <svg class="w-3 h-3 md:w-4 md:h-4 text-[#D4888D]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    <span class="font-[Poppins] text-[10px] md:text-xs text-stone-600 tracking-[0.2em] uppercase font-bold group-hover:text-[#D4888D] transition-colors">Jakarta, Indonesia</span>
+                    <span class="font-[Poppins] text-[10px] md:text-xs text-stone-600 tracking-[0.2em] uppercase font-bold group-hover:text-[#D4888D] transition-colors">{{ $invitation->location }}</span>
                  </div>
             </div>
         </div>
@@ -199,12 +205,12 @@
                 </div>
             </div>
             <div class="w-full md:w-7/12 order-2 md:order-2 text-center md:text-left space-y-4" data-aos="fade-left">
-                <h3 class="font-[Pinyon_Script] text-5xl md:text-6xl text-stone-800">Ujun Junaedi</h3>
-                <p class="font-[Playfair_Display] italic text-stone-500 text-lg">Putra ketiga dari Bpk. Emuh & Ibu Neni Rohaeni</p>
+                <h3 class="font-[Pinyon_Script] text-5xl md:text-6xl text-stone-800">{{ $invitation->groom_name ?? 'Nama Pria' }}</h3>
+                <p class="font-[Playfair_Display] italic text-stone-500 text-lg">{{ $invitation->groom_parents ?? 'Nama Orang Tua Pria' }}</p>
                 <div class="pt-4">
-                     <a href="#" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-stone-200 text-stone-500 text-xs tracking-widest uppercase hover:bg-[#D4888D] hover:text-white hover:border-[#D4888D] transition-colors">
+                     <a href="https://instagram.com/{{ str_replace('@', '', $invitation->groom_ig) }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-stone-200 text-stone-500 text-xs tracking-widest uppercase hover:bg-[#D4888D] hover:text-white hover:border-[#D4888D] transition-colors">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        @ujunjunaedi
+                        {{ $invitation->groom_ig }}
                     </a>
                 </div>
             </div>
@@ -221,12 +227,12 @@
                 </div>
             </div>
             <div class="w-full md:w-7/12 text-center md:text-right space-y-4" data-aos="fade-right">
-                <h3 class="font-[Pinyon_Script] text-5xl md:text-6xl text-stone-800">Furi Intan Rahayu</h3>
-                <p class="font-[Playfair_Display] italic text-stone-500 text-lg">Putri bungsu dari Bpk. - & Ibu -</p>
+                <h3 class="font-[Pinyon_Script] text-5xl md:text-6xl text-stone-800">{{ $invitation->bride_name ?? 'Nama Wanita' }}</h3>
+                <p class="font-[Playfair_Display] italic text-stone-500 text-lg">{{ $invitation->bride_parents ?? 'Nama Orang Tua Wanita' }}</p>
                  <div class="pt-4 flex justify-center md:justify-end">
-                     <a href="#" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-stone-200 text-stone-500 text-xs tracking-widest uppercase hover:bg-[#D4888D] hover:text-white hover:border-[#D4888D] transition-colors">
+                     <a href="https://instagram.com/{{ str_replace('@', '', $invitation->bride_ig) }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-stone-200 text-stone-500 text-xs tracking-widest uppercase hover:bg-[#D4888D] hover:text-white hover:border-[#D4888D] transition-colors">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                         @furiintan
+                         {{ $invitation->bride_ig }}
                     </a>
                 </div>
             </div>
@@ -324,13 +330,13 @@
                 <div class="w-16 h-px bg-[#D4888D]/30 mx-auto my-6"></div>
                 
                 <div class="space-y-3 mb-8 font-[Poppins]">
-                    <p class="text-xl font-medium text-stone-800">08:00 - 10:00 WIB</p>
-                    <p class="text-sm text-stone-500 uppercase tracking-widest">Jumat, 26 Desember 2025</p>
+                    <p class="text-xl font-medium text-stone-800">{{ $invitation->akad_time }}</p>
+                    <p class="text-sm text-stone-500 uppercase tracking-widest">{{ $invitation->wedding_date->format('l, d F Y') }}</p>
                 </div>
                 
                 <div class="bg-[#F9F9F9] rounded-2xl p-6 mb-8 border border-stone-100">
-                    <p class="font-bold text-stone-700 mb-1">Masjid Raya Istiqlal</p>
-                    <p class="text-xs text-stone-500 leading-relaxed max-w-[220px] mx-auto">Jl. Taman Wijaya Kusuma, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat</p>
+                    <p class="font-bold text-stone-700 mb-1">{{ $invitation->akad_location }}</p>
+                    <p class="text-xs text-stone-500 leading-relaxed max-w-[220px] mx-auto">{{ $invitation->akad_address }}</p>
                 </div>
                 
                  <a href="https://goo.gl/maps/example" class="inline-flex items-center gap-2 px-8 py-3 bg-stone-800 text-white rounded-full text-xs tracking-[0.2em] uppercase hover:bg-[#D4888D] hover:shadow-lg hover:shadow-[#D4888D]/30 transition-all">
@@ -351,13 +357,13 @@
                 <div class="w-16 h-px bg-[#D4888D]/30 mx-auto my-6"></div>
                 
                 <div class="space-y-3 mb-8 font-[Poppins]">
-                    <p class="text-xl font-medium text-stone-800">11:00 - 13:00 WIB</p>
-                    <p class="text-sm text-stone-500 uppercase tracking-widest">Jumat, 26 Desember 2025</p>
+                    <p class="text-xl font-medium text-stone-800">{{ $invitation->resepsi_time }}</p>
+                    <p class="text-sm text-stone-500 uppercase tracking-widest">{{ $invitation->wedding_date->format('l, d F Y') }}</p>
                 </div>
                 
                  <div class="bg-[#F9F9F9] rounded-2xl p-6 mb-8 border border-stone-100">
-                    <p class="font-bold text-stone-700 mb-1">Hotel Indonesia Kempinski</p>
-                    <p class="text-xs text-stone-500 leading-relaxed max-w-[220px] mx-auto">Menteng, Jakarta Pusat, DKI Jakarta</p>
+                    <p class="font-bold text-stone-700 mb-1">{{ $invitation->resepsi_location }}</p>
+                    <p class="text-xs text-stone-500 leading-relaxed max-w-[220px] mx-auto">{{ $invitation->resepsi_address }}</p>
                 </div>
                 
                  <a href="https://goo.gl/maps/example" class="inline-flex items-center gap-2 px-8 py-3 bg-stone-800 text-white rounded-full text-xs tracking-[0.2em] uppercase hover:bg-[#D4888D] hover:shadow-lg hover:shadow-[#D4888D]/30 transition-all">
@@ -443,7 +449,7 @@
              
              <div class="h-96 md:h-[500px] bg-stone-200 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white relative z-10">
                  <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.28318687786!2d106.7441893325603!3d-6.22957121652758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e34b9d%3A0x5371bf0fdad786a2!2sJakarta%2C%20Special%20Capital%20Region%20of%20Jakarta!5e0!3m2!1sen!2sid!4v1655095325852!5m2!1sen!2sid" 
+                    src="{{ $invitation->maps_url }}" 
                     width="100%" height="100%" style="border:0; filter: grayscale(1) contrast(1.2) sepia(0.2);" allowfullscreen="" loading="lazy">
                 </iframe>
              </div>
@@ -689,11 +695,11 @@
     
     <div class="container mx-auto px-6 relative z-10">
         <p class="font-[Playfair_Display] italic text-stone-500 text-lg mb-4">Terima Kasih</p>
-        <h2 class="font-[Pinyon_Script] text-5xl md:text-7xl mb-8 text-white">Juna & Furi</h2>
+        <h2 class="font-[Pinyon_Script] text-5xl md:text-7xl mb-8 text-white">{{ $invitation->groom_name }} <span class="text-[#D4888D]">&</span> {{ $invitation->bride_name }}</h2>
         
         <div class="flex justify-center items-center gap-6 mb-10 opacity-50">
              <div class="w-12 h-px bg-white"></div>
-             <span class="text-xs tracking-[0.3em] uppercase">26 . 12 . 2025</span>
+             <span class="text-xs tracking-[0.3em] uppercase">{{ $invitation->wedding_date->format('d . m . Y') }}</span>
              <div class="w-12 h-px bg-white"></div>
         </div>
         

@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Undangan Digital - Undangan Pernikahan Modern</title>
+    <title>{{ $invitation->groom_name }} & {{ $invitation->bride_name }} - Undangan Digital</title>
     <!-- Preload -->
     <link rel="preload" as="image" href="{{ asset('assets/image/img-1.webp') }}">
 
@@ -93,7 +93,7 @@
     });
 
     // Countdown Logic
-    const weddingDate = new Date("Dec 26, 2025 08:00:00").getTime(); // Sesuaikan tahunnya
+    const weddingDate = new Date("{{ $invitation->wedding_date->format('M d, Y') }} 08:00:00").getTime(); // Sesuaikan jamnya jika perlu
 
     const countdownTask = setInterval(function() {
         const now = new Date().getTime();

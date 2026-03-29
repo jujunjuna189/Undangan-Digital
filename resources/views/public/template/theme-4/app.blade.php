@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Tema-4 Undangan Pernikahan</title>
+    <title>Undangan Pernikahan {{ $invitation->bride_name }} & {{ $invitation->groom_name }}</title>
 
     <!-- Preload -->
     <link rel="preload" href="{{ asset('assets/audio/audio-4.mp3') }}" as="audio">
@@ -236,6 +236,44 @@
                 });
             }
         }
+
+        // Countdown configuration
+        @if($invitation->wedding_date)
+            const weddingDateString = "{{ $invitation->wedding_date->format('Y-m-d H:i:s') }}";
+        @else
+            const weddingDateString = "2026-12-30 00:00:00";
+        @endif
+        const weddingDate = new Date(weddingDateString).getTime();
+
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const daysElement = document.getElementById("days");
+            const hoursElement = document.getElementById("hours");
+            const minutesElement = document.getElementById("minutes");
+            const secondsElement = document.getElementById("seconds");
+
+            if (daysElement) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                daysElement.innerText = days.toString().padStart(2, '0');
+                hoursElement.innerText = hours.toString().padStart(2, '0');
+                minutesElement.innerText = minutes.toString().padStart(2, '0');
+                secondsElement.innerText = seconds.toString().padStart(2, '0');
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    daysElement.innerText = "00";
+                    hoursElement.innerText = "00";
+                    minutesElement.innerText = "00";
+                    secondsElement.innerText = "00";
+                }
+            }
+        }, 1000);
     </script>
 </body>
 
