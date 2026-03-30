@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Undangan Pernikahan {{ $invitation->bride_name }} & {{ $invitation->groom_name }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <!-- Preload -->
     <link rel="preload" href="{{ asset('assets/audio/audio-4.mp3') }}" as="audio">

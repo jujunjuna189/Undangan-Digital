@@ -2,14 +2,12 @@
 <nav class="bg-white/70 backdrop-blur-xl fixed w-full top-0 z-50 border-b border-gray-50/50">
     <div class="container mx-auto px-6 lg:px-20 py-6">
         <div class="flex justify-between items-center">
-            <div class="flex items-center space-x-3 group">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-rose-500 to-pink-500 flex items-center justify-center shadow-lg shadow-rose-200 group-hover:scale-110 transition duration-500">
-                    <span class="text-white text-xl">💍</span>
-                </div>
+            <a href="/" class="flex items-center space-x-3 group">
+                <img src="{{ asset('assets/image/logo.png') }}" alt="Lux Invitation Logo" class="w-10 h-10 rounded-2xl shadow-lg shadow-rose-200 group-hover:scale-110 transition duration-500">
                 <span class="font-playfair text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-500 bg-clip-text text-transparent">
-                    Undangan.
+                    Lux Invitation.
                 </span>
-            </div>
+            </a>
             <ul class="hidden md:flex space-x-12 items-center">
                 <li><a href="#home" class="text-[10px] uppercase tracking-[0.3em] text-gray-400 hover:text-rose-500 transition font-bold">Home</a></li>
                 <li><a href="#template" class="text-[10px] uppercase tracking-[0.3em] text-gray-400 hover:text-rose-500 transition font-bold">Designs</a></li>
