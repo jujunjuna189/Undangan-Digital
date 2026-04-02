@@ -375,23 +375,95 @@
     <section class="py-24 px-4 bg-gradient-to-t from-[#0a0a0a] to-[#0a0e17]">
         <div class="container mx-auto max-w-4xl">
             
-            <div class="glass-premium rounded-[1rem] p-10 md:p-20 text-center relative overflow-hidden mb-24">
+            <div class="glass-premium rounded-[1rem] p-10 md:p-20 text-center relative overflow-hidden mb-12">
                 <h2 class="font-playfair text-4xl text-gold mb-10 italic">Konfirmasi Kehadiran</h2>
-                <form class="space-y-6 max-w-lg mx-auto relative z-10">
-                    <input type="text" class="w-full px-0 py-4 bg-transparent border-b border-[#D4AF37]/30 text-center text-[#F7E7CE] placeholder-[#F7E7CE]/40 focus:border-[#D4AF37] transition-all outline-none" placeholder="Nama Lengkap">
-                    
-                    <div class="grid grid-cols-2 gap-8">
-                        <input type="number" class="w-full px-0 py-4 bg-transparent border-b border-[#D4AF37]/30 text-center text-[#F7E7CE] placeholder-[#F7E7CE]/40 focus:border-[#D4AF37] transition-all outline-none" placeholder="Jumlah">
-                         <select class="w-full px-0 py-4 bg-transparent border-b border-[#D4AF37]/30 text-center text-[#F7E7CE] outline-none">
-                            <option class="bg-[#0F172A]">Hadir</option>
-                            <option class="bg-[#0F172A]">Tidak Hadir</option>
-                        </select>
+                <form id="rsvpForm" action="{{ route('invitation.rsvp', $invitation->slug) }}" method="POST" class="space-y-6 max-w-lg mx-auto relative z-10 text-left">
+                    @csrf
+                    <div class="space-y-4">
+                        <input type="text" name="name" value="{{ request('to') }}" class="w-full px-0 py-4 bg-transparent border-b border-[#D4AF37]/30 text-center text-[#F7E7CE] placeholder-[#F7E7CE]/40 focus:border-[#D4AF37] transition-all outline-none" placeholder="Nama Lengkap" required>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <input type="text" name="phone" class="w-full px-0 py-4 bg-transparent border-b border-[#D4AF37]/30 text-center text-[#F7E7CE] placeholder-[#F7E7CE]/40 focus:border-[#D4AF37] transition-all outline-none" placeholder="No. WhatsApp (Opsional)">
+                             <select name="is_attending" class="w-full px-0 py-4 bg-transparent border-b border-[#D4AF37]/30 text-center text-[#F7E7CE] outline-none" required>
+                                <option value="" disabled selected class="bg-[#0F172A]">Pilih Kehadiran</option>
+                                <option value="1" class="bg-[#0F172A]">Hadir</option>
+                                <option value="0" class="bg-[#0F172A]">Tidak Hadir</option>
+                            </select>
+                        </div>
+
+                        <textarea name="message" class="w-full px-0 py-4 bg-transparent border-b border-[#D4AF37]/30 text-center text-[#F7E7CE] placeholder-[#F7E7CE]/40 focus:border-[#D4AF37] transition-all outline-none h-24" placeholder="Tulis ucapan dan doa..."></textarea>
                     </div>
                     
-                    <button type="button" class="mt-8 w-full py-4 glass-button text-[#D4AF37] font-bold tracking-[0.3em] uppercase text-xs">
-                        Kirim Konfirmasi
+                    <button type="submit" id="submitBtn" class="mt-8 w-full py-4 glass-button text-[#D4AF37] font-bold tracking-[0.3em] uppercase text-xs">
+                        <span class="btn-text">Kirim Konfirmasi</span>
+                        <span class="loading-spinner hidden">Mengirim...</span>
                     </button>
                 </form>
+            </div>
+
+            <script>
+                document.getElementById('rsvpForm')?.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const form = this;
+                    const submitBtn = document.getElementById('submitBtn');
+                    const btnText = submitBtn.querySelector('.btn-text');
+                    const spinner = submitBtn.querySelector('.loading-spinner');
+                    
+                    btnText.classList.add('hidden');
+                    spinner.classList.remove('hidden');
+                    submitBtn.disabled = true;
+                    
+                    const formData = new FormData(form);
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showToast(data.message);
+                            form.reset();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showToast('Terjadi kesalahan, silakan coba lagi.');
+                    })
+                    .finally(() => {
+                        btnText.classList.remove('hidden');
+                        spinner.classList.add('hidden');
+                        submitBtn.disabled = false;
+                    });
+                });
+            </script>
+
+            <!-- Wishes List for Theme 3 -->
+            <div class="mb-24 px-4">
+                <h3 class="font-playfair text-2xl text-[#F7E7CE] text-center mb-10 italic">Ucapan & Doa</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-left max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                    @forelse($invitation->guests()->where('is_rsvp', true)->latest()->get() as $rsvp)
+                        <div class="glass-card p-6 rounded-xl border border-[#D4AF37]/10">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-bold text-gold text-sm">{{ $rsvp->name }}</h4>
+                                    <p class="text-[10px] text-[#F7E7CE]/40 uppercase tracking-widest">{{ $rsvp->created_at->diffForHumans() }}</p>
+                                </div>
+                                <span class="text-[10px] {{ $rsvp->is_attending ? 'text-emerald-400' : 'text-rose-400' }} border {{ $rsvp->is_attending ? 'border-emerald-400/30' : 'border-rose-400/30' }} px-2 py-0.5 rounded uppercase font-bold tracking-tighter">
+                                    {{ $rsvp->is_attending ? 'Hadir' : 'Tidak Hadir' }}
+                                </span>
+                            </div>
+                            <p class="text-[#F7E7CE]/80 italic text-sm font-light leading-relaxed">"{{ $rsvp->message ?? 'Tidak ada pesan' }}"</p>
+                        </div>
+                    @empty
+                        <div class="col-span-2 text-center py-10 opacity-30">
+                            <p class="text-xs uppercase tracking-widest text-[#F7E7CE]">Belum ada ucapan & doa.</p>
+                        </div>
+                    @endforelse
+                </div>
             </div>
             
             <!-- Gifts -->

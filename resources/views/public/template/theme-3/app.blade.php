@@ -157,15 +157,20 @@
     
     @yield('content')
 
-    <!-- AOS Script -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            once: false,
-            mirror: true,
-            offset: 100
-        });
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-10 left-1/2 transform -translate-x-1/2 glass-premium px-6 py-3 rounded-full text-gold font-semibold z-[200] animate-bounce';
+            toast.style.boxShadow = '0 0 20px rgba(212, 175, 55, 0.3)';
+            toast.innerText = message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.remove('animate-bounce');
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.5s ease-out';
+                setTimeout(() => document.body.removeChild(toast), 500);
+            }, 3000);
+        }
     </script>
 </body>
 </html>

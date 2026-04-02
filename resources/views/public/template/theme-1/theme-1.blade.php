@@ -519,55 +519,85 @@
                         <p class="text-sm text-stone-500 mt-2 font-light">Mohon isi form di bawah ini untuk konfirmasi kehadiran Anda.</p>
                      </div>
 
-                     <form class="space-y-4">
-                        <input type="text" placeholder="Nama Lengkap" class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-700 placeholder:text-stone-400 transition-colors text-sm">
-                        <input type="text" placeholder="No. WhatsApp" class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-700 placeholder:text-stone-400 transition-colors text-sm">
-                        <select class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-600 text-sm">
-                             <option value="" disabled selected>Konfirmasi Kehadiran</option>
-                             <option>Hadir</option>
-                             <option>Tidak Hadir</option>
-                             <option>Mungkin Hadir</option>
-                         </select>
-                        <textarea placeholder="Tuliskan ucapan & doa..." class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-700 placeholder:text-stone-400 h-28 text-sm resize-none"></textarea>
-                        
-                        <button type="button" class="w-full py-3.5 bg-stone-800 text-white rounded-xl font-medium tracking-widest uppercase text-xs hover:bg-[#D4888D] transition-all hover:shadow-lg">Kirim Konfirmasi</button>
+                     <form id="rsvpForm" action="{{ route('invitation.rsvp', $invitation->slug) }}" method="POST" class="space-y-4">
+                         @csrf
+                         <input type="text" name="name" value="{{ request('to') }}" placeholder="Nama Lengkap" class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-700 placeholder:text-stone-400 transition-colors text-sm" required>
+                         <input type="text" name="phone" placeholder="No. WhatsApp (Opsional)" class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-700 placeholder:text-stone-400 transition-colors text-sm">
+                         <select name="is_attending" class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-600 text-sm" required>
+                              <option value="" disabled selected>Konfirmasi Kehadiran</option>
+                              <option value="1">Hadir</option>
+                              <option value="0">Tidak Hadir</option>
+                          </select>
+                         <textarea name="message" placeholder="Tuliskan ucapan & doa..." class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-700 placeholder:text-stone-400 h-28 text-sm resize-none"></textarea>
+                         
+                         <button type="submit" id="submitBtn" class="w-full py-3.5 bg-stone-800 text-white rounded-xl font-medium tracking-widest uppercase text-xs hover:bg-[#D4888D] transition-all hover:shadow-lg">
+                            <span class="btn-text">Kirim Konfirmasi</span>
+                            <span class="loading-spinner hidden">Mengirim...</span>
+                         </button>
                      </form>
                  </div>
+
+                 <script>
+                    document.getElementById('rsvpForm')?.addEventListener('submit', function(e) {
+                         e.preventDefault();
+                         const form = this;
+                         const submitBtn = document.getElementById('submitBtn');
+                         const btnText = submitBtn.querySelector('.btn-text');
+                         const spinner = submitBtn.querySelector('.loading-spinner');
+                         
+                         btnText.classList.add('hidden');
+                         spinner.classList.remove('hidden');
+                         submitBtn.disabled = true;
+                         
+                         const formData = new FormData(form);
+                         fetch(form.action, {
+                             method: 'POST',
+                             body: formData,
+                             headers: {
+                                 'X-Requested-With': 'XMLHttpRequest',
+                                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                             }
+                         })
+                         .then(response => response.json())
+                         .then(data => {
+                             if (data.success) {
+                                 showToast(data.message);
+                                 form.reset();
+                             }
+                         })
+                         .catch(error => {
+                             console.error('Error:', error);
+                             showToast('Terjadi kesalahan, silakan coba lagi.');
+                         })
+                         .finally(() => {
+                             btnText.classList.remove('hidden');
+                             spinner.classList.add('hidden');
+                             submitBtn.disabled = false;
+                         });
+                    });
+                 </script>
                  
-                 <!-- List Side (Max 3 Items) -->
+                 <!-- List Side -->
                  <div class="bg-[#FAFAFA] p-8 md:p-12 border-t md:border-t-0 md:border-l border-stone-100">
                      <h3 class="font-[Playfair_Display] text-xl text-stone-800 italic mb-6">Ucapan & Doa Terbaru</h3>
                      
-                     <div class="space-y-6">
-                         <!-- Item 1 -->
-                         <div class="pb-6 border-b border-stone-200 last:border-0 last:pb-0">
-                             <div class="flex justify-between items-start mb-2">
-                                 <span class="font-bold text-stone-700 text-sm">Rina & Dedi</span>
-                                 <span class="text-[10px] bg-green-100 text-green-600 px-2 py-0.5 rounded-full font-medium">Hadir</span>
+                     <div class="space-y-6 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                         @forelse($invitation->guests()->where('is_rsvp', true)->latest()->take(10)->get() as $rsvp)
+                             <div class="pb-6 border-b border-stone-200 last:border-0 last:pb-0 font-[Poppins]">
+                                 <div class="flex justify-between items-start mb-2">
+                                     <span class="font-bold text-stone-700 text-sm">{{ $rsvp->name }}</span>
+                                     <span class="text-[10px] {{ $rsvp->is_attending ? 'bg-emerald-100 text-emerald-600' : 'bg-rose-100 text-rose-600' }} px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                                         {{ $rsvp->is_attending ? 'Hadir' : 'Tidak Hadir' }}
+                                     </span>
+                                 </div>
+                                 <p class="text-xs text-stone-500 leading-relaxed italic">"{{ $rsvp->message ?? 'Tidak ada pesan' }}"</p>
+                                 <p class="text-[10px] text-stone-400 mt-2 font-medium uppercase tracking-widest">{{ $rsvp->created_at->diffForHumans() }}</p>
                              </div>
-                             <p class="text-xs text-stone-500 leading-relaxed italic">"Selamat menempuh hidup baru Juna & Furi! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah."</p>
-                             <p class="text-[10px] text-stone-400 mt-2">10 Menit yang lalu</p>
-                         </div>
-                         
-                         <!-- Item 2 -->
-                         <div class="pb-6 border-b border-stone-200 last:border-0 last:pb-0">
-                             <div class="flex justify-between items-start mb-2">
-                                 <span class="font-bold text-stone-700 text-sm">Keluarga Bpk. Santoso</span>
-                                 <span class="text-[10px] bg-green-100 text-green-600 px-2 py-0.5 rounded-full font-medium">Hadir</span>
+                         @empty
+                             <div class="text-center py-10">
+                                 <p class="text-xs text-stone-400 italic">Belum ada ucapan & doa.</p>
                              </div>
-                             <p class="text-xs text-stone-500 leading-relaxed italic">"Barakallahu lakuma. Bahagia selalu yaa!"</p>
-                             <p class="text-[10px] text-stone-400 mt-2">25 Menit yang lalu</p>
-                         </div>
-
-                         <!-- Item 3 -->
-                          <div class="pb-6 border-b border-stone-200 last:border-0 last:pb-0">
-                             <div class="flex justify-between items-start mb-2">
-                                 <span class="font-bold text-stone-700 text-sm">Andi Pratama</span>
-                                 <span class="text-[10px] bg-yellow-100 text-yellow-600 px-2 py-0.5 rounded-full font-medium">Mungkin Hadir</span>
-                             </div>
-                             <p class="text-xs text-stone-500 leading-relaxed italic">"Happy Wedding bro Juna! Lancar sampai hari H."</p>
-                             <p class="text-[10px] text-stone-400 mt-2">1 Jam yang lalu</p>
-                         </div>
+                         @endforelse
                      </div>
                  </div>
              </div>

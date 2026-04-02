@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invitation;
+use App\Models\Guest;
 use Illuminate\Http\Request;
 
 class InvitationController extends Controller
@@ -15,10 +16,17 @@ class InvitationController extends Controller
 
         // Increment Guest View Count if 'to' parameter exists
         if (request()->has('to')) {
-            $guestName = request('to');
+            $guestName = trim(request('to'));
             $guest = $invitation->guests()
-                ->where('name', 'LIKE', $guestName)
+                ->where('name', $guestName)
                 ->first();
+            
+            // Fallback for case-insensitive if exact match fails
+            if (!$guest) {
+                $guest = $invitation->guests()
+                    ->whereRaw('LOWER(name) = ?', [strtolower($guestName)])
+                    ->first();
+            }
             
             if ($guest) {
                 $guest->increment('views_count');
@@ -56,5 +64,46 @@ class InvitationController extends Controller
         }
 
         return view("public.template.{$theme}.{$theme}", compact('invitation'));
+    }
+
+    public function rsvp(Request $request, $slug)
+    {
+        $invitation = Invitation::where('slug', $slug)->firstOrFail();
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'is_attending' => 'required|boolean',
+            'message' => 'nullable|string|max:1000',
+        ]);
+
+        // Find if this guest already exists (by name) for this invitation
+        $guest = Guest::where('invitation_id', $invitation->id)
+            ->where('name', 'LIKE', $request->name)
+            ->first();
+
+        if ($guest) {
+            $guest->update([
+                'is_attending' => $request->is_attending,
+                'message' => $request->message,
+                'is_rsvp' => true,
+            ]);
+        } else {
+            Guest::create([
+                'invitation_id' => $invitation->id,
+                'name' => $request->name,
+                'is_attending' => $request->is_attending,
+                'message' => $request->message,
+                'is_rsvp' => true,
+            ]);
+        }
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Terima kasih atas konfirmasi kehadiran Anda!'
+            ]);
+        }
+
+        return back()->with('success', 'Terima kasih atas konfirmasi kehadiran Anda!');
     }
 }

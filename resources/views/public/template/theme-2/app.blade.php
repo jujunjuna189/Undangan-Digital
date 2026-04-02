@@ -439,6 +439,19 @@
             idleTimer = setTimeout(startAutoScroll, 5000);
         }
     });
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-stone-900 border-2 border-[#d4af37] text-[#d4af37] px-6 py-3 rounded-full text-sm font-bold z-[200] animate-bounce shadow-2xl';
+        toast.style.fontFamily = "'Cinzel', serif";
+        toast.innerText = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.5s ease-out';
+            setTimeout(() => document.body.removeChild(toast), 500);
+        }, 3000);
+    }
 </script>
 
 </html>

@@ -32,6 +32,7 @@ Route::get('/theme-4', [InvitationController::class, 'preview'])->defaults('them
 
 // Public Invitation
 Route::get('/v/{slug}', [InvitationController::class, 'show'])->name('invitation.show');
+Route::post('/v/{slug}/rsvp', [InvitationController::class, 'rsvp'])->name('invitation.rsvp');
 
 // Dashboard (Protected)
 Route::prefix('dashboard')->middleware('auth')->group(function () {

@@ -32,17 +32,19 @@
         </div>
 
         <!-- Main Content -->
-        <div class="relative z-50 text-center px-6 py-12 md:py-20 flex flex-col items-center justify-center min-h-full w-full">
+        <div
+            class="relative z-50 text-center px-6 py-12 md:py-20 flex flex-col items-center justify-center min-h-full w-full">
             <div class="flex flex-col items-center space-y-6 md:space-y-12 max-w-lg">
                 <!-- Title -->
                 <div class="animate-float space-y-2 md:space-y-6">
-                    <p class="text-[#d4af37] text-[10px] md:text-sm tracking-[0.5em] uppercase font-light">The Wedding of</p>
+                    <p class="text-[#d4af37] text-[10px] md:text-sm tracking-[0.5em] uppercase font-light">The Wedding of
+                    </p>
 
                     <!-- Couple Names with Gold Styling -->
                     <h1 class="font-serif text-4xl md:text-7xl text-[#f7e7ce] italic leading-tight text-shadow-gold">
-                        {{ $invitation->groom_name ?? 'Mempelai Pria' }} <span
+                        {{ $invitation->bride_name ?? 'Mempelai Wanita' }} <span
                             class="text-[#d4af37] mx-1 md:mx-2 text-2xl md:text-5xl">&</span>
-                        {{ $invitation->bride_name ?? 'Mempelai Wanita' }}
+                        {{ $invitation->groom_name ?? 'Mempelai Pria' }}
                     </h1>
 
                     <!-- Date & Location -->
@@ -68,10 +70,16 @@
                             <img src="{{ asset('assets/image/theme-4-profile.jpeg') }}" class="w-full h-full object-cover">
                         </div>
                         <!-- Gold Accent Corners -->
-                        <div class="absolute -top-2 -left-2 w-6 h-6 md:w-8 md:h-8 border-l-2 border-t-2 border-[#d4af37]"></div>
-                        <div class="absolute -top-2 -right-2 w-6 h-6 md:w-8 md:h-8 border-r-2 border-t-2 border-[#d4af37]"></div>
-                        <div class="absolute -bottom-2 -left-2 w-6 h-6 md:w-8 md:h-8 border-l-2 border-b-2 border-[#d4af37]"></div>
-                        <div class="absolute -bottom-2 -right-2 w-6 h-6 md:w-8 md:h-8 border-r-2 border-b-2 border-[#d4af37]"></div>
+                        <div class="absolute -top-2 -left-2 w-6 h-6 md:w-8 md:h-8 border-l-2 border-t-2 border-[#d4af37]">
+                        </div>
+                        <div class="absolute -top-2 -right-2 w-6 h-6 md:w-8 md:h-8 border-r-2 border-t-2 border-[#d4af37]">
+                        </div>
+                        <div
+                            class="absolute -bottom-2 -left-2 w-6 h-6 md:w-8 md:h-8 border-l-2 border-b-2 border-[#d4af37]">
+                        </div>
+                        <div
+                            class="absolute -bottom-2 -right-2 w-6 h-6 md:w-8 md:h-8 border-r-2 border-b-2 border-[#d4af37]">
+                        </div>
                     </div>
                 </div>
 
@@ -79,11 +87,15 @@
                 <div class="space-y-4 md:space-y-6">
                     <div>
                         <p class="text-[#f7e7ce] text-[10px] md:text-sm mb-1 tracking-[0.2em] uppercase">Kepada Yth.</p>
-                        <p class="text-[#d4af37] text-lg md:text-2xl font-serif italic tracking-wide">{{ request('to', 'Tamu Undangan') }}</p>
+                        <p class="text-[#d4af37] text-lg md:text-2xl font-serif italic tracking-wide">
+                            {{ request('to', 'Tamu Undangan') }}
+                        </p>
                     </div>
-                    
-                    <p class="text-[#f7e7ce] text-[10px] md:text-sm tracking-[0.1em] opacity-80 max-w-xs mx-auto leading-relaxed">
-                        “Khawatir dan gelisah soal pernikahan itu wajar. Tapi akan ada masanya kamu sampai di titik itu.”
+
+                    <p
+                        class="text-[#f7e7ce] text-[10px] md:text-sm tracking-[0.1em] opacity-80 max-w-xs mx-auto leading-relaxed">
+                        “Khawatir dan gelisah soal pernikahan itu wajar. Tapi akan ada masanya kamu sampai di titik itu.
+                        Saat waktunya datang, hadapi dg berani pokoknya mah guys"
                     </p>
 
                     <button onclick="openInvitation()"
@@ -94,12 +106,12 @@
             </div>
         </div>
 
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-pulse-light">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5">
-                    <path d="M12 5v14m0 0l-7-7m7 7l7-7" />
-                </svg>
-            </div>
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-pulse-light">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5">
+                <path d="M12 5v14m0 0l-7-7m7 7l7-7" />
+            </svg>
+        </div>
         </div>
     </section>
 
@@ -137,8 +149,9 @@
                 </p>
 
                 <h1 class="text-4xl md:text-8xl font-serif text-[#f7e7ce] mb-4 italic drop-shadow-lg leading-tight">
-                    {{ $invitation->groom_name ?? 'Pria' }} <span class="text-[#d4af37] mx-1 md:mx-2 text-3xl md:text-6xl">&</span>
-                    {{ $invitation->bride_name ?? 'Wanita' }}
+                    {{ $invitation->bride_name ?? 'Wanita' }} <span
+                        class="text-[#d4af37] mx-1 md:mx-2 text-3xl md:text-6xl">&</span>
+                    {{ $invitation->groom_name ?? 'Pria' }}
                 </h1>
 
                 <div class="flex justify-center items-center gap-4 mb-8 md:mb-12">
@@ -204,7 +217,8 @@
                         <!-- Text Side -->
                         <div class="order-2 md:order-1" data-aos="fade-right">
                             <h1 class="font-serif text-3xl md:text-6xl text-[#d4af37] italic mb-6">
-                                {{ $invitation->groom_name }} & {{ $invitation->bride_name }}</h1>
+                                {{ $invitation->bride_name }} & {{ $invitation->groom_name }}
+                            </h1>
                             <p class="text-[#f7e7ce] text-lg leading-relaxed mb-8 font-light">
                                 Bersyukur atas segala nikmat yang telah diberikan, dengan hati yang tulus kami berbagi
                                 kebahagiaan dengan orang-orang terkasih.
@@ -212,7 +226,8 @@
                             <div class="flex justify-start items-center gap-4 mb-8">
                                 <div class="h-px w-8 bg-[#d4af37]/50"></div>
                                 <p class="text-[#d4af37] text-sm tracking-[0.2em] uppercase">
-                                    {{ $invitation->wedding_date->translatedFormat('d F Y') }}</p>
+                                    {{ $invitation->wedding_date->translatedFormat('d F Y') }}
+                                </p>
                             </div>
                         </div>
 
@@ -235,16 +250,18 @@
                     <h2 class="text-2xl md:text-4xl text-[#d4af37] mb-8 tracking-[0.2em] uppercase">Mukodimah</h2>
 
                     <!-- Arabic Verse -->
-                    <p class="text-[#d4af37] text-2xl md:text-3xl mb-6 font-serif leading-relaxed">وَمِنْ آيَاتِهِ أَنْ
-                        خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا</p>
+                    <p class="text-[#d4af37] text-2xl md:text-3xl mb-6 font-serif leading-relaxed">وَمِنْ اٰيٰتِهٖٓ اَنْ
+                        خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً
+                        وَّرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ</p>
 
                     <div class="separator-gold w-32 mx-auto my-6"></div>
 
                     <!-- Translation -->
                     <p class="text-[#f7e7ce] text-base md:text-lg leading-relaxed font-light italic mb-6">
-                        "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untuk kamu isteri-isteri dari jenismu
-                        sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antara kamu rasa
-                        kasih dan sayang."
+                        "Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari
+                        (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta
+                        dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran
+                        Allah) bagi kaum yang berpikir."
                     </p>
 
                     <p class="text-[#d4af37] text-sm tracking-[0.2em]">QS. Ar-Rum : 21</p>
@@ -268,9 +285,9 @@
                     <div class="text-center mb-12">
                         <p class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-6">Calon Pengantin</p>
                         <h1 class="text-3xl md:text-7xl font-serif text-[#f7e7ce] italic leading-tight">
-                            {{ $invitation->groom_name ?? 'Mempelai Pria' }} <span
+                            {{ $invitation->bride_name ?? 'Mempelai Wanita' }} <span
                                 class="text-[#d4af37] mx-1 md:mx-3 text-2xl md:text-5xl">&</span>
-                            {{ $invitation->bride_name ?? 'Mempelai Wanita' }}
+                            {{ $invitation->groom_name ?? 'Mempelai Pria' }}
                         </h1>
                     </div>
 
@@ -285,7 +302,7 @@
                                     class="absolute -inset-1 border-2 border-[#d4af37] rounded-3xl translate-x-6 translate-y-6 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500 opacity-60">
                                 </div>
                                 <div class="relative overflow-hidden rounded-3xl aspect-[3/4] shadow-2xl">
-                                    <img src="{{ asset('assets/image/theme-4-cover.jpeg') }}"
+                                    <img src="{{ asset('assets/image/theme-4-profile-2.jpeg') }}"
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                                     <!-- Gold Accent Overlay -->
                                     <div
@@ -295,7 +312,7 @@
                                 <!-- Combined Names Badge -->
                                 <div
                                     class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-[#d4af37] text-[#001f3f] px-8 py-3 rounded-full font-serif italic text-lg shadow-lg whitespace-nowrap">
-                                    {{ $invitation->groom_name ?? 'Prial' }} & {{ $invitation->bride_name ?? 'Wanita' }}
+                                    {{ $invitation->bride_name ?? 'Wanita' }} & {{ $invitation->groom_name ?? 'Pria' }}
                                 </div>
                             </div>
                         </div>
@@ -312,18 +329,21 @@
 
                     <!-- Information Grid -->
                     <div class="grid md:grid-cols-2 gap-8 mt-16">
-                        <!-- Groom Info -->
+                        <!-- Bride Info (Left) -->
                         <div class="text-center md:text-right border-r-0 md:border-r md:border-[#d4af37]/30 pr-0 md:pr-8"
                             data-aos="fade-up">
-                            <h3 class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-3">Pengatin Perempuan
+                            <h3 class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-3">Pengantin
+                                Perempuan
                             </h3>
                             <p class="text-[#d4af37] text-lg mb-4 font-serif">
-                                {{ $invitation->groom_name ?? 'Nama Mempelai Pria' }}</p>
+                                {{ $invitation->bride_name ?? 'Nama Mempelai Wanita' }}
+                            </p>
 
                             <div class="space-y-3 mb-6">
-                                <p class="text-[#f7e7ce] font-light text-sm">Putra dari :</p>
+                                <p class="text-[#f7e7ce] font-light text-sm">Putri dari :</p>
                                 <p class="text-[#d4af37] font-serif text-lg leading-tight">
-                                    {{ $invitation->groom_parents ?? 'Bapak & Ibu' }}</p>
+                                    {{ $invitation->bride_parents ?? 'Bapak & Ibu' }}
+                                </p>
                             </div>
 
                             <!-- Instagram Account -->
@@ -335,26 +355,28 @@
                                     <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
                                     <circle cx="17.5" cy="6.5" r=".5" fill="#d4af37"></circle>
                                 </svg>
-                                <a href="https://instagram.com/{{ str_replace('@', '', $invitation->groom_ig ?? 'groom') }}"
+                                <a href="https://instagram.com/{{ str_replace('@', '', $invitation->bride_ig ?? 'bride') }}"
                                     target="_blank"
                                     class="text-[#d4af37] hover:text-[#f7e7ce] transition text-sm font-light">
-                                    {{ $invitation->groom_ig ?? '@instagram_groom' }}
+                                    {{ $invitation->bride_ig ?? '@instagram_bride' }}
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Bride Info -->
+                        <!-- Groom Info (Right) -->
                         <div class="text-center md:text-left border-l-0 md:border-l md:border-[#d4af37]/30 pl-0 md:pl-8"
                             data-aos="fade-up">
                             <h3 class="text-[#d4af37] text-sm tracking-[0.3em] uppercase font-light mb-3">Pengantin Pria
                             </h3>
                             <p class="text-[#d4af37] text-lg mb-4 font-serif">
-                                {{ $invitation->bride_name ?? 'Nama Mempelai Wanita' }}</p>
+                                {{ $invitation->groom_name ?? 'Nama Mempelai Pria' }}
+                            </p>
 
                             <div class="space-y-3 mb-6">
-                                <p class="text-[#f7e7ce] font-light text-sm">Putri dari :</p>
+                                <p class="text-[#f7e7ce] font-light text-sm">Putra dari :</p>
                                 <p class="text-[#d4af37] font-serif text-lg leading-tight">
-                                    {{ $invitation->bride_parents ?? 'Bapak & Ibu' }}</p>
+                                    {{ $invitation->groom_parents ?? 'Bapak & Ibu' }}
+                                </p>
                             </div>
 
                             <!-- Instagram Account -->
@@ -366,10 +388,10 @@
                                     <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"></path>
                                     <circle cx="17.5" cy="6.5" r=".5" fill="#d4af37"></circle>
                                 </svg>
-                                <a href="https://instagram.com/{{ str_replace('@', '', $invitation->bride_ig ?? 'bride') }}"
+                                <a href="https://instagram.com/{{ str_replace('@', '', $invitation->groom_ig ?? 'groom') }}"
                                     target="_blank"
                                     class="text-[#d4af37] hover:text-[#f7e7ce] transition text-sm font-light">
-                                    {{ $invitation->bride_ig ?? '@instagram_bride' }}
+                                    {{ $invitation->groom_ig ?? '@instagram_groom' }}
                                 </a>
                             </div>
                         </div>
@@ -799,39 +821,87 @@
                 </div>
 
                 <div class="glass-effect rounded-xl p-8 md:p-12" data-aos="fade-up">
-                    <form class="space-y-6">
+                    <form id="rsvpForm" action="{{ route('invitation.rsvp', $invitation->slug) }}" method="POST"
+                        class="space-y-6">
+                        @csrf
                         <div>
                             <label class="block text-[#d4af37] text-sm mb-2">Nama Lengkap</label>
-                            <input type="text"
+                            <input type="text" name="name" value="{{ request('to') }}"
                                 class="w-full bg-transparent border-b border-[#d4af37]/30 text-[#f7e7ce] py-2 focus:outline-none focus:border-[#d4af37] transition"
-                                placeholder="Masukkan nama Anda">
+                                placeholder="Masukkan nama Anda" required>
                         </div>
 
                         <div>
                             <label class="block text-[#d4af37] text-sm mb-2">Kehadiran</label>
-                            <select
-                                class="w-full bg-transparent border-b border-[#d4af37]/30 text-[#f7e7ce] py-2 focus:outline-none focus:border-[#d4af37] transition">
+                            <select name="is_attending"
+                                class="w-full bg-transparent border-b border-[#d4af37]/30 text-[#f7e7ce] py-2 focus:outline-none focus:border-[#d4af37] transition"
+                                required>
                                 <option value="" disabled selected class="bg-[#001f3f]">Pilih kehadiran</option>
-                                <option value="hadir" class="bg-[#001f3f]">Akan Hadir</option>
-                                <option value="tidak" class="bg-[#001f3f]">Belum Bisa Hadir</option>
+                                <option value="1" class="bg-[#001f3f]">Akan Hadir</option>
+                                <option value="0" class="bg-[#001f3f]">Belum Bisa Hadir</option>
                             </select>
                         </div>
 
                         <div>
                             <label class="block text-[#d4af37] text-sm mb-2">Pesan & Doa</label>
-                            <textarea
+                            <textarea name="message"
                                 class="w-full bg-transparent border-b border-[#d4af37]/30 text-[#f7e7ce] py-2 focus:outline-none focus:border-[#d4af37] transition"
                                 placeholder="Kirim pesan & doa untuk kami" rows="4"></textarea>
                         </div>
 
-                        <button type="submit"
+                        <button type="submit" id="submitBtn"
                             class="w-full bg-gradient-to-r from-[#d4af37] to-[#b8860b] text-[#001f3f] py-3 rounded-full font-semibold tracking-[0.2em] uppercase hover:shadow-lg transition-all duration-500 mt-8">
-                            Kirim Konfirmasi
+                            <span class="btn-text">Kirim Konfirmasi</span>
+                            <span class="loading-spinner hidden">Mengirim...</span>
                         </button>
                     </form>
                 </div>
             </div>
         </section>
+
+        <script>
+            document.getElementById('rsvpForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const form = this;
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = submitBtn.querySelector('.btn-text');
+                const spinner = submitBtn.querySelector('.loading-spinner');
+
+                // Show loading
+                btnText.classList.add('hidden');
+                spinner.classList.remove('hidden');
+                submitBtn.disabled = true;
+
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showToast(data.message);
+                            form.reset();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showToast('Terjadi kesalahan, silakan coba lagi.');
+                    })
+                    .finally(() => {
+                        // Hide loading
+                        btnText.classList.remove('hidden');
+                        spinner.classList.add('hidden');
+                        submitBtn.disabled = false;
+                    });
+            });
+        </script>
 
         <!-- SECTION 12: KADO PERNIKAHAN (Tema-3) -->
         <section class="py-24 px-6 relative">
@@ -970,7 +1040,7 @@
                 </p>
 
                 <p class="text-[#d4af37] font-serif text-2xl italic mb-8">
-                    {{ $invitation->groom_name ?? 'Pria' }} & {{ $invitation->bride_name ?? 'Wanita' }}
+                    {{ $invitation->bride_name ?? 'Wanita' }} & {{ $invitation->groom_name ?? 'Pria' }}
                 </p>
 
                 <div class="flex justify-center gap-6 mb-8">
@@ -998,7 +1068,7 @@
                 </div>
 
                 <p class="text-[#f7e7ce]/60 text-xs">
-                    © 2026 {{ $invitation->groom_name ?? 'Pria' }} & {{ $invitation->bride_name ?? 'Wanita' }} Wedding.
+                    © 2026 {{ $invitation->bride_name ?? 'Wanita' }} & {{ $invitation->groom_name ?? 'Pria' }} Wedding.
                 </p>
             </div>
         </footer>

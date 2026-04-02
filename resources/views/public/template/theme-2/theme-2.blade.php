@@ -742,48 +742,92 @@
     <div class="container mx-auto px-6 relative z-10 max-w-3xl">
         <h2 class="text-5xl font-serif italic text-[#d4af37] text-center mb-12" data-aos="fade-down">Ucapan & Doa</h2>
         
-        <form class="space-y-6" data-aos="fade-up">
+        <form id="rsvpForm" action="{{ route('invitation.rsvp', $invitation->slug) }}" method="POST" class="space-y-6" data-aos="fade-up">
+            @csrf
             <div>
                 <label class="block text-[#d4af37] text-xs uppercase tracking-widest mb-2">Nama</label>
-                <input type="text" class="w-full bg-stone-800 border border-stone-700 rounded p-4 text-white focus:outline-none focus:border-[#d4af37] transition" placeholder="Nama Lengkap">
+                <input type="text" name="name" value="{{ request('to') }}" class="w-full bg-stone-800 border border-stone-700 rounded p-4 text-white focus:outline-none focus:border-[#d4af37] transition" placeholder="Nama Lengkap" required>
             </div>
              <div>
-                <label class="block text-[#d4af37] text-xs uppercase tracking-widest mb-2">Hadir Sebagai</label>
-                 <select class="w-full bg-stone-800 border border-stone-700 rounded p-4 text-white focus:outline-none focus:border-[#d4af37] transition">
-                    <option>Tamu Undangan</option>
-                    <option>Keluarga</option>
-                    <option>Kerabat Kerja</option>
-                </select>
+                <label class="block text-[#d4af37] text-xs uppercase tracking-widest mb-2">No. WhatsApp (Opsional)</label>
+                <input type="text" name="phone" class="w-full bg-stone-800 border border-stone-700 rounded p-4 text-white focus:outline-none focus:border-[#d4af37] transition" placeholder="628xxx">
             </div>
              <div>
                 <label class="block text-[#d4af37] text-xs uppercase tracking-widest mb-2">Ucapan & Doa</label>
-                <textarea class="w-full bg-stone-800 border border-stone-700 rounded p-4 text-white focus:outline-none focus:border-[#d4af37] transition h-32" placeholder="Tulis ucapan dan doa..."></textarea>
+                <textarea name="message" class="w-full bg-stone-800 border border-stone-700 rounded p-4 text-white focus:outline-none focus:border-[#d4af37] transition h-32" placeholder="Tulis ucapan dan doa..."></textarea>
             </div>
              <div>
                 <label class="block text-[#d4af37] text-xs uppercase tracking-widest mb-2">Konfirmasi Kehadiran</label>
-                 <select class="w-full bg-stone-800 border border-stone-700 rounded p-4 text-white focus:outline-none focus:border-[#d4af37] transition">
-                    <option>Hadir</option>
-                    <option>Mungkin Hadir</option>
-                    <option>Tidak Hadir</option>
+                 <select name="is_attending" class="w-full bg-stone-800 border border-stone-700 rounded p-4 text-white focus:outline-none focus:border-[#d4af37] transition" required>
+                    <option value="" disabled selected>Pilih Konfirmasi</option>
+                    <option value="1">Hadir</option>
+                    <option value="0">Tidak Hadir</option>
                 </select>
             </div>
             
-            <button type="button" class="w-full bg-[#d4af37] text-stone-900 font-bold uppercase tracking-widest py-4 rounded hover:bg-[#b5952f] transition">Kirim Ucapan</button>
+            <button type="submit" id="submitBtn" class="w-full bg-[#d4af37] text-stone-900 font-bold uppercase tracking-widest py-4 rounded hover:bg-[#b5952f] transition">
+                <span class="btn-text">Kirim Ucapan</span>
+                <span class="loading-spinner hidden">Mengirim...</span>
+            </button>
         </form>
+
+        <script>
+            document.getElementById('rsvpForm')?.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const form = this;
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = submitBtn.querySelector('.btn-text');
+                const spinner = submitBtn.querySelector('.loading-spinner');
+                
+                btnText.classList.add('hidden');
+                spinner.classList.remove('hidden');
+                submitBtn.disabled = true;
+                
+                const formData = new FormData(form);
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showToast(data.message);
+                        form.reset();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('Terjadi kesalahan, silakan coba lagi.');
+                })
+                .finally(() => {
+                    btnText.classList.remove('hidden');
+                    spinner.classList.add('hidden');
+                    submitBtn.disabled = false;
+                });
+            });
+        </script>
         
-        <div class="mt-16 space-y-4 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
-            <!-- Comment Dummy 1 -->
-            <div class="bg-stone-800/50 p-4 border-l-2 border-[#d4af37]">
-                <h4 class="font-bold text-[#d4af37] text-sm">Budi Santoso</h4>
-                <p class="text-xs text-stone-400 mb-2">Hadir • 2 Menit yang lalu</p>
-                <p class="text-stone-300 italic text-sm">"Selamat menempuh hidup baru bro! Semoga sakinah mawaddah warahmah."</p>
-            </div>
-             <!-- Comment Dummy 2 -->
-            <div class="bg-stone-800/50 p-4 border-l-2 border-[#d4af37]">
-                <h4 class="font-bold text-[#d4af37] text-sm">Siti Nurhaliza</h4>
-                <p class="text-xs text-stone-400 mb-2">Hadir • 5 Menit yang lalu</p>
-                <p class="text-stone-300 italic text-sm">"Barakallahu lakuma! Cantik banget undangannya 😍"</p>
-            </div>
+        <div class="mt-16 space-y-4 max-h-96 overflow-y-auto pr-2 custom-scrollbar text-left">
+            @forelse($invitation->guests()->where('is_rsvp', true)->latest()->take(10)->get() as $rsvp)
+                <div class="bg-stone-800/50 p-4 border-l-2 border-[#d4af37]">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-bold text-[#d4af37] text-sm">{{ $rsvp->name }}</h4>
+                        <span class="text-[10px] {{ $rsvp->is_attending ? 'text-emerald-400' : 'text-rose-400' }} uppercase font-bold tracking-widest">
+                            {{ $rsvp->is_attending ? 'Hadir' : 'Tidak Hadir' }}
+                        </span>
+                    </div>
+                    <p class="text-[10px] text-stone-400 mb-2 uppercase tracking-wide">{{ $rsvp->created_at->diffForHumans() }}</p>
+                    <p class="text-stone-300 italic text-sm leading-relaxed">"{{ $rsvp->message ?? 'Tidak ada pesan' }}"</p>
+                </div>
+            @empty
+                <div class="text-center py-10 opacity-50">
+                    <p class="text-xs uppercase tracking-widest">Belum ada ucapan & doa.</p>
+                </div>
+            @endforelse
         </div>
     </div>
 </section>
