@@ -99,10 +99,21 @@ class DashboardController extends Controller
         return redirect()->route('dashboard.invitations')->with('success', 'Undangan berhasil dihapus!');
     }
 
-    public function guests($id)
+    public function guests(Request $request, $id)
     {
-        $invitation = Invitation::where('user_id', Auth::id())->with('guests')->findOrFail($id);
-        return view('dashboard/invitations/guests', compact('invitation'));
+        $search = $request->input('search');
+        $invitation = Invitation::where('user_id', Auth::id())->findOrFail($id);
+        
+        $total_guests = $invitation->guests()->count();
+        
+        $guests = $invitation->guests()
+            ->when($search, function($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->latest()
+            ->get();
+
+        return view('dashboard/invitations/guests', compact('invitation', 'guests', 'search', 'total_guests'));
     }
 
     public function storeGuest(Request $request, $id)
