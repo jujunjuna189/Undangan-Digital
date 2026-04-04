@@ -124,4 +124,16 @@ class DashboardController extends Controller
 
         return back()->with('success', 'Tamu berhasil dihapus!');
     }
+
+    public function resetRSVP($id)
+    {
+        $guest = Guest::findOrFail($id);
+        $guest->update([
+            'is_rsvp' => false,
+            'is_attending' => false,
+            'message' => null,
+        ]);
+
+        return back()->with('success', 'Konfirmasi kehadiran berhasil dihapus, tamu tetap ada di daftar!');
+    }
 }

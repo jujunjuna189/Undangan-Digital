@@ -159,7 +159,8 @@
                                 <tr class="bg-slate-50/50 hidden md:table-row">
                                     <th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest">Tamu & Pesan</th>
                                     <th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Kehadiran</th>
-                                    <th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-right">Waktu</th>
+                                    <th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Waktu</th>
+                                    <th class="px-8 py-4 text-xs font-bold text-slate-400 uppercase tracking-widest text-right">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-50">
@@ -180,12 +181,22 @@
                                                 </span>
                                             @endif
                                         </td>
-                                        <td class="px-8 py-6 text-right">
+                                        <td class="px-8 py-6 text-center">
                                             <div class="text-xs text-slate-400 font-medium">
                                                 {{ $rsvp->updated_at->diffForHumans() }}
                                             </div>
                                             <div class="text-[10px] text-slate-300 mt-0.5">
                                                 {{ $rsvp->updated_at->format('d/m/Y H:i') }}
+                                            </div>
+                                        </td>
+                                        <td class="px-8 py-6 text-right">
+                                            <div class="flex items-center justify-end gap-2">
+                                                <form action="{{ route('dashboard.invitations.reset_rsvp', $rsvp->id) }}" method="POST" class="reset-rsvp-form inline">
+                                                    @csrf
+                                                    <button type="button" onclick="confirmResetRSVP(this.form)" class="p-2 text-slate-300 hover:text-rose-500 transition-colors" title="Hapus Konfirmasi Saja">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -226,6 +237,28 @@
             confirmButtonColor: '#f43f5e',
             cancelButtonColor: '#94a3b8',
             confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+            customClass: {
+                popup: 'rounded-[2rem]',
+                confirmButton: 'rounded-xl px-6 py-3 font-bold',
+                cancelButton: 'rounded-xl px-6 py-3 font-bold'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        })
+    }
+
+    function confirmResetRSVP(form) {
+        Swal.fire({
+            title: 'Hapus Konfirmasi?',
+            text: "Status kehadiran dan pesan tamu akan dihapus, namun tamu tersebut tetap ada di daftar undangan.",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#f43f5e',
+            cancelButtonColor: '#94a3b8',
+            confirmButtonText: 'Ya, Hapus Konfirmasi!',
             cancelButtonText: 'Batal',
             customClass: {
                 popup: 'rounded-[2rem]',

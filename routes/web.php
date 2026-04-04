@@ -48,6 +48,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     // Guests management
     Route::get('/invitations/{id}/guests', [DashboardController::class, 'guests'])->name('dashboard.invitations.guests');
     Route::post('/invitations/{id}/guests', [DashboardController::class, 'storeGuest'])->name('dashboard.invitations.store_guest');
+    Route::post('/guests/{id}/reset-rsvp', [DashboardController::class, 'resetRSVP'])->name('dashboard.invitations.reset_rsvp');
     Route::delete('/guests/{id}', [DashboardController::class, 'destroyGuest'])->name('dashboard.invitations.destroy_guest');
 });
 
