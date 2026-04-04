@@ -856,6 +856,43 @@
                         </button>
                     </form>
                 </div>
+
+                <!-- DAFTAR KEHADIRAN -->
+                <div class="mt-12 glass-effect rounded-xl p-8 md:p-12" data-aos="fade-up">
+                    <h3 class="text-2xl font-serif text-[#d4af37] italic mb-8 text-center">Daftar Kehadiran</h3>
+                    <div class="max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                        <div id="rsvpList" class="space-y-2">
+                            @php
+                                $rsvps = $invitation->guests()->where('is_rsvp', true)->orderBy('updated_at', 'desc')->get();
+                            @endphp
+                            
+                            @forelse($rsvps as $rsvp)
+                                <div class="border-b border-[#d4af37]/20 pb-2 last:border-0">
+                                    <div class="flex justify-between items-start mb-1">
+                                        <div>
+                                            <h4 class="text-[#d4af37] font-serif italic text-lg">{{ $rsvp->name }}</h4>
+                                            <span class="text-[10px] uppercase tracking-widest text-[#f7e7ce]/50">
+                                                {{ $rsvp->updated_at->diffForHumans() }}
+                                            </span>
+                                        </div>
+                                        @if($rsvp->is_attending)
+                                            <span class="bg-[#d4af37]/20 text-[#d4af37] text-[10px] px-3 py-1 rounded-full border border-[#d4af37]/30 uppercase tracking-widest">Hadir</span>
+                                        @else
+                                            <span class="bg-red-500/20 text-red-300 text-[10px] px-3 py-1 rounded-full border border-red-500/30 uppercase tracking-widest">Absen</span>
+                                        @endif
+                                    </div>
+                                    @if($rsvp->message)
+                                        <p class="text-[#f7e7ce] font-light text-sm italic mt-1">"{{ $rsvp->message }}"</p>
+                                    @endif
+                                </div>
+                            @empty
+                                <div class="text-center py-8">
+                                    <p class="text-[#f7e7ce]/50 italic">Belum ada konfirmasi kehadiran.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -887,7 +924,58 @@
                     .then(data => {
                         if (data.success) {
                             showToast(data.message);
+
+                            // Langsung munculkan item di daftar kehadiran tanpa reload
+                            const name = form.querySelector('[name="name"]').value;
+                            const isAttending = form.querySelector('[name="is_attending"]').value === '1';
+                            const message = form.querySelector('[name="message"]').value;
+                            const rsvpList = document.getElementById('rsvpList');
+
+                            // Hapus pesan "Belum ada konfirmasi" jika ada
+                            const emptyState = rsvpList.querySelector('.text-center.py-8');
+                            if (emptyState) {
+                                emptyState.remove();
+                            }
+
+                            // Buat elemen baru
+                            const newRsvp = document.createElement('div');
+                            newRsvp.className = 'border-b border-[#d4af37]/20 pb-2 last:border-0 animate-pulse';
+                            
+                            let rsvpType = isAttending 
+                                ? '<span class="bg-[#d4af37]/20 text-[#d4af37] text-[10px] px-3 py-1 rounded-full border border-[#d4af37]/30 uppercase tracking-widest">Hadir</span>'
+                                : '<span class="bg-red-500/20 text-red-300 text-[10px] px-3 py-1 rounded-full border border-red-500/30 uppercase tracking-widest">Absen</span>';
+                            
+                            let messageHtml = message 
+                                ? `<p class="text-[#f7e7ce] font-light text-sm italic mt-1">"${message}"</p>`
+                                : '';
+
+                            newRsvp.innerHTML = `
+                                <div class="flex justify-between items-start mb-1">
+                                    <div>
+                                        <h4 class="text-[#d4af37] font-serif italic text-lg">${name}</h4>
+                                        <span class="text-[10px] uppercase tracking-widest text-[#f7e7ce]/50">Baru saja</span>
+                                    </div>
+                                    ${rsvpType}
+                                </div>
+                                ${messageHtml}
+                            `;
+
+                            // Tambahkan ke paling atas daftar
+                            rsvpList.insertBefore(newRsvp, rsvpList.firstChild);
+
+                            // Reset form
                             form.reset();
+
+                            // Scroll ke atas daftar kehadiran
+                            rsvpList.parentElement.scrollTo({
+                                top: 0,
+                                behavior: 'smooth'
+                            });
+
+                            // Hilangkan efek pulse setelah 2 detik
+                            setTimeout(() => {
+                                newRsvp.classList.remove('animate-pulse');
+                            }, 2000);
                         }
                     })
                     .catch(error => {
