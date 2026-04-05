@@ -4,7 +4,7 @@
 <div id="cover" class="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900 transition-opacity duration-1000">
 
     <div id="bg-image" class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-0 scale-110"
-        style="background-image: url('<?= asset('assets/image/img-1.webp') ?>');">
+        style="background-image: url('{{ $invitation->cover_photo ? asset($invitation->cover_photo) : asset('assets/image/img-1.webp') }}');">
     </div>
 
     <div class="absolute inset-0 bg-black/40"></div>
@@ -14,7 +14,7 @@
          <!-- Couple Photo in Cover -->
         <div class="w-48 h-48 mx-auto mb-6 rounded-full border-4 border-[#d4af37] overflow-hidden shadow-2xl relative">
             <div class="absolute inset-0 bg-[#d4af37] opacity-20"></div>
-            <img src="{{ asset('assets/image/img-1.webp') }}" class="w-full h-full object-cover">
+            <img src="{{ $invitation->cover_photo ? asset($invitation->cover_photo) : asset('assets/image/img-1.webp') }}" class="w-full h-full object-cover">
         </div>
         <h1 class="text-5xl md:text-7xl font-serif mb-8 italic">Juna & Furi</h1>
         <button onclick="openInvitation()" class="bg-rose-500 text-white px-10 py-4 rounded-full font-bold uppercase text-xs tracking-[0.2em] hover:bg-pink-600 transition-all shadow-2xl">
@@ -26,7 +26,7 @@
 <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden bg-stone-900">
     <!-- Immersive Background with Parallax Feel -->
     <div class="absolute inset-0 z-0">
-        <img src="{{ asset('assets/image/img-1.webp') }}" class="w-full h-full object-cover object-center opacity-60 scale-105" alt="Background">
+        <img src="{{ $invitation->cover_photo ? asset($invitation->cover_photo) : asset('assets/image/img-1.webp') }}" class="w-full h-full object-cover object-center opacity-60 scale-105" alt="Background">
         <div class="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/40 to-black/30"></div>
         <!-- Subtle Batik Overlay Pattern -->
         <div class="absolute inset-0 opacity-10 bg-[url('{{ asset('assets/image/batik-pattern.jpg') }}')] bg-repeat mix-blend-overlay"></div>
@@ -147,7 +147,7 @@
                 <div class="relative group">
                     <div class="absolute inset-0 border-2 border-[#d4af37] -translate-x-3 translate-y-3 transition-transform duration-500 group-hover:translate-x-0 group-hover:translate-y-0"></div>
                      <div class="relative overflow-hidden w-full aspect-[3/4]">
-                        <img src="{{ asset('assets/image/img-4.webp') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
+                        <img src="{{ $invitation->bride_photo ? asset($invitation->bride_photo) : asset('assets/image/img-4.webp') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0">
                     </div>
                 </div>
             </div>
@@ -681,7 +681,7 @@
                 <div class="w-20 h-20 mx-auto rounded-full bg-stone-100 border border-[#d4af37] flex items-center justify-center">
                     <!-- Icon placeholder -->
                    <svg class="w-10 h-10 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                    </svg>
                 </div>
                 <p class="text-xs font-bold uppercase tracking-widest text-stone-600">Mendoakan Kedua Mempelai</p>
@@ -689,7 +689,7 @@
              <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="w-20 h-20 mx-auto rounded-full bg-stone-100 border border-[#d4af37] flex items-center justify-center">
                    <svg class="w-10 h-10 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 12h20M4 12c0 4.418 3.582 8 8 8s8-3.582 8-8M8 4v4M12 4v4M16 4v4" />
                     </svg>
                 </div>
                 <p class="text-xs font-bold uppercase tracking-widest text-stone-600">Memperhatikan Adab Makan & Minum</p>
@@ -697,7 +697,7 @@
              <div class="space-y-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="w-20 h-20 mx-auto rounded-full bg-stone-100 border border-[#d4af37] flex items-center justify-center">
                     <svg class="w-10 h-10 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                     </svg>
                 </div>
                 <p class="text-xs font-bold uppercase tracking-widest text-stone-600">Berpakaian Sopan & Menutup Aurat</p>
@@ -742,8 +742,10 @@
     <div class="container mx-auto px-6 relative z-10 max-w-3xl">
         <h2 class="text-5xl font-serif italic text-[#d4af37] text-center mb-12" data-aos="fade-down">Ucapan & Doa</h2>
         
-        <form id="rsvpForm" action="{{ route('invitation.rsvp', $invitation->slug) }}" method="POST" class="space-y-6" data-aos="fade-up">
+        <form id="rsvpForm" action="{{ route('rsvp.store') }}" method="POST" class="space-y-6" data-aos="fade-up">
             @csrf
+            <input type="hidden" name="slug" value="{{ $invitation->slug ?? 'preview' }}">
+            <input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
             <div>
                 <label class="block text-[#d4af37] text-xs uppercase tracking-widest mb-2">Nama</label>
                 <input type="text" name="name" value="{{ request('to') }}" class="w-full bg-stone-800 border border-stone-700 rounded p-4 text-white focus:outline-none focus:border-[#d4af37] transition" placeholder="Nama Lengkap" required>

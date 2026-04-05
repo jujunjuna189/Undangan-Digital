@@ -18,7 +18,7 @@
         @foreach($packages as $package)
         <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 group relative">
             <div class="absolute top-8 right-8 flex gap-2">
-                <button class="w-10 h-10 bg-white border border-slate-100 rounded-xl text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 transition-all duration-300 shadow-sm flex items-center justify-center"><svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></button>
+                <a href="{{ route('admin.packages.edit', $package->id) }}" class="w-10 h-10 bg-white border border-slate-100 rounded-xl text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 transition-all duration-300 shadow-sm flex items-center justify-center"><svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg></a>
             </div>
             
             <div class="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-500 flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition duration-500 shadow-inner border border-emerald-100 italic font-playfair font-black">
@@ -36,8 +36,9 @@
 
             <div class="space-y-4 mb-10 pt-8 border-t border-slate-50">
                 <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Included Features</p>
-                @if($package->features)
-                    @foreach(json_decode($package->features, true) ?? [] as $feature)
+                @php $features = is_array($package->features) ? $package->features : json_decode($package->features, true) ?? []; @endphp
+                @if(!empty($features))
+                    @foreach($features as $feature)
                     <div class="flex items-center gap-3">
                         <div class="w-5 h-5 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center text-[10px] font-bold">✓</div>
                         <span class="text-slate-600 text-sm font-medium">{{ $feature }}</span>
@@ -49,7 +50,7 @@
             </div>
 
             <div class="grid grid-cols-1 gap-2">
-                <button class="w-full bg-slate-50 border border-slate-100 py-3 rounded-2xl text-slate-600 font-bold hover:bg-slate-100 transition-all text-xs">Ubah Detail</button>
+                <a href="{{ route('admin.packages.edit', $package->id) }}" class="w-full bg-slate-50 border border-slate-100 py-3 rounded-2xl text-slate-600 font-bold hover:bg-slate-100 transition-all text-xs text-center">Ubah Detail</a>
             </div>
         </div>
         @endforeach

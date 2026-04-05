@@ -5,7 +5,7 @@
 <div id="cover" class="fixed inset-0 z-[100] flex items-center justify-center bg-stone-900 transition-opacity duration-1500">
     <!-- Dynamic Background -->
     <div id="bg-image" class="absolute inset-0 bg-cover bg-center transition-all duration-[3000ms] opacity-0 scale-110 ease-out"
-        style="background-image: url('{{ asset('assets/image/img-1.webp') }}');">
+        style="background-image: url('{{ $invitation->cover_photo ? asset($invitation->cover_photo) : asset('assets/image/img-1.webp') }}');">
     </div>
     
     <!-- Gradient Overlay for Readability -->
@@ -60,7 +60,7 @@
 <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden py-20 md:py-0">
     <!-- Background Image with Blur -->
     <div class="absolute inset-0">
-        <img src="{{ asset('assets/image/img-1.webp') }}" class="w-full h-full object-cover blur-[3px] scale-110 opacity-60">
+        <img src="{{ $invitation->cover_photo ? asset($invitation->cover_photo) : asset('assets/image/img-1.webp') }}" class="w-full h-full object-cover blur-[3px] scale-110 opacity-60">
         <div class="absolute inset-0 bg-[#FDFBF7]/60"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#FDFBF7] via-transparent to-[#FDFBF7]/50"></div>
     </div>
@@ -200,7 +200,7 @@
                 <div class="relative mx-auto w-64 h-80 md:w-80 md:h-[28rem]">
                      <div class="absolute inset-0 border border-[#D4888D]/30 rounded-t-[10rem] rounded-b-[2rem] translate-x-3 translate-y-3"></div>
                      <div class="absolute inset-0 rounded-t-[10rem] rounded-b-[2rem] overflow-hidden shadow-xl">
-                         <img src="{{ asset('assets/image/img-2.webp') }}" class="w-full h-full object-cover">
+                         <img src="{{ $invitation->groom_photo ? asset($invitation->groom_photo) : asset('assets/image/img-2.webp') }}" class="w-full h-full object-cover">
                      </div>
                 </div>
             </div>
@@ -222,7 +222,7 @@
                  <div class="relative mx-auto w-64 h-80 md:w-80 md:h-[28rem]">
                      <div class="absolute inset-0 border border-[#D4888D]/30 rounded-t-[10rem] rounded-b-[2rem] -translate-x-3 translate-y-3"></div>
                      <div class="absolute inset-0 rounded-t-[10rem] rounded-b-[2rem] overflow-hidden shadow-xl">
-                         <img src="{{ asset('assets/image/img-4.webp') }}" class="w-full h-full object-cover">
+                         <img src="{{ $invitation->bride_photo ? asset($invitation->bride_photo) : asset('assets/image/img-4.webp') }}" class="w-full h-full object-cover">
                      </div>
                 </div>
             </div>
@@ -519,8 +519,10 @@
                         <p class="text-sm text-stone-500 mt-2 font-light">Mohon isi form di bawah ini untuk konfirmasi kehadiran Anda.</p>
                      </div>
 
-                     <form id="rsvpForm" action="{{ route('invitation.rsvp', $invitation->slug) }}" method="POST" class="space-y-4">
+                     <form id="rsvpForm" action="{{ route('rsvp.store') }}" method="POST" class="space-y-4">
                          @csrf
+                         <input type="hidden" name="slug" value="{{ $invitation->slug ?? 'preview' }}">
+                         <input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
                          <input type="text" name="name" value="{{ request('to') }}" placeholder="Nama Lengkap" class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-700 placeholder:text-stone-400 transition-colors text-sm" required>
                          <input type="text" name="phone" placeholder="No. WhatsApp (Opsional)" class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-700 placeholder:text-stone-400 transition-colors text-sm">
                          <select name="is_attending" class="w-full px-5 py-3 bg-[#F9F9F9] rounded-xl border border-stone-100 focus:border-[#D4888D] outline-none text-stone-600 text-sm" required>

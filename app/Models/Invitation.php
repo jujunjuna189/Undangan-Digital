@@ -25,6 +25,16 @@ class Invitation extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function galleries()
+    {
+        return $this->hasMany(InvitationGallery::class);
+    }
+
+    public function stories()
+    {
+        return $this->hasMany(InvitationStory::class)->orderBy('order_num');
+    }
+
     public function guests()
     {
         return $this->hasMany(Guest::class);

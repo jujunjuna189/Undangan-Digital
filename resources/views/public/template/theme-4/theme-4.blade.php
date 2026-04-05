@@ -6,7 +6,7 @@
     <section id="cover"
         class="fixed inset-0 z-[100] flex items-center justify-center navy-bg transition-opacity duration-1000">
         <div class="absolute inset-0 z-0">
-            <img src="{{ asset('assets/image/theme-4-cover.jpeg') }}"
+            <img src="{{ $invitation->cover_photo ? asset($invitation->cover_photo) : asset('assets/image/theme-4-cover.jpeg') }}"
                 class="w-full h-full object-cover opacity-60 scale-105 object-[50%_20%]" alt="Background">
             <div class="absolute inset-0 bg-gradient-to-t from-[#001f3f] via-[#001f3f]/40 to-black/30"></div>
             <div class="absolute inset-0 opacity-10"
@@ -67,7 +67,7 @@
                     <div class="w-32 h-32 md:w-56 md:h-56 mx-auto relative">
                         <div class="absolute inset-0 border-4 border-[#d4af37] rounded-full opacity-80"></div>
                         <div class="absolute inset-2 rounded-full overflow-hidden border-2 border-[#d4af37]">
-                            <img src="{{ asset('assets/image/theme-4-profile.jpeg') }}" class="w-full h-full object-cover">
+                            <img src="{{ $invitation->bride_photo ? asset($invitation->bride_photo) : asset('assets/image/theme-4-profile.jpeg') }}" class="w-full h-full object-cover">
                         </div>
                         <!-- Gold Accent Corners -->
                         <div class="absolute -top-2 -left-2 w-6 h-6 md:w-8 md:h-8 border-l-2 border-t-2 border-[#d4af37]">
@@ -234,7 +234,7 @@
                         <!-- Image Side -->
                         <div class="order-1 md:order-2 relative" data-aos="fade-left">
                             <div class="relative aspect-[3/4] overflow-hidden rounded-2xl border-4 border-[#d4af37]">
-                                <img src="{{ asset('assets/image/theme-4-cover.jpeg') }}"
+                                <img src="{{ $invitation->cover_photo ? asset($invitation->cover_photo) : asset('assets/image/theme-4-cover.jpeg') }}"
                                     class="w-full h-full object-cover">
                             </div>
                         </div>
@@ -302,7 +302,7 @@
                                     class="absolute -inset-1 border-2 border-[#d4af37] rounded-3xl translate-x-6 translate-y-6 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-500 opacity-60">
                                 </div>
                                 <div class="relative overflow-hidden rounded-3xl aspect-[3/4] shadow-2xl">
-                                    <img src="{{ asset('assets/image/theme-4-profile-2.jpeg') }}"
+                                    <img src="{{ $invitation->cover_photo ? asset($invitation->cover_photo) : asset('assets/image/theme-4-profile-2.jpeg') }}"
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                                     <!-- Gold Accent Overlay -->
                                     <div
@@ -821,9 +821,11 @@
                 </div>
 
                 <div class="glass-effect rounded-xl p-8 md:p-12" data-aos="fade-up">
-                    <form id="rsvpForm" action="{{ route('invitation.rsvp', $invitation->slug) }}" method="POST"
+                    <form id="rsvpForm" action="{{ route('rsvp.store') }}" method="POST"
                         class="space-y-6">
                         @csrf
+                        <input type="hidden" name="slug" value="{{ $invitation->slug ?? 'preview' }}">
+                        <input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
                         <div>
                             <label class="block text-[#d4af37] text-sm mb-2">Nama Lengkap</label>
                             <input type="text" name="name" value="{{ request('to') }}"
@@ -1056,7 +1058,7 @@
                             class="w-20 h-20 mx-auto rounded-full bg-[#d4af37]/10 border-2 border-[#d4af37] flex items-center justify-center group hover:bg-[#d4af37]/20 transition">
                             <svg class="w-10 h-10 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0V12m-3 .5a3 3 0 006 0V6a1.5 1.5 0 10-3 0v12a3 3 0 11-6 0v-4m.5-3.5h0" />
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                             </svg>
                         </div>
                         <p class="text-xs md:text-sm font-semibold uppercase tracking-widest text-[#f7e7ce]">Mendo'akan
@@ -1069,7 +1071,7 @@
                             class="w-20 h-20 mx-auto rounded-full bg-[#d4af37]/10 border-2 border-[#d4af37] flex items-center justify-center group hover:bg-[#d4af37]/20 transition">
                             <svg class="w-10 h-10 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    d="M2 12h20M4 12c0 4.418 3.582 8 8 8s8-3.582 8-8M8 4v4M12 4v4M16 4v4" />
                             </svg>
                         </div>
                         <p class="text-xs md:text-sm font-semibold uppercase tracking-widest text-[#f7e7ce]">Memperhatikan
@@ -1082,7 +1084,7 @@
                             class="w-20 h-20 mx-auto rounded-full bg-[#d4af37]/10 border-2 border-[#d4af37] flex items-center justify-center group hover:bg-[#d4af37]/20 transition">
                             <svg class="w-10 h-10 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04M12 21.48V11.5" />
+                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                             </svg>
                         </div>
                         <p class="text-xs md:text-sm font-semibold uppercase tracking-widest text-[#f7e7ce]">Berpakaian
@@ -1107,8 +1109,11 @@
                         <div
                             class="w-20 h-20 mx-auto rounded-full bg-[#d4af37]/10 border-2 border-[#d4af37] flex items-center justify-center group hover:bg-[#d4af37]/20 transition">
                             <svg class="w-10 h-10 text-[#d4af37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                <circle cx="6" cy="8" r="3" stroke-width="1.5" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 19c0-2.21 1.343-4 3-4s3 1.79 3 4" />
+                                <circle cx="18" cy="8" r="3" stroke-width="1.5" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19c0-2.21 1.343-4 3-4s3 1.79 3 4" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" stroke-dasharray="3 3" d="M12 4v16" />
                             </svg>
                         </div>
                         <p class="text-xs md:text-sm font-semibold uppercase tracking-widest text-[#f7e7ce]">Kursi duduk

@@ -10,7 +10,7 @@ class InvitationController extends Controller
 {
     public function show($slug)
     {
-        $invitation = Invitation::with('template')
+        $invitation = Invitation::with(['template', 'galleries', 'stories'])
             ->where('slug', $slug)
             ->firstOrFail();
 
@@ -40,6 +40,8 @@ class InvitationController extends Controller
     public function preview($theme)
     {
         $invitation = new \App\Models\Invitation();
+        $invitation->id = 1; // Dummy ID for preview
+        $invitation->slug = "preview";
         $invitation->bride_name = "Emma Sophia Watson";
         $invitation->groom_name = "James Arthur Bond";
         $invitation->wedding_date = now()->addMonths(2);
@@ -56,6 +58,24 @@ class InvitationController extends Controller
         $invitation->resepsi_address = "768 5th Ave, New York, NY 10019";
         $invitation->maps_url = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.25280821814!2d-74.11976373946229!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sid!4v1740578496854!5m2!1sen!2sid";
         
+        // Dummy Bank for Preview
+        $invitation->bank_name = "BCA";
+        $invitation->bank_account = "123456789";
+        $invitation->bank_holder = "Emma & James";
+        $invitation->bank_name_2 = "Bank Mandiri";
+        $invitation->bank_account_2 = "987654321";
+        $invitation->bank_holder_2 = "Sophia Watson";
+        
+        // Dummy Stories for Preview
+        $invitation->setRelation('stories', collect([
+            (object)['title' => 'Pertama Berjumpa', 'content' => 'Di sebuah senja yang cerah, takdir mempertemukan kami untuk pertama kalinya.', 'date_info' => '2020'],
+            (object)['title' => 'Membangun Komitmen', 'content' => 'Setelah perjalanan panjang, kami menyadari bahwa kami diciptakan untuk satu sama lain.', 'date_info' => '2022'],
+            (object)['title' => 'Menuju Pelaminan', 'content' => 'Kini kami memantapkan hari untuk mengikat janji suci di hadapan Allah SWT.', 'date_info' => '2026'],
+        ]));
+
+        // Dummy Galleries for Preview
+        $invitation->setRelation('galleries', collect());
+
         // Ensure wedding_date is treated correctly if it's a Carbon instance
         if ($invitation->wedding_date instanceof \Carbon\Carbon) {
             // It's already carbon
@@ -66,9 +86,24 @@ class InvitationController extends Controller
         return view("public.template.{$theme}.{$theme}", compact('invitation'));
     }
 
-    public function rsvp(Request $request, $slug)
+    public function rsvp(Request $request, $slug = null)
     {
-        $invitation = Invitation::where('slug', $slug)->firstOrFail();
+        if (!$slug) {
+            $slug = $request->input('slug');
+        }
+
+        if ($slug) {
+            $invitation = Invitation::where('slug', $slug)->first();
+        } else {
+            $invitation = Invitation::find($request->input('invitation_id'));
+        }
+
+        if (!$invitation) {
+            if ($request->ajax()) {
+                return response()->json(['success' => false, 'message' => 'Invitation not found.'], 404);
+            }
+            return back()->with('error', 'Invitation not found.');
+        }
 
         $request->validate([
             'name' => 'required|string|max:255',

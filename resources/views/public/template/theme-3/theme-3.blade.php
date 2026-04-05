@@ -50,7 +50,7 @@
             </div>
 
             <div class="relative py-8">
-                <h1 class="font-pinyon text-7xl md:text-9xl text-gold drop-shadow-2xl relative z-20 leading-none">Juna & Furi</h1>
+                <h1 class="font-pinyon text-7xl md:text-9xl text-gold drop-shadow-2xl relative z-20 leading-none">{{ $invitation->groom_name ?? 'Mempelai Pria' }} & {{ $invitation->bride_name ?? 'Mempelai Wanita' }}</h1>
                 <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[100px] bg-[#D4AF37] blur-[100px] opacity-20 z-10"></div>
             </div>
 
@@ -95,16 +95,16 @@
                         <div class="space-y-2">
                             <p class="font-playfair text-[#F7E7CE] text-xl italic opacity-80">Kami mengundang Anda</p>
                             <h2 class="font-playfair text-6xl md:text-8xl text-gold leading-[0.9]">
-                                Juna <br> 
+                                {{ $invitation->groom_name ?? 'Mempelai Pria' }} <br> 
                                 <span class="font-pinyon text-5xl md:text-7xl text-[#F7E7CE]">&</span> <br>
-                                Furi
+                                {{ $invitation->bride_name ?? 'Mempelai Wanita' }}
                             </h2>
                         </div>
 
                         <div class="space-y-6 border-l border-[#D4AF37]/30 pl-6 md:ml-2">
                             <div class="text-[#F7E7CE]">
-                                <p class="text-2xl font-playfair mb-1">Minggu</p>
-                                <p class="tracking-[0.2em] text-sm uppercase opacity-70">26 Desember 2025</p>
+                                <p class="text-2xl font-playfair mb-1">{{ $invitation->wedding_date ? $invitation->wedding_date->translatedFormat('l') : 'Minggu' }}</p>
+                                <p class="tracking-[0.2em] text-sm uppercase opacity-70">{{ $invitation->wedding_date ? $invitation->wedding_date->translatedFormat('d F Y') : '30 Desember 2026' }}</p>
                             </div>
                             
                             <!-- Boxed Countdown -->
@@ -184,10 +184,10 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="font-playfair text-4xl text-[#F7E7CE] mb-2">Junaedi Al-Fatih</h3>
+                        <h3 class="font-playfair text-4xl text-[#F7E7CE] mb-2">{{ $invitation->groom_name ?? 'Nama Pria' }}</h3>
                         <p class="font-pinyon text-2xl text-gold mb-4">The Groom</p>
                         <div class="w-12 h-px bg-[#D4AF37] mx-auto mb-4 opacity-50"></div>
-                        <p class="text-[#F7E7CE]/60 text-xs tracking-widest uppercase">Putra dari Bpk. Ahmad & Ibu Siti</p>
+                        <p class="text-[#F7E7CE]/60 text-xs tracking-widest uppercase">{{ $invitation->groom_parents ?? 'Putra dari Bpk. Ahmad & Ibu Siti' }}</p>
                     </div>
                 </div>
 
@@ -203,10 +203,10 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="font-playfair text-4xl text-[#F7E7CE] mb-2">Furi Intan Rahayu</h3>
+                        <h3 class="font-playfair text-4xl text-[#F7E7CE] mb-2">{{ $invitation->bride_name ?? 'Nama Wanita' }}</h3>
                         <p class="font-pinyon text-2xl text-gold mb-4">The Bride</p>
                        <div class="w-12 h-px bg-[#D4AF37] mx-auto mb-4 opacity-50"></div>
-                        <p class="text-[#F7E7CE]/60 text-xs tracking-widest uppercase">Putri dari Bpk. Budi & Ibu Rina</p>
+                        <p class="text-[#F7E7CE]/60 text-xs tracking-widest uppercase">{{ $invitation->bride_parents ?? 'Putri dari Bpk. Budi & Ibu Rina' }}</p>
                     </div>
                 </div>
             </div>
@@ -310,15 +310,15 @@
                      
                      <div class="space-y-4 border-y border-[#D4AF37]/20 py-8 mb-8">
                          <div class="flex items-center justify-center gap-2">
-                             <span class="text-[#D4AF37]">Minggu</span>
+                             <span class="text-[#D4AF37]">{{ $invitation->wedding_date ? $invitation->wedding_date->translatedFormat('l') : 'Minggu' }}</span>
                              <span class="w-1 h-1 bg-white rounded-full"></span>
-                             <span class="text-[#F7E7CE]">26 Desember 2025</span>
+                             <span class="text-[#F7E7CE]">{{ $invitation->wedding_date ? $invitation->wedding_date->translatedFormat('d F Y') : '30 Desember 2026' }}</span>
                          </div>
-                         <p class="font-playfair text-2xl text-gold">11:00 - 13:00 WIB</p>
+                         <p class="font-playfair text-2xl text-gold">{{ $invitation->resepsi_time ?? '11:00 - 13:00 WIB' }}</p>
                      </div>
                      
-                     <p class="text-[#F7E7CE] font-medium mb-1">Hotel Indonesia Kempinski</p>
-                     <p class="text-[#F7E7CE]/40 text-sm mb-8">Menteng, Jakarta Pusat</p>
+                     <p class="text-[#F7E7CE] font-medium mb-1">{{ $invitation->resepsi_location ?? 'Lokasi Resepsi' }}</p>
+                     <p class="text-[#F7E7CE]/40 text-sm mb-8">{{ $invitation->resepsi_address ?? 'Alamat Lengkap Resepsi' }}</p>
                      
                      <a href="https://maps.google.com" class="inline-flex glass-button px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest items-center gap-2">
                          <span>Maps</span>
@@ -377,8 +377,10 @@
             
             <div class="glass-premium rounded-[1rem] p-10 md:p-20 text-center relative overflow-hidden mb-12">
                 <h2 class="font-playfair text-4xl text-gold mb-10 italic">Konfirmasi Kehadiran</h2>
-                <form id="rsvpForm" action="{{ route('invitation.rsvp', $invitation->slug) }}" method="POST" class="space-y-6 max-w-lg mx-auto relative z-10 text-left">
+                <form id="rsvpForm" action="{{ route('rsvp.store') }}" method="POST" class="space-y-6 max-w-lg mx-auto relative z-10 text-left">
                     @csrf
+                    <input type="hidden" name="slug" value="{{ $invitation->slug ?? 'preview' }}">
+                    <input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
                     <div class="space-y-4">
                         <input type="text" name="name" value="{{ request('to') }}" class="w-full px-0 py-4 bg-transparent border-b border-[#D4AF37]/30 text-center text-[#F7E7CE] placeholder-[#F7E7CE]/40 focus:border-[#D4AF37] transition-all outline-none" placeholder="Nama Lengkap" required>
                         
@@ -489,7 +491,7 @@
 
             <!-- Footer -->
             <footer class="text-center pt-12 border-t border-[#D4AF37]/10">
-                <h2 class="font-pinyon text-6xl md:text-8xl text-gold mb-6 opacity-80">Juna & Furi</h2>
+                <h2 class="font-pinyon text-6xl md:text-8xl text-gold mb-6 opacity-80">{{ $invitation->groom_name }} & {{ $invitation->bride_name }}</h2>
                 <p class="text-[#F7E7CE]/30 text-[10px] uppercase tracking-[0.5em]">Terima Kasih</p>
             </footer>
         </div>

@@ -34,6 +34,13 @@ class TemplateSeeder extends Seeder
                 'preview_image' => 'assets/image/hero.png',
                 'description' => 'Elegansi hijau zamrud yang menenangkan dan mewah',
             ],
+            [
+                'name' => 'Adat Sunda & Betawi Luxury',
+                'slug' => 'theme-5',
+                'preview_image' => 'assets/image/theme-5-cover.png',
+                'description' => 'Eksplorasi kemewahan adat Sunda dan Betawi dalam desain premium yang kaya akan ornamen budaya',
+                'is_active' => true,
+            ],
         ];
 
         foreach ($templates as $template) {

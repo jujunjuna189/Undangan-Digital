@@ -14,7 +14,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
     <!-- Form Side -->
     <div class="lg:col-span-2">
-        <form action="{{ route('dashboard.invitations.store') }}" method="POST" class="space-y-8">
+        <form action="{{ route('dashboard.invitations.store') }}" method="POST" enctype="multipart/form-data" class="space-y-8">
             @csrf
             <input type="hidden" name="template_id" value="{{ $template->id }}">
 
@@ -124,6 +124,119 @@
                 <div class="pt-8 border-t border-slate-50">
                     <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
                         <span class="w-8 h-8 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-sm">5</span>
+                        Media & Galeri (Khusus Template Berfoto)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="space-y-4">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Foto Mempelai Wanita</label>
+                            <div class="relative group mx-auto w-32 h-32">
+                                <div class="w-32 h-32 rounded-full overflow-hidden bg-slate-100 border-4 border-white shadow-md relative">
+                                    <img id="preview-bride" src="https://ui-avatars.com/api/?name=W&background=random" class="w-full h-full object-cover">
+                                    <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        <input type="file" name="bride_photo" class="hidden" onchange="previewImage(this, 'preview-bride')">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Foto Mempelai Pria</label>
+                            <div class="relative group mx-auto w-32 h-32">
+                                <div class="w-32 h-32 rounded-full overflow-hidden bg-slate-100 border-4 border-white shadow-md relative">
+                                    <img id="preview-groom" src="https://ui-avatars.com/api/?name=P&background=random" class="w-full h-full object-cover">
+                                    <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                        <input type="file" name="groom_photo" class="hidden" onchange="previewImage(this, 'preview-groom')">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Foto Cover / Hero</label>
+                            <div class="relative group mx-auto w-full max-w-[200px]">
+                                <div class="aspect-[16/9] rounded-2xl overflow-hidden bg-slate-100 border border-slate-100 shadow-sm relative">
+                                    <img id="preview-cover" src="https://placehold.co/600x400?text=Cover+Photo" class="w-full h-full object-cover">
+                                    <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        <input type="file" name="cover_photo" class="hidden" onchange="previewImage(this, 'preview-cover')">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8 border-t border-slate-50">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-sm">6</span>
+                        Galeri Foto (Opsional)
+                    </h3>
+                    <div class="space-y-4">
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest text-center">Unggah Beberapa Foto Galeri</label>
+                        <div class="border-2 border-dashed border-slate-100 rounded-[2rem] p-12 text-center hover:border-rose-200 transition-colors cursor-pointer group relative overflow-hidden">
+                            <input type="file" name="gallery[]" id="gallery-input" multiple class="absolute inset-0 opacity-0 cursor-pointer z-20" onchange="previewGallery(this)" accept="image/*">
+                            <div class="space-y-4 relative z-10">
+                                <div class="w-16 h-16 bg-rose-50 text-rose-500 rounded-full flex items-center justify-center mx-auto group-hover:scale-110 transition-transform">
+                                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                </div>
+                                <p class="text-slate-400 text-sm font-medium">Klik atau seret foto ke sini</p>
+                                <p class="text-slate-300 text-xs italic">Anda dapat memilih banyak foto sekaligus</p>
+                            </div>
+                        </div>
+                        <div id="gallery-previews" class="grid grid-cols-3 md:grid-cols-5 gap-4 mt-6"></div>
+                    </div>
+                </div>
+
+                <div class="pt-8 border-t border-slate-50">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-slate-800 flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-sm">7</span>
+                            Kisah Cinta (Timeline)
+                        </h3>
+                        <button type="button" onclick="addStory()" class="px-4 py-2 bg-rose-50 text-rose-500 rounded-full text-xs font-bold hover:bg-rose-100 transition-colors flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            Tambah Momen
+                        </button>
+                    </div>
+                    <div id="story-container" class="space-y-6">
+                        <div class="story-item p-6 bg-slate-50 rounded-3xl border border-slate-100 space-y-4 relative group">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <input type="text" name="stories[0][date_info]" placeholder="Waktu (Contoh: 2020)" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
+                                <input type="text" name="stories[0][title]" placeholder="Judul Momen" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all md:col-span-2">
+                            </div>
+                            <textarea name="stories[0][content]" placeholder="Ceritakan momen ini..." rows="2" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8 border-t border-slate-50">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-sm">8</span>
+                        Hadiah Pernikahan (Data Rekening)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Bank 1 -->
+                        <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100 space-y-4">
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Rekening Utama</p>
+                            <input type="text" name="bank_name" placeholder="Nama Bank (Contoh: BCA, BSI)" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
+                            <input type="text" name="bank_account" placeholder="Nomor Rekening" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
+                            <input type="text" name="bank_holder" placeholder="Atas Nama (Nama Pemilik)" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
+                        </div>
+                        <!-- Bank 2 -->
+                        <div class="p-6 bg-slate-50 rounded-3xl border border-slate-100 space-y-4">
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Rekening Tambahan (Opsional)</p>
+                            <input type="text" name="bank_name_2" placeholder="Nama Bank" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
+                            <input type="text" name="bank_account_2" placeholder="Nomor Rekening" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
+                            <input type="text" name="bank_holder_2" placeholder="Atas Nama" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-8 border-t border-slate-50">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-sm">9</span>
                         Informasi Utama (Countdown)
                     </h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -170,4 +283,88 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    let storyIndex = 1;
+    function addStory() {
+        const container = document.getElementById('story-container');
+        const html = `
+            <div class="story-item p-6 bg-slate-50 rounded-3xl border border-slate-100 space-y-4 relative group animate-fade-in">
+                <button type="button" onclick="this.parentElement.remove()" class="absolute -top-2 -right-2 w-8 h-8 bg-white text-rose-500 rounded-full shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input type="text" name="stories[${storyIndex}][date_info]" placeholder="Waktu (Contoh: 2020)" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
+                    <input type="text" name="stories[${storyIndex}][title]" placeholder="Judul Momen" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all md:col-span-2">
+                </div>
+                <textarea name="stories[${storyIndex}][content]" placeholder="Ceritakan momen ini..." rows="2" class="w-full bg-white border border-slate-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all"></textarea>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
+        storyIndex++;
+    }
+
+    function previewImage(input, previewId) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById(previewId).src = e.target.result;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    let allGalleryFiles = [];
+
+    function previewGallery(input) {
+        if (!input.files) return;
+        
+        // Push new files to our global array
+        Array.from(input.files).forEach(file => {
+            allGalleryFiles.push(file);
+        });
+
+        // Sync files back to input using DataTransfer
+        syncGalleryInput(input);
+        
+        // Refresh UI
+        renderGalleryPreviews(input);
+    }
+
+    function syncGalleryInput(input) {
+        const dt = new DataTransfer();
+        allGalleryFiles.forEach(file => dt.items.add(file));
+        input.files = dt.files;
+    }
+
+    function removeSelectedGallery(index, inputId) {
+        allGalleryFiles.splice(index, 1);
+        const input = document.getElementById(inputId);
+        syncGalleryInput(input);
+        renderGalleryPreviews(input);
+    }
+
+    function renderGalleryPreviews(input) {
+        const previewContainer = document.getElementById('gallery-previews');
+        previewContainer.innerHTML = '';
+        
+        allGalleryFiles.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const div = document.createElement('div');
+                div.className = 'relative group aspect-square rounded-xl overflow-hidden bg-slate-100 border border-slate-200';
+                div.innerHTML = `
+                    <img src="${e.target.result}" class="w-full h-full object-cover">
+                    <button type="button" onclick="removeSelectedGallery(${index}, '${input.id}')" 
+                        class="absolute top-1 right-1 w-6 h-6 bg-rose-500 text-white rounded-lg flex items-center justify-center shadow-lg hover:bg-rose-600 transition-all z-30">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                `;
+                previewContainer.appendChild(div);
+            }
+            reader.readAsDataURL(file);
+        });
+    }
+</script>
+@endpush
 @endsection

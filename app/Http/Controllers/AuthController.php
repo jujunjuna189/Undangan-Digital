@@ -28,7 +28,7 @@ class AuthController extends Controller
                 return redirect()->route('admin.index');
             }
             
-            return redirect()->intended('dashboard');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
@@ -53,6 +53,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user', // Explicitly set to user for public registration
         ]);
 
         Auth::login($user);

@@ -158,7 +158,7 @@
                     </div>
                     <ul class="space-y-4 mb-10">
                         @if($package->features)
-                            @foreach(json_decode($package->features, true) ?? [] as $feature)
+                            @foreach($package->features as $feature)
                             <li class="flex items-center text-sm gap-3 {{ $loop->parent->index == 1 ? 'text-gray-100' : 'text-gray-600' }}">
                                 <span class="{{ $loop->parent->index == 1 ? 'text-rose-400' : 'text-emerald-500' }} font-bold">✓</span> {{ $feature }}
                             </li>

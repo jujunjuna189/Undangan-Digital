@@ -5,11 +5,91 @@ namespace App\Http\Controllers;
 use App\Models\Invitation;
 use App\Models\Template;
 use App\Models\Guest;
+use App\Models\InvitationGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+    private function processImage($file, $prefix)
+    {
+        $filename = time() . '_' . $prefix . '_' . uniqid() . '.webp';
+        $path = public_path('uploads/invitations');
+        
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $sourcePath = $file->getRealPath();
+        $destinationPath = $path . '/' . $filename;
+
+        // Use GD to convert to WebP
+        $info = getimagesize($sourcePath);
+        $mime = $info['mime'];
+
+        switch ($mime) {
+            case 'image/jpeg':
+                $image = imagecreatefromjpeg($sourcePath);
+                break;
+            case 'image/gif':
+                $image = imagecreatefromgif($sourcePath);
+                break;
+            case 'image/png':
+                $image = imagecreatefrompng($sourcePath);
+                imagealphablending($image, false);
+                imagesavealpha($image, true);
+                break;
+            default:
+                // Fallback to normal move if not supported
+                $file->move($path, $filename);
+                return 'uploads/invitations/' . $filename;
+        }
+
+        // Save as WebP with 80% quality
+        imagewebp($image, $destinationPath, 80);
+        imagedestroy($image);
+
+        return 'uploads/invitations/' . $filename;
+    }
+
+    private function processGalleryImage($file)
+    {
+        $filename = time() . '_gallery_' . uniqid() . '.webp';
+        $path = public_path('uploads/gallery');
+        
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $sourcePath = $file->getRealPath();
+        $destinationPath = $path . '/' . $filename;
+
+        $info = getimagesize($sourcePath);
+        $mime = $info['mime'];
+
+        switch ($mime) {
+            case 'image/jpeg':
+                $image = imagecreatefromjpeg($sourcePath);
+                break;
+            case 'image/gif':
+                $image = imagecreatefromgif($sourcePath);
+                break;
+            case 'image/png':
+                $image = imagecreatefrompng($sourcePath);
+                imagealphablending($image, false);
+                imagesavealpha($image, true);
+                break;
+            default:
+                $file->move($path, $filename);
+                return 'uploads/gallery/' . $filename;
+        }
+
+        imagewebp($image, $destinationPath, 80);
+        imagedestroy($image);
+
+        return 'uploads/gallery/' . $filename;
+    }
+
     public function index()
     {
         $invitations = Invitation::where('user_id', Auth::id())->with('template')->get();
@@ -58,12 +138,41 @@ class DashboardController extends Controller
             'groom_name' => 'required',
             'wedding_date' => 'required|date',
             'location' => 'required',
+            'bride_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'groom_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
 
-        $data = $request->all();
+        $data = $request->except(['bride_photo', 'groom_photo', 'cover_photo', 'gallery', 'stories']);
         $data['user_id'] = Auth::id();
-        
+
+        foreach (['bride_photo', 'groom_photo', 'cover_photo'] as $photo) {
+            if ($request->hasFile($photo)) {
+                $data[$photo] = $this->processImage($request->file($photo), $photo);
+            }
+        }
+
         $invitation = Invitation::create($data);
+
+        if ($request->has('stories')) {
+            foreach ($request->stories as $index => $storyData) {
+                if (!empty($storyData['title']) || !empty($storyData['content'])) {
+                    $invitation->stories()->create([
+                        'title' => $storyData['title'] ?? 'Momen',
+                        'content' => $storyData['content'] ?? '',
+                        'date_info' => $storyData['date_info'] ?? null,
+                        'order_num' => $index,
+                    ]);
+                }
+            }
+        }
+
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $file) {
+                $path = $this->processGalleryImage($file);
+                $invitation->galleries()->create(['image_path' => $path]);
+            }
+        }
 
         return redirect()->route('dashboard.invitations.guests', $invitation->id)->with('success', 'Data undangan utama berhasil disimpan! Sekarang, silakan masukkan daftar tamu Anda.');
     }
@@ -77,18 +186,89 @@ class DashboardController extends Controller
 
     public function updateInvitation(Request $request, $id)
     {
+        $invitation = Invitation::where('user_id', Auth::id())->findOrFail($id);
+
         $request->validate([
             'slug' => 'required|unique:invitations,slug,'.$id,
             'bride_name' => 'required',
             'groom_name' => 'required',
             'wedding_date' => 'required|date',
             'location' => 'required',
+            'bride_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'groom_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cover_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
 
-        $invitation = Invitation::where('user_id', Auth::id())->findOrFail($id);
-        $invitation->update($request->all());
+        $data = $request->except(['bride_photo', 'groom_photo', 'cover_photo', 'gallery', 'stories']);
 
-        return redirect()->route('dashboard.invitations')->with('success', 'Undangan berhasil diperbarui!');
+        foreach (['bride_photo', 'groom_photo', 'cover_photo'] as $photo) {
+            if ($request->hasFile($photo)) {
+                if ($invitation->$photo && file_exists(public_path($invitation->$photo))) {
+                    unlink(public_path($invitation->$photo));
+                }
+                $data[$photo] = $this->processImage($request->file($photo), $photo);
+            }
+        }
+
+        $invitation->update($data);
+
+        if ($request->has('stories')) {
+            $invitation->stories()->delete();
+            foreach ($request->stories as $index => $storyData) {
+                if (!empty($storyData['title']) || !empty($storyData['content'])) {
+                    $invitation->stories()->create([
+                        'title' => $storyData['title'] ?? 'Momen',
+                        'content' => $storyData['content'] ?? '',
+                        'date_info' => $storyData['date_info'] ?? null,
+                        'order_num' => $index,
+                    ]);
+                }
+            }
+        }
+
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $file) {
+                $path = $this->processGalleryImage($file);
+                $invitation->galleries()->create(['image_path' => $path]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Perubahan berhasil disimpan!');
+    }
+
+    public function deleteGalleryPhoto($id)
+    {
+        $gallery = InvitationGallery::findOrFail($id);
+        $invitation = $gallery->invitation;
+
+        if ($invitation->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        if (file_exists(public_path($gallery->image_path))) {
+            unlink(public_path($gallery->image_path));
+        }
+
+        $gallery->delete();
+
+        return redirect()->back()->with('success', 'Foto galeri berhasil dihapus!');
+    }
+
+    public function deletePhoto($id, $type)
+    {
+        $invitation = Invitation::where('user_id', Auth::id())->findOrFail($id);
+        $column = $type . '_photo';
+
+        if (in_array($type, ['bride', 'groom', 'cover'])) {
+            if ($invitation->$column && file_exists(public_path($invitation->$column))) {
+                unlink(public_path($invitation->$column));
+            }
+            $invitation->$column = null;
+            $invitation->save();
+            return redirect()->back()->with('success', 'Foto berhasil dihapus! Sekarang undangan menggunakan foto default template.');
+        }
+
+        return redirect()->back()->with('error', 'Tipe foto tidak valid.');
     }
 
     public function destroyInvitation($id)

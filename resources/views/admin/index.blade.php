@@ -33,6 +33,30 @@
                 <span class="text-slate-400 font-normal">on display</span>
             </div>
         </div>
+
+        <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-rose-500/5 transition-all duration-300">
+            <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-2xl mb-6">
+                🛍️
+            </div>
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Pesanan Pending</div>
+            <h3 class="text-4xl font-bold text-slate-800">{{ $stats['pending_orders'] }}</h3>
+            <div class="mt-4 flex items-center gap-2 text-xs text-rose-500 font-bold">
+                <span>⚠ Perlu dicek</span>
+                <span class="text-slate-400 font-normal">segera</span>
+            </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300">
+            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-500 flex items-center justify-center text-2xl mb-6">
+                👥
+            </div>
+            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Total Pelanggan</div>
+            <h3 class="text-4xl font-bold text-slate-800">{{ $stats['total_users'] }}</h3>
+            <div class="mt-4 flex items-center gap-2 text-xs text-blue-500 font-bold">
+                <span>↑ 100%</span>
+                <span class="text-slate-400 font-normal">active users</span>
+            </div>
+        </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
