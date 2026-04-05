@@ -4,7 +4,7 @@
 
     <!-- COVER SECTION - Theme 5: Sunda x Betawi -->
     <section id="cover"
-        class="fixed inset-0 z-[100] flex items-center justify-center bg-[#fff7ed] transition-opacity duration-1000">
+        class="fixed inset-0 z-[100] flex items-center justify-center bg-[#fff7ed] transition-opacity duration-1000 overflow-hidden">
         <div class="absolute inset-0 z-0 bg-megamendung opacity-20"></div>
         <div class="absolute inset-0 z-0">
             <img src="{{ $invitation->cover_photo ? asset($invitation->cover_photo) : asset('assets/image/theme-5-cover.png') }}" class="w-full h-full object-cover opacity-60"
@@ -17,17 +17,16 @@
         <div class="absolute bottom-0 left-0 w-full h-[15px] gigibalang-border-top rotate-180"></div>
 
         <!-- Cover Decorative Elements -->
-        <div class="sunda-jasmine-hanging w-6 h-48 absolute top-0 left-10 opacity-40 animate-float translate-y-[-20px]">
+        <div class="sunda-jasmine-hanging w-4 md:w-6 h-32 sm:h-40 md:h-48 absolute top-0 left-3 md:left-10 opacity-40 animate-float translate-y-[-20px]">
         </div>
-        <div
-            class="sunda-jasmine-hanging w-6 h-64 absolute top-0 right-10 opacity-30 animate-float-reverse translate-y-[-10px]">
+        <div class="sunda-jasmine-hanging w-4 md:w-6 h-40 sm:h-48 md:h-64 absolute top-0 right-3 md:right-10 opacity-30 animate-float-reverse translate-y-[-10px]">
         </div>
-        <div class="sunda-leaf-accent w-32 h-32 absolute top-20 right-[15%] opacity-20 -rotate-12"></div>
-        <div class="sunda-leaf-alt w-40 h-40 absolute bottom-10 left-[10%] opacity-20 rotate-45"></div>
+        <div class="sunda-leaf-accent w-16 h-16 md:w-32 md:h-32 absolute top-16 right-[10%] opacity-20 -rotate-12"></div>
+        <div class="sunda-leaf-alt w-20 h-20 md:w-40 md:h-40 absolute bottom-8 left-[8%] opacity-20 rotate-45"></div>
 
         <!-- Branch Decorations -->
-        <div class="sunda-branch-left w-64 h-64 absolute top-0 left-0 opacity-40 animate-float"></div>
-        <div class="sunda-branch-right w-64 h-64 absolute top-0 right-0 opacity-40 animate-float-reverse"></div>
+        <div class="sunda-branch-left w-24 h-24 sm:w-32 sm:h-32 md:w-64 md:h-64 absolute top-0 left-0 opacity-40 animate-float"></div>
+        <div class="sunda-branch-right w-24 h-24 sm:w-32 sm:h-32 md:w-64 md:h-64 absolute top-0 right-0 opacity-40 animate-float-reverse"></div>
 
         <!-- Main Content -->
         <div class="relative z-50 text-center px-6 py-12 flex flex-col items-center justify-center min-h-full w-full">
@@ -65,99 +64,88 @@
         </div>
     </section>
 
-    <!-- MAIN CONTENT -->
-    <main id="main-content" class="hidden relative z-10 bg-[#fff7ed]">
+    <!-- GLOBAL DECORATIONS (Floating background elements) -->
+    <div id="cultural-frame" class="cultural-frame-container hidden">
+        <!-- Floating corner bouquets -->
+        <div class="frame-corner-tl z-40"></div>
+        <div class="frame-corner-br z-40"></div>
+        <!-- Traditional icons floating slightly further in -->
+        <div class="frame-siger-left w-32 h-32 absolute top-32 left-5 opacity-80 animate-float"></div>
+        <div class="frame-ondel-right w-24 h-24 absolute bottom-32 right-5 opacity-80 animate-float-reverse"></div>
+    </div>
 
+    <div id="global-decor" class="fixed inset-0 pointer-events-none z-10 overflow-hidden w-full h-full hidden">
+        <!-- Left Jasmine Chain -->
+        <div class="sunda-jasmine-hanging w-8 h-screen absolute left-4 top-0 opacity-30 animate-float"></div>
+        <!-- Right Jasmine Chain -->
+        <div class="sunda-jasmine-hanging w-8 h-screen absolute right-4 top-0 opacity-30 animate-float-reverse"></div>
+
+        <!-- Scattered Leaves -->
+        <div class="sunda-leaf-accent w-32 h-32 absolute top-20 left-[10%] opacity-10 rotate-45 animate-pulse"></div>
+        <div class="sunda-leaf-alt w-40 h-40 absolute top-[40%] right-[5%] opacity-10 -rotate-12 animate-float"></div>
+        <div
+            class="sunda-leaf-accent w-24 h-24 absolute bottom-[20%] left-[5%] opacity-10 rotate-90 animate-float-reverse">
+        </div>
+
+        <!-- More Scattered Flowers -->
+        <div class="sunda-flower-accent w-16 h-16 absolute top-[15%] right-[20%] opacity-20 animate-float"></div>
+        <div class="sunda-flower-accent w-20 h-20 absolute bottom-[10%] right-[30%] opacity-20 animate-pulse"></div>
+        <div class="sunda-leaf-alt w-32 h-32 absolute top-[60%] left-[15%] opacity-10 rotate-45"></div>
+
+        <!-- ROMANCE PETALS (Falling) -->
+        <div class="sunda-petal w-4 h-4 left-[10%]" style="animation-duration: 8s; animation-delay: 0s;"></div>
+        <div class="sunda-petal w-3 h-3 left-[30%]" style="animation-duration: 12s; animation-delay: 2s;"></div>
+        <div class="sunda-petal w-5 h-5 left-[50%]" style="animation-duration: 10s; animation-delay: 4s;"></div>
+        <div class="sunda-petal w-4 h-4 left-[70%]" style="animation-duration: 15s; animation-delay: 1s;"></div>
+        <div class="sunda-petal w-3 h-3 left-[90%]" style="animation-duration: 9s; animation-delay: 5s;"></div>
+
+        <!-- MORE ROMANCE PETALS -->
+        <div class="sunda-petal w-4 h-4 left-[15%]" style="animation-duration: 11s; animation-delay: 0.5s;"></div>
+        <div class="sunda-petal w-2 h-2 left-[25%]" style="animation-duration: 13s; animation-delay: 1.5s;"></div>
+        <div class="sunda-petal w-5 h-5 left-[35%]" style="animation-duration: 9s; animation-delay: 3.5s;"></div>
+        <div class="sunda-petal w-3 h-3 left-[45%]" style="animation-duration: 14s; animation-delay: 2.5s;"></div>
+        <div class="sunda-petal w-6 h-6 left-[55%]" style="animation-duration: 10s; animation-delay: 1.0s;"></div>
+        <div class="sunda-petal w-4 h-4 left-[65%]" style="animation-duration: 12s; animation-delay: 4.5s;"></div>
+        <div class="sunda-petal w-2 h-2 left-[75%]" style="animation-duration: 16s; animation-delay: 0.2s;"></div>
+        <div class="sunda-petal w-5 h-5 left-[85%]" style="animation-duration: 8s; animation-delay: 3.0s;"></div>
+        <div class="sunda-petal w-3 h-3 left-[95%]" style="animation-duration: 11s; animation-delay: 2.2s;"></div>
+
+        <!-- More Floating Branches & Leaves -->
+        <div class="sunda-branch-left w-32 h-32 absolute top-[20%] left-[-20px] opacity-10 animate-float"></div>
+        <div class="sunda-branch-right w-40 h-40 absolute top-[50%] right-[-30px] opacity-10 animate-float-reverse">
+        </div>
+        <div class="sunda-leaf-accent w-20 h-20 absolute top-[10%] left-[40%] opacity-10 animate-pulse"></div>
+        <div class="sunda-flower-accent w-12 h-12 absolute top-[30%] left-[80%] opacity-20 animate-float"></div>
+
+        <!-- LARGE DECORATIONS (Pot & Headpiece) -->
+        <div class="sunda-vase-flower w-40 h-64 absolute top-[25%] left-[5%] opacity-20 animate-float"></div>
+        <div class="sunda-ornament-large w-64 h-48 absolute top-[60%] right-[10%] opacity-15 animate-float-reverse">
+        </div>
+        <div class="sunda-vase-flower w-32 h-48 absolute bottom-[10%] right-[5%] opacity-15 rotate-12 animate-pulse">
+        </div>
+
+        <!-- CULTURAL SYMBOLS (Floating) -->
+        <div class="sunda-siger-icon w-20 h-12 absolute top-[15%] left-[15%] animate-float"></div>
+        <div class="sunda-kujang-icon w-12 h-24 absolute top-[45%] left-[5%] animate-float-reverse opacity-20"></div>
+        <div class="betawi-ondel-icon w-16 h-16 absolute top-[25%] right-[10%] animate-float opacity-20"></div>
+        <div class="sunda-siger-icon w-16 h-10 absolute bottom-[15%] right-[15%] animate-float-reverse"></div>
+        <div class="betawi-ondel-icon w-12 h-12 absolute bottom-[35%] left-[12%] animate-float opacity-15"></div>
+
+        <!-- EXTREME PETAL DENSITY (Hujan Salju/Bunga) -->
+        @for($i = 0; $i < 80; $i++)
+            <div class="sunda-petal w-{{ rand(2, 6) }} h-{{ rand(2, 6) }} left-[{{ rand(0, 100) }}%]"
+                style="animation-duration: {{ rand(15, 35) }}s; animation-delay: {{ rand(0, 15) }}s; top: -10px;"></div>
+        @endfor
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content" class="hidden relative z-20 bg-transparent">
         <!-- BOKEH BACKGROUND -->
         <div class="bokeh-circles">
             <div class="bokeh-circle w-64 h-64 top-[-10%] left-[-10%]" style="animation-delay: 0s;"></div>
             <div class="bokeh-circle w-48 h-48 top-[30%] right-[10%]" style="animation-delay: 2s;"></div>
             <div class="bokeh-circle w-80 h-80 bottom-[-20%] left-[20%]" style="animation-delay: 5s;"></div>
             <div class="bokeh-circle w-56 h-56 bottom-[10%] right-[-10%]" style="animation-delay: 3s;"></div>
-        </div>
-
-        <!-- CULTURAL FRAME (Interior Only) - Transparent floating florals -->
-        <div class="cultural-frame-container">
-            <!-- Floating corner bouquets -->
-            <div class="frame-corner-tl z-10"></div>
-            <div class="frame-corner-br z-10"></div>
-            <!-- Traditional icons floating slightly further in -->
-            <div class="frame-siger-left w-32 h-32 absolute top-32 left-5 opacity-80 animate-float"></div>
-            <div class="frame-ondel-right w-24 h-24 absolute bottom-32 right-5 opacity-80 animate-float-reverse"></div>
-        </div>
-
-        <!-- SCROLL FADING VIGNETTE (Atas & Bawah) -->
-        <div
-            class="fixed top-0 left-0 w-full h-64 bg-gradient-to-b from-[#fff7ed] via-[#fff7ed]/80 to-transparent z-20 pointer-events-none">
-        </div>
-        <div
-            class="fixed bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#fff7ed] via-[#fff7ed]/80 to-transparent z-20 pointer-events-none">
-        </div>
-
-
-        <!-- GLOBAL DECORATIONS (Floating background elements) -->
-        <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-            <!-- Left Jasmine Chain -->
-            <div class="sunda-jasmine-hanging w-8 h-screen absolute left-4 top-0 opacity-30 animate-float"></div>
-            <!-- Right Jasmine Chain -->
-            <div class="sunda-jasmine-hanging w-8 h-screen absolute right-4 top-0 opacity-30 animate-float-reverse"></div>
-
-            <!-- Scattered Leaves -->
-            <div class="sunda-leaf-accent w-32 h-32 absolute top-20 left-[10%] opacity-10 rotate-45 animate-pulse"></div>
-            <div class="sunda-leaf-alt w-40 h-40 absolute top-[40%] right-[5%] opacity-10 -rotate-12 animate-float"></div>
-            <div
-                class="sunda-leaf-accent w-24 h-24 absolute bottom-[20%] left-[5%] opacity-10 rotate-90 animate-float-reverse">
-            </div>
-
-            <!-- More Scattered Flowers -->
-            <div class="sunda-flower-accent w-16 h-16 absolute top-[15%] right-[20%] opacity-20 animate-float"></div>
-            <div class="sunda-flower-accent w-20 h-20 absolute bottom-[10%] right-[30%] opacity-20 animate-pulse"></div>
-            <div class="sunda-leaf-alt w-32 h-32 absolute top-[60%] left-[15%] opacity-10 rotate-45"></div>
-
-            <!-- ROMANCE PETALS (Falling) -->
-            <div class="sunda-petal w-4 h-4 left-[10%]" style="animation-duration: 8s; animation-delay: 0s;"></div>
-            <div class="sunda-petal w-3 h-3 left-[30%]" style="animation-duration: 12s; animation-delay: 2s;"></div>
-            <div class="sunda-petal w-5 h-5 left-[50%]" style="animation-duration: 10s; animation-delay: 4s;"></div>
-            <div class="sunda-petal w-4 h-4 left-[70%]" style="animation-duration: 15s; animation-delay: 1s;"></div>
-            <div class="sunda-petal w-3 h-3 left-[90%]" style="animation-duration: 9s; animation-delay: 5s;"></div>
-
-            <!-- MORE ROMANCE PETALS -->
-            <div class="sunda-petal w-4 h-4 left-[15%]" style="animation-duration: 11s; animation-delay: 0.5s;"></div>
-            <div class="sunda-petal w-2 h-2 left-[25%]" style="animation-duration: 13s; animation-delay: 1.5s;"></div>
-            <div class="sunda-petal w-5 h-5 left-[35%]" style="animation-duration: 9s; animation-delay: 3.5s;"></div>
-            <div class="sunda-petal w-3 h-3 left-[45%]" style="animation-duration: 14s; animation-delay: 2.5s;"></div>
-            <div class="sunda-petal w-6 h-6 left-[55%]" style="animation-duration: 10s; animation-delay: 1.0s;"></div>
-            <div class="sunda-petal w-4 h-4 left-[65%]" style="animation-duration: 12s; animation-delay: 4.5s;"></div>
-            <div class="sunda-petal w-2 h-2 left-[75%]" style="animation-duration: 16s; animation-delay: 0.2s;"></div>
-            <div class="sunda-petal w-5 h-5 left-[85%]" style="animation-duration: 8s; animation-delay: 3.0s;"></div>
-            <div class="sunda-petal w-3 h-3 left-[95%]" style="animation-duration: 11s; animation-delay: 2.2s;"></div>
-
-            <!-- More Floating Branches & Leaves -->
-            <div class="sunda-branch-left w-32 h-32 absolute top-[20%] left-[-20px] opacity-10 animate-float"></div>
-            <div class="sunda-branch-right w-40 h-40 absolute top-[50%] right-[-30px] opacity-10 animate-float-reverse">
-            </div>
-            <div class="sunda-leaf-accent w-20 h-20 absolute top-[10%] left-[40%] opacity-10 animate-pulse"></div>
-            <div class="sunda-flower-accent w-12 h-12 absolute top-[30%] left-[80%] opacity-20 animate-float"></div>
-
-            <!-- LARGE DECORATIONS (Pot & Headpiece) -->
-            <div class="sunda-vase-flower w-40 h-64 absolute top-[25%] left-[5%] opacity-20 animate-float"></div>
-            <div class="sunda-ornament-large w-64 h-48 absolute top-[60%] right-[10%] opacity-15 animate-float-reverse">
-            </div>
-            <div class="sunda-vase-flower w-32 h-48 absolute bottom-[10%] right-[5%] opacity-15 rotate-12 animate-pulse">
-            </div>
-
-            <!-- CULTURAL SYMBOLS (Floating) -->
-            <div class="sunda-siger-icon w-20 h-12 absolute top-[15%] left-[15%] animate-float"></div>
-            <div class="sunda-kujang-icon w-12 h-24 absolute top-[45%] left-[5%] animate-float-reverse opacity-20"></div>
-            <div class="betawi-ondel-icon w-16 h-16 absolute top-[25%] right-[10%] animate-float opacity-20"></div>
-            <div class="sunda-siger-icon w-16 h-10 absolute bottom-[15%] right-[15%] animate-float-reverse"></div>
-            <div class="betawi-ondel-icon w-12 h-12 absolute bottom-[35%] left-[12%] animate-float opacity-15"></div>
-
-            <!-- EXTREME PETAL DENSITY (Hujan Salju/Bunga) -->
-            @for($i = 0; $i < 50; $i++)
-                <div class="sunda-petal w-{{ rand(2, 6) }} h-{{ rand(2, 6) }} left-[{{ rand(0, 100) }}%]"
-                    style="animation-duration: {{ rand(8, 20) }}s; animation-delay: {{ rand(0, 10) }}s; top: -10px;"></div>
-            @endfor
         </div>
 
         <!-- HERO SECTION -->
@@ -833,8 +821,12 @@
         </script>
 
         <!-- FOOTER -->
-        <footer class="pt-20 pb-64 bg-gradient-to-b from-transparent to-[#78350f] text-center relative overflow-hidden">
-            <div class="absolute bottom-0 left-0 w-full h-[500px] bg-[#78350f] -z-10"></div>
+        <footer class="pt-20 pb-24 bg-[#78350f] text-center relative overflow-hidden">
+            <!-- Ensure background fills deep into bottom if overscrolling -->
+            <div class="absolute inset-0 bg-[#78350f] -z-10"></div>
+            <!-- Large bleed below -->
+            <div class="absolute top-0 left-0 w-full h-[2000px] bg-[#78350f] -z-20"></div>
+
             <!-- Footer Ornament -->
             <div class="w-full flex justify-center mb-10 opacity-30">
                 <svg width="200" height="50" viewBox="0 0 200 50">

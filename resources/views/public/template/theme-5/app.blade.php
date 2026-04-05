@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" class="scroll-smooth overflow-x-hidden bg-[#fff7ed]">
 
 <head>
     <meta charset="UTF-8">
@@ -53,9 +53,11 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--cream);
+            background-color: #fff7ed;
             color: #1a1a1a;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
 
         .font-serif {
@@ -136,10 +138,10 @@
             /* Warm gold */
             border-radius: 50%;
             /* Perfect circles again */
-            opacity: 0.15;
-            /* Sangat pudar seperti bokeh/kunang-kunang */
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
-            /* Glow effect pudar */
+            opacity: 0.4;
+            /* Lebih terlihat untuk efek hujan */
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
+            /* Glow effect lebih kuat */
             filter: blur(1px);
             /* Soft focus effect */
             animation: falling linear infinite;
@@ -258,35 +260,39 @@
             opacity: 0.6;
         }
 
-        .cultural-frame-container {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 40;
-            padding: 20px;
-        }
+
 
         /* Top Left Sunda-Betawi Floral Bouquet */
         .frame-corner-tl {
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            width: 350px;
-            height: 350px;
+            position: fixed;
+            top: -10px;
+            left: -10px;
+            width: 220px;
+            height: 220px;
             background-image: url("{{ asset('assets/image/theme-5-floral 1.png') }}");
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
             animation: float 6s ease-in-out infinite;
+            z-index: 40;
+            pointer-events: none;
         }
 
-        /* Bottom Right Sunda-Betawi Floral Bouquet */
+        @media (min-width: 768px) {
+            .frame-corner-tl {
+                width: 350px;
+                height: 350px;
+                top: -50px;
+                left: -50px;
+            }
+        }
+
         .frame-corner-br {
-            position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 350px;
-            height: 350px;
+            position: fixed;
+            bottom: -10px;
+            right: -10px;
+            width: 220px;
+            height: 220px;
             background-image: url("{{ asset('assets/image/theme-5-floral 2.png') }}");
             background-size: contain;
             background-repeat: no-repeat;
@@ -294,6 +300,17 @@
             transform: rotate(180deg);
             /* Rotate to fit the bottom corner */
             animation: float-reverse 7s ease-in-out infinite;
+            z-index: 40;
+            pointer-events: none;
+        }
+
+        @media (min-width: 768px) {
+            .frame-corner-br {
+                width: 350px;
+                height: 350px;
+                bottom: -50px;
+                right: -50px;
+            }
         }
 
         .bokeh-circles {
@@ -325,7 +342,7 @@
     </style>
 </head>
 
-<body class="antialiased overflow-x-hidden max-w-[100vw]">
+<body class="antialiased">
     <audio id="bgMusic" loop preload="none">
         <source src="{{ asset($invitation->audio_url ?? 'assets/audio/audio-5.mp3') }}" type="audio/mpeg">
     </audio>
@@ -336,12 +353,11 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 1500,
-            once: false,
-            mirror: true,
-            offset: 120,
+            duration: 1000,
+            once: true,
+            mirror: false,
+            offset: 50,
             easing: 'ease-out-quad',
-            anchorPlacement: 'top-bottom',
         });
 
         function openInvitation() {
@@ -362,6 +378,11 @@
                 setTimeout(() => {
                     coverSection.style.display = 'none';
                     document.getElementById('main-content').classList.remove('hidden');
+                    const culturalFrame = document.getElementById('cultural-frame');
+                    const globalDecor = document.getElementById('global-decor');
+                    if (culturalFrame) culturalFrame.classList.remove('hidden');
+                    if (globalDecor) globalDecor.classList.remove('hidden');
+                    
                     document.body.style.overflowY = 'auto';
                     document.body.style.overflowX = 'hidden';
                     AOS.refresh();
