@@ -452,6 +452,36 @@
             }
         })
     }
+
+    function shareConfig() {
+        const text = `*FORM DATA KONFIGURASI INVITATION*
+--------------------------------------------------
+Mohon isi data berikut untuk pembuatan undangan:
+
+1. Nama mempelai wanita:
+2. Nama Bapak & Ibu mempelai wanita:
+3. Username Instagram mempelai wanita: 
+4. Nama mempelai pria:
+5. Nama Bapak & Ibu mempelai pria:
+6. Username Instagram mempelai pria: 
+7. Tanggal & Hari Akad Nikah:
+8. Waktu/Jam Akad Nikah:
+9. Nama Lokasi & Alamat Akad Nikah:
+10. Tanggal & Hari Resepsi:
+11. Waktu/Jam Resepsi:
+12. Nama Lokasi & Alamat Resepsi:
+13. Link Google Maps Lokasi:
+14. Rekening Bank (Nama Bank, No Rek, Atas Nama):
+15. Judul Undangan/Slug URL:
+16. Kisah Cinta/Story (Singkat):
+17. Foto-foto (Mempelai & Gallery):
+
+--------------------------------------------------
+Silakan isi dan kirimkan kembali kepada kami. Terima kasih!`;
+
+        const waUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        window.open(waUrl, '_blank');
+    }
 </script>
 @endpush
 
