@@ -382,7 +382,7 @@
                     const globalDecor = document.getElementById('global-decor');
                     if (culturalFrame) culturalFrame.classList.remove('hidden');
                     if (globalDecor) globalDecor.classList.remove('hidden');
-                    
+
                     document.body.style.overflowY = 'auto';
                     document.body.style.overflowX = 'hidden';
                     AOS.refresh();
