@@ -41,6 +41,13 @@ class TemplateSeeder extends Seeder
                 'description' => 'Eksplorasi kemewahan adat Sunda dan Betawi dalam desain premium yang kaya akan ornamen budaya',
                 'is_active' => true,
             ],
+            [
+                'name' => 'Javanese Wayang Culture',
+                'slug' => 'theme-6',
+                'preview_image' => 'assets/image/theme-6-bg.png',
+                'description' => 'Kemewahan budaya Jawa dengan sentuhan Wayang Kulit yang artistik dan premium',
+                'is_active' => true,
+            ],
         ];
 
         foreach ($templates as $template) {

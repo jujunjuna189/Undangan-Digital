@@ -30,6 +30,7 @@ Route::get('/theme-2', [InvitationController::class, 'preview'])->defaults('them
 Route::get('/theme-3', [InvitationController::class, 'preview'])->defaults('theme', 'theme-3');
 Route::get('/theme-4', [InvitationController::class, 'preview'])->defaults('theme', 'theme-4');
 Route::get('/theme-5', [InvitationController::class, 'preview'])->defaults('theme', 'theme-5');
+Route::get('/theme-6', [InvitationController::class, 'preview'])->defaults('theme', 'theme-6');
 
 // Public Invitation
 Route::get('/v/{slug}', [InvitationController::class, 'show'])->name('invitation.show');
