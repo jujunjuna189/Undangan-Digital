@@ -303,6 +303,9 @@
             const audio = document.getElementById('bgMusic');
             const mainContent = document.getElementById('main-content');
             const bottomNav = document.getElementById('bottom-nav');
+            const fixedFrame = document.getElementById('fixed-frame');
+            const wLeft = document.getElementById('fixed-wayang-left');
+            const wRight = document.getElementById('fixed-wayang-right');
 
             if (coverSection) {
                 coverSection.style.opacity = '0';
@@ -318,6 +321,9 @@
                     coverSection.style.display = 'none';
                     mainContent.classList.remove('hidden');
                     if(bottomNav) bottomNav.classList.remove('hidden');
+                    if(fixedFrame) fixedFrame.classList.remove('hidden');
+                    if(wLeft) wLeft.classList.remove('hidden');
+                    if(wRight) wRight.classList.remove('hidden');
                     document.body.style.overflowY = 'auto';
                     document.body.style.overflowX = 'hidden';
                     AOS.refresh();

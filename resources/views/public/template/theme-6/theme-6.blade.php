@@ -3,75 +3,103 @@
 @section('content')
 
     <!-- COVER SECTION -->
-    <section id="cover" class="fixed inset-0 z-[200] flex items-center justify-center bg-java-espresso transition-opacity duration-1200 overflow-hidden">
-        <!-- Royal Backlit Background -->
-        <div class="absolute inset-0 z-0">
-            <img src="{{ asset('assets/image/gunungan.jpg') }}" class="w-full h-full object-cover opacity-80 brightness-[0.3] contrast-150" alt="Background">
-            <div class="absolute inset-0 bg-radial-gradient from-transparent to-java-dark opacity-90"></div>
-            <div class="absolute inset-0 shadow-[inset_0_0_200px_rgba(0,0,0,1)]"></div>
+    <section id="cover" class="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[#B6A68F] transition-opacity duration-1200 overflow-hidden">
+        
+        <!-- Full Screen Frame -->
+        <div class="absolute inset-0 pointer-events-none z-10">
+            <img src="{{ asset('assets/image/theme-6-frame.png') }}" class="w-full h-full object-cover md:object-fill" alt="">
         </div>
 
-        <!-- Ornament Corners (Lux Gold) -->
-        <div class="absolute top-0 left-0 w-48 h-48 md:w-80 md:h-80 opacity-40 pointer-events-none">
-            <img src="{{ asset('assets/image/theme-6-floral-corner.png') }}" class="w-full h-full filter saturate-[2] brightness-[1.5] drop-shadow-[0_0_15px_rgba(191,149,63,0.5)]" alt="">
-        </div>
-        <div class="absolute bottom-0 right-0 w-48 h-48 md:w-80 md:h-80 opacity-40 pointer-events-none transform rotate-180">
-            <img src="{{ asset('assets/image/theme-6-floral-corner.png') }}" class="w-full h-full filter saturate-[2] brightness-[1.5] drop-shadow-[0_0_15px_rgba(191,149,63,0.5)]" alt="">
-        </div>
-
-        <div class="container mx-auto px-6 text-center relative z-20" data-aos="zoom-out" data-aos-duration="2500">
-            <div class="animate-float flex flex-col items-center space-y-12 max-w-4xl max-h-screen">
-                
-                <div class="space-y-4">
-                   <div class="w-32 h-[2px] bg-java-gold-gradient mx-auto"></div>
-                   <p class="font-decorative text-java-gold gold-glow text-lg md:text-xl tracking-[0.8em] uppercase">The Wedding of</p>
-                   <div class="w-32 h-[2px] bg-java-gold-gradient mx-auto"></div>
+        <!-- Center Content Container -->
+        <div class="relative z-20 flex flex-col items-center justify-center w-full max-w-4xl h-full pt-8 pb-16">
+            
+            <!-- Single Gunungan & Clouds Group -->
+            <div class="relative w-full flex flex-col items-center mb-6 pointer-events-none h-40 md:h-64 justify-center">
+                <!-- Clouds behind -->
+                <div class="absolute inset-0 flex items-center justify-center gap-10 md:gap-20 opacity-30">
+                    <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="w-24 md:w-48" alt="">
+                    <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="w-24 md:w-48 transform -scale-x-100" alt="">
                 </div>
-
-                <h1 class="font-script text-8xl md:text-[13rem] text-[#fffef0] gold-glow leading-[0.7] mb-8 font-bold drop-shadow-[0_20px_40px_rgba(0,0,0,1)]">
-                    {{ $invitation->bride_name }} <span class="text-java-gold block md:inline md:mx-6 mt-8 md:mt-0 font-normal">&</span>
-                    {{ $invitation->groom_name }}
-                </h1>
-
-                <div class="mt-16 space-y-10">
-                    <div class="space-y-3">
-                        <p class="text-xs uppercase tracking-[0.6em] text-white/50 font-bold">Yth. Bapak/Ibu/Saudara/i</p>
-                        <p class="font-serif text-4xl md:text-6xl text-white italic font-bold tracking-tight drop-shadow-2xl">
-                            {{ request('to', 'Tamu Undangan') }}
-                        </p>
-                    </div>
-
-                    <button onclick="openInvitation()"
-                        class="btn-premium px-20 py-6 rounded-full text-sm md:text-base tracking-[0.5em] uppercase font-bold pulse-gold border-2 border-[#bf953f]">
-                        Buka Undangan
-                    </button>
+                
+                <!-- Single Center Gunungan -->
+                <div class="relative z-10">
+                    <img src="{{ asset('assets/image/theme-6-wayang.png') }}" class="w-32 md:w-64 drop-shadow-xl" alt="">
                 </div>
             </div>
+
+            <!-- Text Content -->
+            <div class="text-center px-4" data-aos="fade-up" data-aos-duration="1500">
+                <p class="font-serif text-[#1e1e1e] text-sm md:text-lg tracking-wide mb-1">The Wedding Of</p>
+                <h1 class="font-script text-4xl md:text-6xl text-[#1e1e1e] mb-2 drop-shadow-sm font-bold">
+                    {{ $invitation->bride_name }} & {{ $invitation->groom_name }}
+                </h1>
+                
+                <div class="space-y-0.5 mb-4">
+                    <p class="font-serif text-[#1e1e1e] text-xs md:text-base">Kepada Yth:</p>
+                    <p class="font-serif text-[#1e1e1e] text-lg md:text-2xl font-bold italic">{{ request('to', 'Nama Penerima') }}</p>
+                    <p class="font-serif text-[#1e1e1e] text-xs md:text-base">Di Tempat</p>
+                </div>
+
+                <button onclick="openInvitation()"
+                    class="bg-black text-white px-8 md:px-12 py-3 rounded-md text-base md:text-xl font-serif flex items-center justify-center gap-3 mx-auto hover:bg-zinc-900 transition-all shadow-xl">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Buka Undangan
+                </button>
+            </div>
+        </div>
+
+        <!-- Wayang Characters Layer -->
+        <div class="absolute inset-x-0 bottom-0 pointer-events-none flex justify-between items-end px-0 md:px-10 z-20">
+            <img src="{{ asset('assets/image/theme-6-wayang-left.png') }}" class="w-32 md:w-72 -ml-4 md:ml-0 drop-shadow-2xl translate-y-4" alt="">
+            <img src="{{ asset('assets/image/theme-6-wayang-right.png') }}" class="w-32 md:w-72 -mr-4 md:mr-0 drop-shadow-2xl translate-y-4" alt="">
         </div>
     </section>
 
     <!-- FLOATING NAVIGATION BAR -->
-    <nav id="bottom-nav" class="bottom-nav hidden">
-         <a href="#hero" class="nav-link active">
-             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    <nav id="bottom-nav" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[200] hidden bg-black/80 backdrop-blur-md border border-white/30 px-6 py-3 rounded-full flex items-center gap-6 shadow-2xl transition-all duration-500">
+         <!-- Hero/Home -->
+         <a href="#hero" class="nav-link text-white/60 hover:text-white transition-all">
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
          </a>
-         <a href="#mempelai" class="nav-link">
-             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+         <!-- Mempelai/Heart -->
+         <a href="#mempelai" class="nav-link text-white/60 hover:text-white transition-all">
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
          </a>
-         <a href="#acara" class="nav-link">
-             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+         <!-- Acara/Calendar -->
+         <a href="#acara" class="nav-link text-white/60 hover:text-white transition-all">
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
          </a>
-         <a href="#galeri" class="nav-link">
-             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+         <!-- Galeri/Image -->
+         <a href="#galeri" class="nav-link text-white/60 hover:text-white transition-all">
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
          </a>
-         <a href="#rsvp" class="nav-link">
-             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+         <!-- Kontak/Message -->
+         <a href="#kontak" class="nav-link text-white/60 hover:text-white transition-all">
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
          </a>
     </nav>
 
+    <!-- GLOBAL DECORATIONS (THEME 5 STYLE: DIRECT FIXED ELEMENTS) -->
+    <!-- Full Screen Frame Image -->
+    <img id="fixed-frame" src="{{ asset('assets/image/theme-6-frame.png') }}" 
+         class="fixed inset-0 w-full h-full object-fill opacity-90 pointer-events-none z-[150] hidden" alt="">
+    
+    <!-- Wayang Characters (Directly Fixed to Corners with slight negative offset to hide jitter) -->
+    <img id="fixed-wayang-left" src="{{ asset('assets/image/theme-6-wayang-left.png') }}" 
+         class="fixed bottom-[-20px] left-[-20px] w-32 md:w-72 opacity-90 transform -rotate-12 pointer-events-none z-[160] hidden" 
+         alt="">
+    <img id="fixed-wayang-right" src="{{ asset('assets/image/theme-6-wayang-right.png') }}" 
+         class="fixed bottom-[-20px] right-[-20px] w-32 md:w-72 opacity-90 transform rotate-12 pointer-events-none z-[160] hidden" 
+         alt="">
+
     <!-- MAIN CONTENT -->
-    <main id="main-content" class="hidden relative z-20 bg-batik min-h-screen">
+    <main id="main-content" class="hidden relative z-20 bg-[#B6A68F] min-h-screen overflow-x-hidden">
         
+        <!-- BACKGROUND STATIC GUNUNGAN (BEHIND CONTENT) -->
+        <div class="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center opacity-10 pointer-events-none z-0">
+             <img src="{{ asset('assets/image/theme-6-wayang.png') }}" class="w-64 md:w-[32rem]" alt="">
+        </div>
+
         <!-- Music Control -->
         <button onclick="toggleMusic()"
             class="music-btn fixed top-6 right-6 z-[60] w-12 h-12 rounded-full glass-effect flex items-center justify-center text-[#3e2723] hover:text-[#c6a700] transition-all border border-[#c6a700] shadow-xl">
@@ -80,441 +108,289 @@
             </svg>
         </button>
 
-        <!-- HERO SECTION -->
-        <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden py-32 bg-java-espresso">
-            <!-- Grand Backstage Background -->
-            <div class="absolute inset-0 z-0">
-                <img src="{{ asset('assets/image/gunungan.jpg') }}" class="w-full h-full object-cover opacity-50 brightness-[0.2] contrast-150 rotate-3 scale-110" alt="Background">
-                <div class="absolute inset-0 bg-gradient-to-b from-java-espresso via-transparent to-java-espresso opacity-100"></div>
-            </div>
-            
-            <div class="container mx-auto px-6 text-center relative z-10" data-aos="zoom-in" data-aos-duration="2000">
-                <div class="mb-16">
-                    <div class="w-48 h-[2px] bg-java-gold-gradient mx-auto mb-6"></div>
-                    <p class="font-decorative text-java-gold gold-glow text-xl tracking-[1.2em] mb-4">THE WEDDING OF</p>
-                    <div class="w-48 h-[2px] bg-java-gold-gradient mx-auto"></div>
-                </div>
-                
-                <h1 class="font-script text-8xl md:text-[11rem] text-white gold-glow mb-16 leading-tight drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)] font-bold">
-                    {{ $invitation->bride_name }} & {{ $invitation->groom_name }}
-                </h1>
+        <!-- CONTENT LAYER -->
+        <div class="relative z-10">
+            <!-- HERO SECTION -->
+            <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden py-12 bg-transparent">
+                <div class="container mx-auto px-4 text-center relative z-10">
+                    <!-- Text Content Only -->
+                    <div class="mb-6" data-aos="fade-up">
+                        <p class="font-serif text-[#1e1e1e] text-base md:text-lg tracking-tight mb-1">The Wedding Of</p>
+                        <h1 class="font-script text-5xl md:text-6xl text-[#1e1e1e] mb-3 drop-shadow-sm font-bold">
+                            {{ $invitation->bride_name }} & {{ $invitation->groom_name }}
+                        </h1>
+                        <p class="font-serif text-[#1e1e1e] text-sm md:text-base max-w-sm mx-auto leading-tight italic">
+                            kami akan menikah, kami ingin anda menjadi bagian dari hari bahagia kami
+                        </p>
+                    </div>
 
-                <!-- ROYAL COUNTDOWN BOX -->
-                <div class="grid grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto mb-20" data-aos="fade-up">
-                    <div class="glass-effect p-8 rounded-[2rem] border-t-8 border-java-gold shadow-[0_0_30px_rgba(191,149,63,0.3)]">
-                        <span id="days" class="block text-5xl md:text-7xl font-serif text-java-gold gold-glow font-bold italic">00</span>
-                        <span class="text-xs uppercase tracking-[0.3em] font-bold text-white/60">Hari</span>
+                    <!-- COUNTDOWN -->
+                    <div class="flex justify-center gap-2 md:gap-4 mb-10" data-aos="fade-up">
+                        <div class="bg-black text-white w-16 md:w-20 py-2 rounded-lg flex flex-col items-center shadow-lg">
+                            <span id="days" class="text-xl md:text-3xl font-bold">0</span>
+                            <span class="text-[10px] md:text-xs uppercase">Hari</span>
+                        </div>
+                        <div class="bg-black text-white w-16 md:w-20 py-2 rounded-lg flex flex-col items-center shadow-lg">
+                            <span id="hours" class="text-xl md:text-3xl font-bold">0</span>
+                            <span class="text-[10px] md:text-xs uppercase">Jam</span>
+                        </div>
+                        <div class="bg-black text-white w-16 md:w-20 py-2 rounded-lg flex flex-col items-center shadow-lg">
+                            <span id="minutes" class="text-xl md:text-3xl font-bold">0</span>
+                            <span class="text-[10px] md:text-xs uppercase">Menit</span>
+                        </div>
+                        <div class="bg-black text-white w-16 md:w-20 py-2 rounded-lg flex flex-col items-center shadow-lg">
+                            <span id="seconds" class="text-xl md:text-3xl font-bold">0</span>
+                            <span class="text-[10px] md:text-xs uppercase">Detik</span>
+                        </div>
                     </div>
-                    <div class="glass-effect p-8 rounded-[2rem] border-t-8 border-java-gold shadow-[0_0_30px_rgba(191,149,63,0.3)]">
-                        <span id="hours" class="block text-5xl md:text-7xl font-serif text-java-gold gold-glow font-bold italic">00</span>
-                        <span class="text-xs uppercase tracking-[0.3em] font-bold text-white/60">Jam</span>
-                    </div>
-                    <div class="glass-effect p-8 rounded-[2rem] border-t-8 border-java-gold shadow-[0_0_30px_rgba(191,149,63,0.3)]">
-                        <span id="minutes" class="block text-5xl md:text-7xl font-serif text-java-gold gold-glow font-bold italic">00</span>
-                        <span class="text-xs uppercase tracking-[0.3em] font-bold text-white/60">Menit</span>
-                    </div>
-                    <div class="glass-effect p-8 rounded-[2rem] border-t-8 border-java-gold shadow-[0_0_30px_rgba(191,149,63,0.3)]">
-                        <span id="seconds" class="block text-5xl md:text-7xl font-serif text-java-gold gold-glow font-bold italic">00</span>
-                        <span class="text-xs uppercase tracking-[0.3em] font-bold text-white/60">Detik</span>
-                    </div>
-                </div>
 
-                <div class="mt-12 flex flex-col items-center gap-6">
-                     <p class="font-serif text-white text-3xl md:text-5xl tracking-[0.2em] italic font-bold gold-glow">
-                         {{ $invitation->wedding_date ? $invitation->wedding_date->translatedFormat('d F Y') : '30 Desember 2026' }}
-                     </p>
-                     <div class="java-separator w-64 mx-auto"></div>
-                     <button onclick="window.open('...', '_blank')"
-                        class="btn-premium px-12 py-5 rounded-full text-sm uppercase tracking-[0.5em] font-bold mt-8 flex items-center gap-3 shadow-[0_10px_30px_rgba(191,149,63,0.4)]">
-                          SAVE THE DATE
-                     </button>
+                    <div class="flex flex-col items-center gap-6" data-aos="fade-up">
+                        <button onclick="window.open('...', '_blank')"
+                            class="bg-black text-white px-8 md:px-12 py-3 rounded-md text-base md:text-lg font-serif italic flex items-center justify-center gap-3 mx-auto hover:bg-zinc-900 transition-all shadow-xl">
+                            <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Simpan Tanggal
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </section>
 
             <!-- Cloud Decorations -->
-            <div class="absolute top-20 left-10 wayang-cloud w-32 h-16 opacity-30 animate-float"></div>
-            <div class="absolute top-40 right-10 wayang-cloud w-40 h-20 opacity-20 animate-float-reverse"></div>
-            <div class="absolute bottom-40 left-20 wayang-cloud w-36 h-18 opacity-20 animate-float"></div>
+
         </section>
 
-        <!-- QURANIC VERSE SECTION -->
-        <section class="py-24 px-6 relative bg-java-brown text-[#fff0d1] overflow-hidden">
-            <div class="absolute inset-0 opacity-10 bg-batik mix-blend-overlay"></div>
-            
-            <div class="container mx-auto max-w-4xl relative z-10 text-center" data-aos="fade-up">
-                <div class="mb-12">
-                     <div class="java-separator w-48 mx-auto mb-12 opacity-40"></div>
-                </div>
-                
-                <h2 class="font-decorative text-java-gold text-2xl md:text-3xl mb-12 tracking-widest">Q.S Al-Fatir : ayat 11</h2>
-                
-                <p class="text-3xl md:text-5xl font-serif italic mb-12 leading-relaxed text-white drop-shadow-md">
-                    "Dan Allah menciptakan kamu dari tanah kemudian dari air mani, kemudian Dia menjadikan kamu berpasang-pasangan (laki-laki dan perempuan). Tidak ada seorang perempuan pun yang mengandung dan melahirkan melainkan dengan sepengetahuan-Nya. Dan tidak dipanjangkan umur seseorang dan tidak pula dikurangi umurnya, melainkan (sudah ditetapkan) dalam Kitab (Lauh Mahfuzh). Sesungguhnya yang demikian itu mudah bagi Allah."
-                </p>
-                
-                <div class="java-separator w-48 mx-auto opacity-40"></div>
-            </div>
-            
-            <!-- Corner Ornaments -->
-            <div class="absolute top-0 right-0 w-32 h-32 opacity-10 pointer-events-none">
-                 <img src="{{ asset('assets/image/theme-6-floral-corner.png') }}" class="rotate-90 brightness-0" alt="">
-            </div>
-            <div class="absolute bottom-0 left-0 w-32 h-32 opacity-10 pointer-events-none">
-                 <img src="{{ asset('assets/image/theme-6-floral-corner.png') }}" class="-rotate-90 brightness-0" alt="">
-            </div>
-        </section>
+
 
         <!-- MEMPELAI SECTION -->
-        <section id="mempelai" class="py-32 px-6 relative overflow-hidden">
-            <div class="container mx-auto max-w-6xl relative z-10">
-                <div class="text-center mb-24" data-aos="fade-down">
-                    <div class="java-separator w-48 mx-auto"></div>
-                    <h2 class="font-script text-7xl md:text-8xl text-java-brown drop-shadow-sm">Mempelai</h2>
-                    <div class="java-separator w-48 mx-auto"></div>
+        <section id="mempelai" class="py-12 px-4 relative bg-transparent">
+            <div class="container mx-auto max-w-4xl relative z-10 text-center">
+                
+                <div class="mb-12" data-aos="fade-up">
+                    <p class="font-serif text-[#1e1e1e] text-xs md:text-sm leading-relaxed max-w-md mx-auto">
+                        Dengan memohon rahmat dan ridho Tuhan kita, <br>
+                        Kami bermaksud menyelenggarakan pernikahan kami :
+                    </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-24 md:gap-16 items-center">
-                    
-                    <!-- Groom -->
-                    <div class="flex flex-col items-center md:items-end text-center md:text-right" data-aos="fade-right">
-                        <div class="relative mb-12">
-                            <!-- Java Frame -->
-                            <div class="absolute -inset-4 border-2 border-java-gold/30 rounded-3xl z-0 transform -rotate-3"></div>
-                            <div class="absolute -inset-4 border-2 border-java-brown/20 rounded-3xl z-0 transform rotate-2"></div>
-                            
-                            <div class="w-64 h-80 md:w-80 md:h-[450px] rounded-2xl overflow-hidden shadow-2xl relative z-10 border-8 border-[#fffefc]">
-                                <img src="{{ $invitation->groom_photo ? asset($invitation->groom_photo) : asset('assets/image/theme-5-profile.png') }}"
-                                    class="w-full h-full object-cover grayscale-[20%] sepia-[10%] hover:scale-110 transition-transform duration-1000"
-                                    alt="Groom">
-                            </div>
-                            
-                            <!-- Wayang Overlay Decor -->
-                            <div class="absolute -bottom-10 -left-10 w-32 h-32 opacity-40 z-20 animate-float">
-                                <img src="{{ asset('assets/image/theme-6-floral-corner.png') }}" class="rotate-[-20deg] brightness-0" alt="">
-                            </div>
-                        </div>
-
-                        <div class="space-y-4">
-                            <h3 class="font-script text-6xl md:text-7xl text-java-brown font-bold">{{ $invitation->groom_name }}</h3>
-                            <div class="space-y-1">
-                                <p class="text-xs text-java-gold uppercase tracking-[0.2em] font-bold">Putra Dari :</p>
-                                <p class="font-serif text-2xl md:text-3xl text-java-brown italic font-bold">
-                                    {{ $invitation->groom_parents ?? 'Bapak & Ibu' }}</p>
-                            </div>
-                            <div class="pt-4">
-                                <a href="https://instagram.com/{{ $invitation->groom_ig ?? 'mempelaipria' }}" target="_blank"
-                                    class="inline-flex items-center gap-2 text-java-brown hover:text-java-gold transition-colors border-b border-java-gold/50 pb-1">
-                                    <span class="text-xs font-bold tracking-widest italic">@<span></span>{{ ltrim($invitation->groom_ig ?? 'mempelaipria', '@') }}</span>
-                                </a>
-                            </div>
-                        </div>
+                <!-- First Person -->
+                <div class="mb-8" data-aos="fade-up">
+                    <h2 class="font-script text-4xl md:text-6xl text-[#1e1e1e] mb-1 font-bold">{{ $invitation->groom_name }}</h2>
+                    <div class="space-y-0.5">
+                        <p class="font-serif text-[#1e1e1e] text-xs md:text-sm italic">Putra dari</p>
+                        <p class="font-serif text-[#1e1e1e] text-sm md:text-lg font-bold italic">{{ $invitation->groom_parents ?? 'Bapak ..... dan Ibu .....' }}</p>
                     </div>
-
-                    <!-- Bride -->
-                    <div class="flex flex-col items-center md:items-start text-center md:text-left" data-aos="fade-left">
-                        <div class="relative mb-12">
-                             <!-- Java Frame -->
-                            <div class="absolute -inset-4 border-2 border-java-gold/30 rounded-3xl z-0 transform rotate-3"></div>
-                            <div class="absolute -inset-4 border-2 border-java-brown/20 rounded-3xl z-0 transform -rotate-2"></div>
-
-                            <div class="w-64 h-80 md:w-80 md:h-[450px] rounded-2xl overflow-hidden shadow-2xl relative z-10 border-8 border-[#fffefc]">
-                                <img src="{{ $invitation->bride_photo ? asset($invitation->bride_photo) : asset('assets/image/theme-5-profile.png') }}"
-                                    class="w-full h-full object-cover grayscale-[20%] sepia-[10%] hover:scale-110 transition-transform duration-1000"
-                                    alt="Bride">
-                            </div>
-
-                             <!-- Wayang Overlay Decor -->
-                             <div class="absolute -bottom-10 -right-10 w-32 h-32 opacity-40 z-20 animate-float-reverse">
-                                <img src="{{ asset('assets/image/theme-6-floral-corner.png') }}" class="rotate-[20deg] brightness-0" alt="">
-                            </div>
-                        </div>
-
-                        <div class="space-y-4">
-                            <h3 class="font-script text-6xl md:text-7xl text-java-brown font-bold">{{ $invitation->bride_name }}</h3>
-                            <div class="space-y-1">
-                                <p class="text-xs text-java-gold uppercase tracking-[0.2em] font-bold">Putri Dari :</p>
-                                <p class="font-serif text-2xl md:text-3xl text-java-brown italic font-bold">
-                                    {{ $invitation->bride_parents ?? 'Bapak & Ibu' }}</p>
-                            </div>
-                            <div class="pt-4">
-                                <a href="https://instagram.com/{{ $invitation->bride_ig ?? 'mempelaiwanita' }}" target="_blank"
-                                    class="inline-flex items-center gap-2 text-java-brown hover:text-java-gold transition-colors border-b border-java-gold/50 pb-1">
-                                    <span class="text-xs font-bold tracking-widest italic">@<span></span>{{ ltrim($invitation->bride_ig ?? 'mempelaiwanita', '@') }}</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
+
+                <!-- Divider & -->
+                <div class="relative flex items-center justify-center gap-6 mb-8" data-aos="zoom-in">
+                    <div class="h-0.5 w-12 md:w-20 bg-black/40"></div>
+                    <div class="relative">
+                        <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute inset-0 w-16 md:w-24 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 opacity-30 pointer-events-none" alt="">
+                        <span class="font-script text-3xl md:text-5xl text-[#1e1e1e] relative z-10 font-bold">&</span>
+                    </div>
+                    <div class="h-0.5 w-12 md:w-20 bg-black/40"></div>
+                </div>
+
+                <!-- Second Person -->
+                <div class="mb-10" data-aos="fade-up">
+                    <h2 class="font-script text-4xl md:text-6xl text-[#1e1e1e] mb-1 font-bold">{{ $invitation->bride_name }}</h2>
+                    <div class="space-y-0.5">
+                        <p class="font-serif text-[#1e1e1e] text-xs md:text-sm italic">Putri dari</p>
+                        <p class="font-serif text-[#1e1e1e] text-sm md:text-lg font-bold italic">{{ $invitation->bride_parents ?? 'Bapak ..... dan Ibu .....' }}</p>
+                    </div>
+                </div>
+
             </div>
-            
-            <!-- Global Decorations -->
-            <div class="wayang-corner-tl opacity-20 -z-10 bg-fixed"></div>
-            <div class="wayang-corner-tr opacity-20 -z-10 bg-fixed"></div>
         </section>
 
-        <!-- STORY SECTION -->
-        <section id="kisah" class="py-24 px-6 relative bg-java-espresso text-white overflow-hidden">
-             <div class="absolute inset-0 opacity-20 overflow-hidden">
-                 <img src="{{ asset('assets/image/theme-6-bg.png') }}" class="w-full h-full object-cover" alt="">
-             </div>
-             
-             <div class="container mx-auto max-w-5xl relative z-10 text-center">
-                 <h2 class="font-script text-6xl md:text-7xl mb-6">Kisah Cinta</h2>
-                 <div class="java-separator w-32 mx-auto mb-16 opacity-40"></div>
-                 
-                 <div class="space-y-12">
-                     @forelse ($invitation->stories as $story)
-                        <div class="glass-effect p-8 md:p-12 rounded-[2rem] border-java-gold/30" data-aos="fade-up">
-                            <h3 class="font-decorative text-2xl mb-4 text-java-gold uppercase tracking-widest">{{ $story->title }}</h3>
-                            <p class="font-serif italic text-lg leading-relaxed text-[#fffef0]">"{{ $story->content }}"</p>
-                            <div class="mt-6 text-xs tracking-widest font-bold uppercase text-java-gold/60">
-                                {{ $story->year ?? (isset($story->date) ? \Carbon\Carbon::parse($story->date)->format('Y') : '2024') }}
-                            </div>
-                        </div>
-                     @empty
-                        <p class="italic text-java-gold/60">Perjalanan cinta yang tertulis indah dalam takdir...</p>
-                     @endforelse
-                 </div>
-             </div>
+        <!-- QURANIC VERSE SECTION (Replaced Kisah) -->
+        <section id="kisah" class="py-24 px-4 relative bg-transparent">
+            <div class="container mx-auto max-w-4xl relative z-10 text-center" data-aos="fade-up">
+                
+                <div class="relative inline-block mb-8">
+                    <!-- Clouds around Title -->
+                    <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -left-16 top-0 w-24 opacity-30 pointer-events-none" alt="">
+                    <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -right-16 top-0 w-24 opacity-30 transform -scale-x-100 pointer-events-none" alt="">
+                    
+                    <h2 class="font-serif text-[#1e1e1e] text-2xl md:text-4xl font-bold tracking-tight">Q.S Al- Fatir : ayat 11</h2>
+                </div>
+
+                <div class="relative">
+                    <!-- Additional Clouds -->
+                    <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -left-10 bottom-0 w-28 opacity-20 pointer-events-none" alt="">
+                    
+                    <p class="font-serif text-[#1e1e1e] text-sm md:text-base italic leading-relaxed max-w-3xl mx-auto px-4">
+                        "Dan Allah menciptakan kamu dari tanah kemudian dari air mani, kemudian Dia menjadikan kamu berpasang-pasangan (laki-laki dan perempuan). Tidak ada seorang perempuan pun yang mengandung dan melahirkan melainkan dengan sepengetahuan-Nya. Dan tidak dipanjangkan umur seseorang dan tidak pula dikurangi umurnya, melainkan (sudah ditetapkan) dalam Kitab (Lauh Mahfuzh). Sesungguhnya yang demikian itu mudah bagi Allah."
+                    </p>
+                </div>
+
+            </div>
         </section>
 
         <!-- ACARA SECTION -->
-        <section id="acara" class="py-32 px-6 relative">
-            <div class="container mx-auto max-w-5xl relative z-10">
-                <div class="text-center mb-16" data-aos="fade-down">
-                    <h2 class="font-decorative text-java-brown text-3xl md:text-4xl tracking-widest uppercase">Akad & Resepsi</h2>
-                    <div class="java-separator w-48 mx-auto mt-4"></div>
+        <section id="acara" class="py-12 px-0 relative bg-transparent">
+            <div class="container mx-auto max-w-[450px] relative z-10 text-center">
+                
+                <div class="mb-8" data-aos="fade-up">
+                    <p class="font-serif text-[#1e1e1e] text-xs md:text-sm leading-relaxed max-w-sm mx-auto px-4">
+                        Dengan segala kerendahan hati kami berharap kehadiran Bapak/Ibu/i dalam acara pernikahan anak kami yang akan di selenggarakan pada :
+                    </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                <!-- Akad/Pernikahan Card -->
+                <div class="bg-black/5 backdrop-blur-sm rounded-[2rem] p-3 md:p-6 mb-6 shadow-sm border border-black/5" data-aos="fade-up">
+                    <h2 class="font-serif text-[#1e1e1e] text-2xl md:text-3xl font-bold mb-6">Pernikahan</h2>
+
+                    <!-- Date Area -->
+                    <div class="flex items-center justify-center gap-4 md:gap-8 mb-8 border-y border-black/10 py-6">
+                        <div class="flex-1 text-right">
+                            <p class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold">{{ $invitation->wedding_date->translatedFormat('l') }}</p>
+                            <p class="text-[10px] md:text-xs uppercase tracking-widest opacity-60">Hari</p>
+                        </div>
+                        <div class="h-16 w-px bg-black opacity-30"></div>
+                        <div class="flex-[1.5] text-center">
+                            <p class="font-script text-2xl md:text-4xl text-[#1e1e1e] font-bold leading-none mb-1">{{ $invitation->wedding_date->translatedFormat('d') }}</p>
+                            <p class="font-serif text-[#1e1e1e] text-base md:text-lg font-bold">{{ $invitation->wedding_date->translatedFormat('Y') }}</p>
+                            <p class="text-[10px] md:text-xs uppercase tracking-widest opacity-60">Tanggal</p>
+                        </div>
+                        <div class="h-16 w-px bg-black opacity-30"></div>
+                        <div class="flex-1 text-left">
+                            <p class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold">{{ $invitation->wedding_date->translatedFormat('F') }}</p>
+                            <p class="text-[10px] md:text-xs uppercase tracking-widest opacity-60">Bulan</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-script text-xl md:text-2xl text-[#1e1e1e] font-bold italic">Pukul : {{ $invitation->akad_time ?? '08.00' }} WIB - Selesai</p>
+                        </div>
+                        <div class="space-y-0.5">
+                            <p class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold">Lokasi</p>
+                            <p class="font-serif text-[#1e1e1e] text-xs md:text-sm">Bertempat Di,</p>
+                            <p class="font-serif text-[#1e1e1e] text-xs md:text-sm leading-tight">{{ $invitation->akad_location }} <br> {{ $invitation->akad_address }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resepsi Card -->
+                <div class="bg-black/5 backdrop-blur-sm rounded-[2rem] p-3 md:p-6 shadow-sm border border-black/5 relative overflow-hidden" data-aos="fade-up">
+                    <!-- Clouds decor in card -->
+                    <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute right-0 top-1/2 -translate-y-1/2 w-20 md:w-28 opacity-20 transform translate-x-8 pointer-events-none" alt="">
                     
-                    <!-- Akad Card -->
-                    <div class="glass-effect rounded-[3rem] p-10 md:p-12 border-b-8 border-java-gold text-center relative overflow-hidden" data-aos="fade-right">
-                        <div class="absolute top-0 right-0 w-32 h-32 opacity-10 rotate-45 translate-x-12 -translate-y-12">
-                             <img src="{{ asset('assets/image/theme-6-floral-corner.png') }}" alt="">
+                    <h2 class="font-serif text-[#1e1e1e] text-2xl md:text-3xl font-bold mb-6">Resepsi</h2>
+
+                    <!-- Date Area -->
+                    <div class="flex items-center justify-center gap-4 md:gap-8 mb-8 border-y border-black/10 py-6">
+                        <div class="flex-1 text-right">
+                            <p class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold">{{ $invitation->wedding_date->translatedFormat('l') }}</p>
+                            <p class="text-[10px] md:text-xs uppercase tracking-widest opacity-60">Hari</p>
                         </div>
-                        
-                        <h3 class="font-script text-5xl text-java-gold mb-8">Akad Nikah</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="space-y-1">
-                                <p class="text-xs uppercase tracking-[0.3em] font-bold text-java-gold/60">Hari & Tanggal</p>
-                                <p class="font-serif text-2xl text-[#fffef0]">
-                                    {{ $invitation->wedding_date->translatedFormat('l, d F Y') }}
-                                </p>
-                            </div>
-                            
-                            <div class="space-y-1">
-                                <p class="text-xs uppercase tracking-[0.3em] font-bold text-java-gold/60">Waktu</p>
-                                <p class="font-serif text-2xl text-[#fffef0]">{{ $invitation->akad_time ?? '08:00 - 10:00' }} WIB</p>
-                            </div>
-                            
-                            <div class="space-y-1">
-                                <p class="text-xs uppercase tracking-[0.3em] font-bold text-java-gold/60">Lokasi</p>
-                                <p class="font-serif text-lg text-java-gold font-bold">{{ $invitation->akad_location }}</p>
-                                <p class="text-sm text-[#fffef0]/80 leading-relaxed italic">{{ $invitation->akad_address }}</p>
-                            </div>
+                        <div class="h-16 w-px bg-black opacity-30"></div>
+                        <div class="flex-[1.5] text-center">
+                            <p class="font-script text-2xl md:text-4xl text-[#1e1e1e] font-bold leading-none mb-1">{{ $invitation->wedding_date->translatedFormat('d') }}</p>
+                            <p class="font-serif text-[#1e1e1e] text-base md:text-lg font-bold">{{ $invitation->wedding_date->translatedFormat('Y') }}</p>
+                            <p class="text-[10px] md:text-xs uppercase tracking-widest opacity-60">Tanggal</p>
+                        </div>
+                        <div class="h-16 w-px bg-black opacity-30"></div>
+                        <div class="flex-1 text-left">
+                            <p class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold">{{ $invitation->wedding_date->translatedFormat('F') }}</p>
+                            <p class="text-[10px] md:text-xs uppercase tracking-widest opacity-60">Bulan</p>
                         </div>
                     </div>
 
-                    <!-- Resepsi Card -->
-                    <div class="glass-effect rounded-[3rem] p-10 md:p-12 border-b-8 border-java-brown text-center relative overflow-hidden" data-aos="fade-left">
-                        <div class="absolute top-0 left-0 w-32 h-32 opacity-10 -rotate-45 -translate-x-12 -translate-y-12">
-                             <img src="{{ asset('assets/image/theme-6-floral-corner.png') }}" class="scale-x-[-1]" alt="">
+                    <div class="space-y-4">
+                        <div>
+                            <p class="font-script text-xl md:text-2xl text-[#1e1e1e] font-bold italic">Pukul : {{ $invitation->resepsi_time ?? '11.00' }} WIB - Selesai</p>
                         </div>
-                        
-                        <h3 class="font-script text-5xl text-java-gold mb-8">Resepsi</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="space-y-1">
-                                <p class="text-xs uppercase tracking-[0.3em] font-bold text-java-gold/60">Hari & Tanggal</p>
-                                <p class="font-serif text-2xl text-[#fffef0]">
-                                    {{ $invitation->wedding_date->translatedFormat('l, d F Y') }}
-                                </p>
-                            </div>
-                            
-                            <div class="space-y-1">
-                                <p class="text-xs uppercase tracking-[0.3em] font-bold text-java-gold/60">Waktu</p>
-                                <p class="font-serif text-2xl text-[#fffef0]">{{ $invitation->resepsi_time ?? '11:00 - selesai' }} WIB</p>
-                            </div>
-
-                            <div class="space-y-1">
-                                <p class="text-xs uppercase tracking-[0.3em] font-bold text-java-gold/60">Lokasi</p>
-                                <p class="font-serif text-lg text-java-gold font-bold">{{ $invitation->resepsi_location }}</p>
-                                <p class="text-sm text-[#fffef0]/80 leading-relaxed italic">{{ $invitation->resepsi_address }}</p>
-                            </div>
+                        <div class="space-y-0.5">
+                            <p class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold">Lokasi</p>
+                            <p class="font-serif text-[#1e1e1e] text-xs md:text-sm">Bertempat Di,</p>
+                            <p class="font-serif text-[#1e1e1e] text-xs md:text-sm leading-tight">{{ $invitation->resepsi_location }} <br> {{ $invitation->resepsi_address }}</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Google Maps -->
-                <div class="mt-20 glass-effect rounded-[3rem] overflow-hidden h-[400px] border-4 border-java-gold shadow-2xl" data-aos="zoom-in">
-                    <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.521260322283!2d106.81956135000001!3d-6.194723500000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f421d1aa5941%3A0x2bd0321f68ca1d56!2sGrand%20Indonesia!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid">
-                    </iframe>
                 </div>
             </div>
         </section>
+            </div>
+        </section>
 
-        <!-- GALLERY -->
-        <section id="galeri" class="py-32 px-6 relative bg-java-brown overflow-hidden">
-             <div class="absolute inset-0 opacity-10 bg-batik mix-blend-overlay"></div>
-             
-             <div class="container mx-auto max-w-6xl relative z-10">
-                <div class="text-center mb-20" data-aos="fade-down">
-                    <h2 class="font-script text-7xl text-java-gold">Galeri Momen</h2>
-                    <div class="java-separator w-48 mx-auto mt-4 opacity-40"></div>
+        <!-- GALLERY SECTION -->
+        <section id="galeri" class="py-12 px-4 relative bg-transparent overflow-hidden">
+            <div class="container mx-auto max-w-5xl relative z-10 text-center">
+                
+                <!-- Cloud Decor Left -->
+                <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -left-10 top-20 w-32 md:w-48 opacity-30 pointer-events-none" alt="">
+                
+                <!-- Cloud Decor Right -->
+                <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -right-10 top-40 w-32 md:w-48 opacity-30 transform -scale-x-100 pointer-events-none" alt="">
+
+                <div class="mb-10" data-aos="fade-up">
+                    <h2 class="font-serif text-[#1e1e1e] text-4xl md:text-6xl font-bold tracking-tighter">Foto</h2>
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4" data-aos="fade-up">
                     @forelse($invitation->galleries as $index => $photo)
-                        <div class="rounded-2xl overflow-hidden border-2 border-java-gold/30 shadow-xl" data-aos="zoom-in" data-aos-delay="{{ $index * 100 }}">
-                             <img src="{{ asset($photo->image_path) }}" class="w-full h-64 md:h-80 object-cover hover:scale-110 transition duration-700">
+                        @php
+                            $isLarge = $index % 5 == 0;
+                            $gridClasses = $isLarge ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1';
+                            $aspectRatio = $isLarge ? 'aspect-[4/3] md:aspect-[3/4]' : 'aspect-square';
+                        @endphp
+                        <div class="{{ $gridClasses }} group relative overflow-hidden bg-white shadow-lg">
+                             <img src="{{ asset($photo->image_path) }}" 
+                                  class="w-full h-full object-cover transition-all duration-700 scale-110 group-hover:scale-100" 
+                                  alt="Gallery Image">
                         </div>
                     @empty
-                        @for($i = 1; $i <= 6; $i++)
-                        <div class="rounded-2xl overflow-hidden border-2 border-java-gold/30 shadow-xl" data-aos="zoom-in">
-                             <img src="{{ asset('assets/image/theme-5-cover.png') }}" class="w-full h-64 md:h-80 object-cover">
+                        @for($i = 0; $i < 6; $i++)
+                        <div class="{{ $i == 0 ? 'col-span-2 row-span-2' : 'col-span-1' }} bg-white overflow-hidden relative group">
+                             <img src="{{ asset('assets/image/theme-5-cover.png') }}" class="w-full h-full object-cover transition-all duration-700" alt="Placeholder">
                         </div>
                         @endfor
                     @endforelse
                 </div>
-             </div>
+
+            </div>
         </section>
 
-        <!-- PEMESANAN / CONTACT SECTION (Based on Screen 7) -->
-        <section id="kontak" class="py-24 px-6 relative bg-java-brown/60 overflow-hidden text-center">
+        <!-- CONTACT / PEMESANAN SECTION -->
+        <section id="kontak" class="py-24 px-4 relative bg-transparent text-center overflow-hidden">
             <div class="container mx-auto max-w-lg relative z-10">
-                <h2 class="font-script text-6xl text-java-gold mb-12">Pemesanan</h2>
                 
-                <div class="flex flex-col gap-4">
-                    <a href="https://wa.me/{{ $invitation->phone ?? '628123456789' }}?text=Halo%20{{ urlencode($invitation->bride_name) }}%20dan%20{{ urlencode($invitation->groom_name) }},%20saya%20ingin%20mengonfirmasi%20undangan..." 
+                <!-- Cloud Decor Left -->
+                <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -left-20 top-1/2 -translate-y-1/2 w-40 opacity-30 pointer-events-none" alt="">
+                
+                <!-- Cloud Decor Right -->
+                <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -right-20 top-1/2 -translate-y-1/2 w-40 opacity-30 transform -scale-x-100 pointer-events-none" alt="">
+
+                <h2 class="font-serif text-[#1e1e1e] text-4xl md:text-6xl font-bold mb-10 tracking-tight">Pemesanan</h2>
+
+                <div class="flex flex-col gap-3 max-w-sm mx-auto">
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/{{ $invitation->phone ?? '628123456789' }}" 
                         target="_blank"
-                        class="btn-premium py-4 rounded-full flex items-center justify-center gap-3 text-sm tracking-widest font-bold grayscale hover:grayscale-0 transition-all">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-2.296 0-4.159 1.864-4.159 4.159 0 .828.24 1.599.654 2.247l-.689 2.525 2.589-.679c.508.272 1.087.428 1.704.428 2.296 0 4.159-1.864 4.159-4.159 0-2.295-1.863-4.159-4.159-4.159zm2.463 6.011c-.114.288-.654.524-.914.524-.26 0-.583-.024-.914-.158-1.571-.629-2.582-2.203-2.658-2.311-.077-.107-.618-.822-.618-1.57 0-.749.394-1.116.533-1.264.139-.148.304-.185.405-.185.101 0 .203.001.291.001.077 0 .185-.029.288.225.101.254.348.847.378.914.03.067.051.144.004.238-.046.094-.07.153-.139.231-.069.079-.148.176-.213.237-.074.069-.151.144-.065.293.086.148.384.633.824 1.026.566.505 1.042.663 1.189.736.148.074.233.061.32-.04.086-.101.378-.435.479-.582.101-.148.203-.121.341-.07.139.051.874.412 1.026.488.151.077.253.114.291.176.037.062.037.358-.077.646z"/></svg>
-                        WHATS APP
+                        class="bg-[#4a4a50] text-[#fffef0] py-3.5 px-6 rounded-md flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all shadow-lg active:scale-95 group">
+                        <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-2.296 0-4.159 1.864-4.159 4.159 0 .828.24 1.599.654 2.247l-.689 2.525 2.589-.679c.508.272 1.087.428 1.704.428 2.296 0 4.159-1.864 4.159-4.159 0-2.295-1.863-4.159-4.159-4.159zm2.463 6.011c-.114.288-.654.524-.914.524-.26 0-.583-.024-.914-.158-1.571-.629-2.582-2.203-2.658-2.311-.077-.107-.618-.822-.618-1.57 0-.749.394-1.116.533-1.264.139-.148.304-.185.405-.185.101 0 .203.001.291.001.077 0 .185-.029.288.225.101.254.348.847.378.914.03.067.051.144.004.238-.046.094-.07.153-.139.231-.069.079-.148.176-.213.237-.074.069-.151.144-.065.293.086.148.384.633.824 1.026.566.505 1.042.663 1.189.736.148.074.233.061.32-.04.086-.101.378-.435.479-.582.101-.148.203-.121.341-.07.139.051.874.412 1.026.488.151.077.253.114.291.176.037.062.037.358-.077.646z"/></svg>
+                        <span class="font-serif text-lg">Whats App</span>
                     </a>
-                    
+
+                    <!-- Email -->
                     <a href="mailto:{{ $invitation->email ?? 'undangan@example.com' }}" 
-                        class="btn-premium py-4 rounded-full flex items-center justify-center gap-3 text-sm tracking-widest font-bold grayscale hover:grayscale-0 transition-all">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        EMAIL
+                        class="bg-[#4a4a50] text-[#fffef0] py-3.5 px-6 rounded-md flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all shadow-lg active:scale-95 group">
+                        <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        <span class="font-serif text-lg">Email</span>
                     </a>
-                    
+
+                    <!-- Lokasi -->
                     <a href="#acara" 
-                        class="btn-premium py-4 rounded-full flex items-center justify-center gap-3 text-sm tracking-widest font-bold grayscale hover:grayscale-0 transition-all">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                        LOKASI
+                        class="bg-[#4a4a50] text-[#fffef0] py-3.5 px-6 rounded-md flex items-center justify-center gap-3 hover:bg-zinc-800 transition-all shadow-lg active:scale-95 group">
+                        <svg class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        <span class="font-serif text-lg tracking-[0.15em]">LOKASI</span>
                     </a>
                 </div>
             </div>
-            
-            <!-- Gunungan Decor -->
-            <div class="absolute inset-0 opacity-10 pointer-events-none bg-batik"></div>
         </section>
 
-        <!-- KONFIRMASI / RSVP -->
-        <section id="rsvp" class="py-32 px-6 relative">
-            <div class="container mx-auto max-w-4xl relative z-10">
-                <div class="text-center mb-16" data-aos="fade-down">
-                    <h2 class="font-decorative text-3xl text-java-brown tracking-widest uppercase">Konfirmasi Kehadiran</h2>
-                    <div class="java-separator w-32 mx-auto mt-4"></div>
-                </div>
-
-                <div class="glass-effect rounded-[3rem] p-8 md:p-16 shadow-2xl border-java-gold/40" data-aos="fade-up">
-                    <form id="rsvpForm" action="{{ route('rsvp.store') }}" method="POST" class="space-y-8">
-                        @csrf
-                        <input type="hidden" name="invitation_id" value="{{ $invitation->id }}">
-                        
-                        <div class="space-y-2">
-                            <label class="font-serif italic text-[#fff0d1] font-bold text-lg">Nama Lengkap</label>
-                            <input type="text" name="name" value="{{ request('to') }}"
-                                class="w-full bg-white/10 border-b-2 border-java-gold p-4 text-white placeholder-white/40 focus:outline-none focus:bg-white/20 transition rounded-t-lg"
-                                placeholder="Masukkan nama Anda" required>
-                        </div>
-
-                        <div class="space-y-2">
-                            <label class="font-serif italic text-[#fff0d1] font-bold text-lg">Kehadiran</label>
-                            <select name="is_attending"
-                                class="w-full bg-white/10 border-b-2 border-java-gold p-4 text-white focus:outline-none focus:bg-white/20 transition rounded-t-lg"
-                                required>
-                                <option value="" disabled selected class="text-java-brown">Pilih Kehadiran</option>
-                                <option value="1" class="text-java-brown">Akan Hadir</option>
-                                <option value="0" class="text-java-brown">Tidak Dapat Hadir</option>
-                            </select>
-                        </div>
-
-                        <div class="space-y-2">
-                            <label class="font-serif italic text-[#fff0d1] font-bold text-lg">Pesan & Doa</label>
-                            <textarea name="message"
-                                class="w-full bg-white/10 border-b-2 border-java-gold p-4 text-white placeholder-white/40 focus:outline-none focus:bg-white/20 transition rounded-t-lg"
-                                placeholder="Tulis ucapan selamat & doa" rows="4"></textarea>
-                        </div>
-
-                        <button type="submit"
-                            class="btn-premium w-full py-5 rounded-full text-sm uppercase tracking-[0.3em] font-bold shadow-xl hover:shadow-java-gold/50 transition-all">
-                            Kirim Konfirmasi
-                        </button>
-                    </form>
-                </div>
-                
-                <!-- RSVP LIST -->
-                <div class="mt-32 space-y-8" data-aos="fade-up">
-                    <h3 class="font-script text-6xl text-java-gold text-center">Ucapan Selamat</h3>
-                    <div class="max-h-[500px] overflow-y-auto px-4 custom-scrollbar space-y-6">
-                        @php
-                            $rsvps = $invitation->guests()->where('is_rsvp', true)->orderBy('updated_at', 'desc')->get();
-                        @endphp
-                        @forelse($rsvps as $rsvp)
-                            <div class="glass-effect p-8 rounded-[2rem] border-java-gold/20 shadow-lg relative overflow-hidden">
-                                <div class="absolute left-0 top-0 bottom-0 w-2 {{ $rsvp->is_attending ? 'bg-java-gold' : 'bg-java-brown' }}"></div>
-                                <div class="flex justify-between items-start mb-4">
-                                    <div class="flex items-center gap-4">
-                                        <div class="w-12 h-12 rounded-full bg-java-gold text-java-brown flex items-center justify-center font-bold">
-                                            {{ strtoupper(substr($rsvp->name, 0, 1)) }}
-                                        </div>
-                                        <div>
-                                            <p class="font-bold text-java-gold">{{ $rsvp->name }}</p>
-                                            <p class="text-[10px] text-[#fffef0]/60 tracking-widest">{{ $rsvp->updated_at->diffForHumans() }}</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-[9px] px-3 py-1 rounded-full uppercase tracking-widest font-bold {{ $rsvp->is_attending ? 'bg-java-gold/10 text-java-gold border border-java-gold/30' : 'bg-white/10 text-white border border-white/30' }}">
-                                        {{ $rsvp->is_attending ? 'Hadir' : 'Absen' }}
-                                    </span>
-                                </div>
-                                <p class="font-serif italic text-[#fffef0] mt-4 leading-relaxed">"{{ $rsvp->message }}"</p>
-                            </div>
-                        @empty
-                            <div class="text-center py-20 glass-effect rounded-[2rem] border-2 border-dashed border-java-gold/20">
-                                <p class="text-java-gold/50 italic font-serif">Belum ada ucapan...</p>
-                            </div>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FOOTER / CLOSING -->
-        <footer class="py-32 px-6 bg-java-espresso text-white text-center relative overflow-hidden border-t-8 border-java-gold">
-             <div class="absolute inset-0 opacity-10 bg-batik mix-blend-overlay"></div>
-             
-             <div class="container mx-auto max-w-4xl relative z-10" data-aos="zoom-in">
-                 <div class="java-separator w-48 mx-auto mb-12"></div>
-                 
-                 <p class="font-serif italic text-xl md:text-2xl mb-12 leading-relaxed">
-                     "Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga, apabila Bapak/Ibu/Saudara/i dapat hadir dan memberikan doa restu kepada kedua mempelai."
-                 </p>
-                 
-                 <div class="java-separator w-48 mx-auto mb-12 opacity-40"></div>
-                 
-                 <h2 class="font-serif text-lg tracking-[0.5em] uppercase mb-12">Terima Kasih</h2>
-                 
-                 <h1 class="font-script text-7xl md:text-8xl text-java-gold mb-16">
-                     {{ $invitation->bride_name }} & {{ $invitation->groom_name }}
-                 </h1>
-             </div>
-        </footer>
+        
+    </main>
 
     </main>
 
