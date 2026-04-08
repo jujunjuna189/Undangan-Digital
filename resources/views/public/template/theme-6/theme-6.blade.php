@@ -36,7 +36,7 @@
                 
                 <div class="space-y-0.5 mb-4">
                     <p class="font-serif text-[#1e1e1e] text-xs md:text-base">Kepada Yth:</p>
-                    <p class="font-serif text-[#1e1e1e] text-lg md:text-2xl font-bold italic">{{ request('to', 'Nama Penerima') }}</p>
+                    <p class="font-serif text-[#1e1e1e] text-lg md:text-2xl font-bold italic">{{ request('to', 'Tamu Undangan') }}</p>
                     <p class="font-serif text-[#1e1e1e] text-xs md:text-base">Di Tempat</p>
                 </div>
 
@@ -144,8 +144,17 @@
                         </div>
                     </div>
 
+                    @php
+                        $dt = $invitation->wedding_date ? \Carbon\Carbon::parse($invitation->wedding_date) : \Carbon\Carbon::parse('2026-12-25');
+                        $startDate = $dt->format('Ymd\THis');
+                        $endDate = \Carbon\Carbon::parse($dt)->addHours(5)->format('Ymd\THis');
+                        $calendarTitle = urlencode("The Wedding of " . ($invitation->bride_name ?? 'Mempelai') . " & " . ($invitation->groom_name ?? 'Mempelai'));
+                        $calendarDetails = urlencode("Acara pernikahan bahagia " . ($invitation->bride_name ?? 'Mempelai') . " & " . ($invitation->groom_name ?? 'Mempelai'));
+                        $calendarLocation = urlencode($invitation->akad_location ?? $invitation->akad_address ?? $invitation->location ?? 'Lokasi Acara');
+                        $gcalUrl = "https://www.google.com/calendar/render?action=TEMPLATE&text={$calendarTitle}&dates={$startDate}/{$endDate}&details={$calendarDetails}&location={$calendarLocation}";
+                    @endphp
                     <div class="flex flex-col items-center gap-6" data-aos="fade-up">
-                        <button onclick="window.open('...', '_blank')"
+                        <button onclick="window.open('{{ $gcalUrl }}', '_blank')"
                             class="bg-black text-white px-8 md:px-12 py-3 rounded-md text-base md:text-lg font-serif italic flex items-center justify-center gap-3 mx-auto hover:bg-zinc-900 transition-all shadow-xl">
                             <svg class="w-5 h-5 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             Simpan Tanggal
@@ -307,9 +316,17 @@
                             <p class="font-serif text-[#1e1e1e] text-xs md:text-sm leading-tight">{{ $invitation->resepsi_location }} <br> {{ $invitation->resepsi_address }}</p>
                         </div>
                     </div>
+                <!-- Maps Button -->
+                <div class="mt-8" data-aos="fade-up">
+                    <button onclick="window.open('{{ $invitation->maps_url ?? '#' }}', '_blank')"
+                        class="bg-black text-white px-8 py-3 rounded-md text-sm font-serif italic flex items-center justify-center gap-3 mx-auto hover:bg-zinc-900 transition-all shadow-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        Buka Google Maps
+                    </button>
                 </div>
-            </div>
-        </section>
             </div>
         </section>
 
