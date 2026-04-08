@@ -44,7 +44,7 @@ class TemplateSeeder extends Seeder
             [
                 'name' => 'Javanese Wayang Culture',
                 'slug' => 'theme-6',
-                'preview_image' => 'assets/image/theme-6-bg.png',
+                'preview_image' => 'assets/image/theme-6-wayang.png',
                 'description' => 'Kemewahan budaya Jawa dengan sentuhan Wayang Kulit yang artistik dan premium',
                 'is_active' => true,
             ],

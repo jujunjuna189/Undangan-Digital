@@ -209,8 +209,20 @@
             width: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: var(--java-gold);
+            background: rgba(197, 160, 89, 0.5);
             border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(197, 160, 89, 0.8);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
         }
 
         /* Floating Nav Bar */

@@ -123,7 +123,7 @@ class InvitationController extends Controller
                 'is_rsvp' => true,
             ]);
         } else {
-            Guest::create([
+            $guest = Guest::create([
                 'invitation_id' => $invitation->id,
                 'name' => $request->name,
                 'is_attending' => $request->is_attending,
@@ -134,8 +134,9 @@ class InvitationController extends Controller
 
         if ($request->ajax()) {
             return response()->json([
-                'success' => true,
-                'message' => 'Terima kasih atas konfirmasi kehadiran Anda!'
+                'status' => 'success',
+                'message' => 'Terima kasih atas konfirmasi kehadiran Anda!',
+                'guest' => $guest
             ]);
         }
 
