@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Prata&family=Inter:wght@300;400;500;600&family=Forum&display=swap"
         rel="stylesheet">
 
     <!-- AOS Animation -->
@@ -54,8 +54,9 @@
 
         body {
             font-family: 'Inter', sans-serif;
+            font-weight: 300;
             background-color: #f5efe6;
-            color: #1a1a1a;
+            color: #111111;
             overflow-x: hidden;
             width: 100%;
             position: relative;
@@ -81,12 +82,13 @@
         }
 
         .font-script {
-            font-family: 'Great Vibes', cursive;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-family: 'Prata', serif;
+            font-weight: 400;
+            text-shadow: none;
         }
 
         .font-serif {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Forum', serif;
         }
 
         .glass-effect {

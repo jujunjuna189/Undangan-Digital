@@ -29,15 +29,15 @@
 
             <!-- Text Content -->
             <div class="text-center px-4" data-aos="fade-up" data-aos-duration="1500">
-                <p class="font-serif text-[#1e1e1e] text-sm md:text-lg tracking-wide mb-1">The Wedding Of</p>
-                <h1 class="font-script text-4xl md:text-6xl text-[#1e1e1e] mb-2 drop-shadow-sm font-bold">
+                <p class="font-serif text-[#1e1e1e] text-[10px] md:text-sm tracking-wide mb-1">The Wedding Of</p>
+                <h1 class="font-script text-2xl md:text-4xl text-[#1e1e1e] mb-2 drop-shadow-sm font-bold">
                     {{ $invitation->bride_name }} & {{ $invitation->groom_name }}
                 </h1>
                 
                 <div class="space-y-0.5 mb-4">
-                    <p class="font-serif text-[#1e1e1e] text-xs md:text-base">Kepada Yth:</p>
-                    <p class="font-serif text-[#1e1e1e] text-lg md:text-2xl font-bold italic">{{ request('to', 'Tamu Undangan') }}</p>
-                    <p class="font-serif text-[#1e1e1e] text-xs md:text-base">Di Tempat</p>
+                    <p class="font-serif text-[#1e1e1e] text-[9px] md:text-xs">Kepada Yth:</p>
+                    <p class="font-serif text-[#1e1e1e] text-sm md:text-lg font-bold italic">{{ request('to', 'Tamu Undangan') }}</p>
+                    <p class="font-serif text-[#1e1e1e] text-[9px] md:text-xs">Di Tempat</p>
                 </div>
 
                 <button onclick="openInvitation()"
@@ -115,32 +115,32 @@
                 <div class="container mx-auto px-4 text-center relative z-10">
                     <!-- Text Content Only -->
                     <div class="mb-6" data-aos="fade-up">
-                        <p class="font-serif text-[#1e1e1e] text-base md:text-lg tracking-tight mb-1">The Wedding Of</p>
-                        <h1 class="font-script text-5xl md:text-6xl text-[#1e1e1e] mb-3 drop-shadow-sm font-bold">
+                        <p class="font-serif text-[#1e1e1e] text-sm md:text-base tracking-tight mb-1">The Wedding Of</p>
+                        <h1 class="font-script text-4xl md:text-5xl text-[#1e1e1e] mb-3 drop-shadow-sm font-bold">
                             {{ $invitation->bride_name }} & {{ $invitation->groom_name }}
                         </h1>
-                        <p class="font-serif text-[#1e1e1e] text-sm md:text-base max-w-sm mx-auto leading-tight italic">
+                        <p class="font-serif text-[#1e1e1e] text-xs md:text-sm max-w-sm mx-auto leading-tight italic">
                             kami akan menikah, kami ingin anda menjadi bagian dari hari bahagia kami
                         </p>
                     </div>
 
                     <!-- COUNTDOWN -->
                     <div class="flex justify-center gap-2 md:gap-4 mb-10" data-aos="fade-up">
-                        <div class="bg-black text-white w-16 md:w-20 py-2 rounded-lg flex flex-col items-center shadow-lg">
-                            <span id="days" class="text-xl md:text-3xl font-bold">0</span>
-                            <span class="text-[10px] md:text-xs uppercase">Hari</span>
+                        <div class="bg-black text-white w-12 md:w-14 py-2 rounded-lg flex flex-col items-center shadow-lg">
+                            <span id="days" class="text-base md:text-xl font-bold">0</span>
+                            <span class="text-[7px] md:text-[8px] uppercase">Hari</span>
                         </div>
-                        <div class="bg-black text-white w-16 md:w-20 py-2 rounded-lg flex flex-col items-center shadow-lg">
-                            <span id="hours" class="text-xl md:text-3xl font-bold">0</span>
-                            <span class="text-[10px] md:text-xs uppercase">Jam</span>
+                        <div class="bg-black text-white w-12 md:w-14 py-2 rounded-lg flex flex-col items-center shadow-lg">
+                            <span id="hours" class="text-base md:text-xl font-bold">0</span>
+                            <span class="text-[7px] md:text-[8px] uppercase">Jam</span>
                         </div>
-                        <div class="bg-black text-white w-16 md:w-20 py-2 rounded-lg flex flex-col items-center shadow-lg">
-                            <span id="minutes" class="text-xl md:text-3xl font-bold">0</span>
-                            <span class="text-[10px] md:text-xs uppercase">Menit</span>
+                        <div class="bg-black text-white w-12 md:w-14 py-2 rounded-lg flex flex-col items-center shadow-lg">
+                            <span id="minutes" class="text-base md:text-xl font-bold">0</span>
+                            <span class="text-[7px] md:text-[8px] uppercase">Menit</span>
                         </div>
-                        <div class="bg-black text-white w-16 md:w-20 py-2 rounded-lg flex flex-col items-center shadow-lg">
-                            <span id="seconds" class="text-xl md:text-3xl font-bold">0</span>
-                            <span class="text-[10px] md:text-xs uppercase">Detik</span>
+                        <div class="bg-black text-white w-12 md:w-14 py-2 rounded-lg flex flex-col items-center shadow-lg">
+                            <span id="seconds" class="text-base md:text-xl font-bold">0</span>
+                            <span class="text-[7px] md:text-[8px] uppercase">Detik</span>
                         </div>
                     </div>
 
@@ -182,29 +182,29 @@
 
                 <!-- First Person -->
                 <div class="mb-8" data-aos="fade-up">
-                    <h2 class="font-script text-4xl md:text-6xl text-[#1e1e1e] mb-1 font-bold">{{ $invitation->groom_name }}</h2>
+                    <h2 class="font-script text-2xl md:text-4xl text-[#1e1e1e] mb-1 font-bold">{{ $invitation->groom_name }}</h2>
                     <div class="space-y-0.5">
-                        <p class="font-serif text-[#1e1e1e] text-xs md:text-sm italic">Putra dari</p>
-                        <p class="font-serif text-[#1e1e1e] text-sm md:text-lg font-bold italic">{{ $invitation->groom_parents ?? 'Bapak ..... dan Ibu .....' }}</p>
+                        <p class="font-serif text-[#1e1e1e] text-[9px] md:text-[10px] italic">Putra dari</p>
+                        <p class="font-serif text-[#1e1e1e] text-[10px] md:text-sm font-bold italic">{{ $invitation->groom_parents ?? 'Bapak ..... dan Ibu .....' }}</p>
                     </div>
                 </div>
 
                 <!-- Divider & -->
                 <div class="relative flex items-center justify-center gap-6 mb-8" data-aos="zoom-in">
-                    <div class="h-0.5 w-12 md:w-20 bg-black/40"></div>
+                    <div class="h-px w-12 md:w-20 bg-black/40"></div>
                     <div class="relative">
                         <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute inset-0 w-16 md:w-24 -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 opacity-30 pointer-events-none" alt="">
-                        <span class="font-script text-3xl md:text-5xl text-[#1e1e1e] relative z-10 font-bold">&</span>
+                        <span class="font-script text-xl md:text-3xl text-[#1e1e1e] relative z-10 font-bold">&</span>
                     </div>
-                    <div class="h-0.5 w-12 md:w-20 bg-black/40"></div>
+                    <div class="h-px w-12 md:w-20 bg-black/40"></div>
                 </div>
 
                 <!-- Second Person -->
                 <div class="mb-10" data-aos="fade-up">
-                    <h2 class="font-script text-4xl md:text-6xl text-[#1e1e1e] mb-1 font-bold">{{ $invitation->bride_name }}</h2>
+                    <h2 class="font-script text-2xl md:text-4xl text-[#1e1e1e] mb-1 font-bold">{{ $invitation->bride_name }}</h2>
                     <div class="space-y-0.5">
-                        <p class="font-serif text-[#1e1e1e] text-xs md:text-sm italic">Putri dari</p>
-                        <p class="font-serif text-[#1e1e1e] text-sm md:text-lg font-bold italic">{{ $invitation->bride_parents ?? 'Bapak ..... dan Ibu .....' }}</p>
+                        <p class="font-serif text-[#1e1e1e] text-[9px] md:text-[10px] italic">Putri dari</p>
+                        <p class="font-serif text-[#1e1e1e] text-[10px] md:text-sm font-bold italic">{{ $invitation->bride_parents ?? 'Bapak ..... dan Ibu .....' }}</p>
                     </div>
                 </div>
 
@@ -247,7 +247,7 @@
 
                 <!-- Akad/Pernikahan Card -->
                 <div class="bg-black/5 backdrop-blur-sm rounded-[2rem] p-3 md:p-6 mb-6 shadow-sm border border-black/5" data-aos="fade-up">
-                    <h2 class="font-serif text-[#1e1e1e] text-2xl md:text-3xl font-bold mb-6">Pernikahan</h2>
+                    <h2 class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold mb-6">Pernikahan</h2>
 
                     <!-- Date Area -->
                     <div class="flex items-center justify-center gap-4 md:gap-8 mb-8 border-y border-black/10 py-6">
@@ -285,7 +285,7 @@
                     <!-- Clouds decor in card -->
                     <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute right-0 top-1/2 -translate-y-1/2 w-20 md:w-28 opacity-20 transform translate-x-8 pointer-events-none" alt="">
                     
-                    <h2 class="font-serif text-[#1e1e1e] text-2xl md:text-3xl font-bold mb-6">Resepsi</h2>
+                    <h2 class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold mb-6">Resepsi</h2>
 
                     <!-- Date Area -->
                     <div class="flex items-center justify-center gap-4 md:gap-8 mb-8 border-y border-black/10 py-6">
@@ -341,7 +341,7 @@
                 <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -right-10 top-40 w-32 md:w-48 opacity-30 transform -scale-x-100 pointer-events-none" alt="">
 
                 <div class="mb-10" data-aos="fade-up">
-                    <h2 class="font-serif text-[#1e1e1e] text-4xl md:text-6xl font-bold tracking-tighter">Foto</h2>
+                    <h2 class="font-serif text-[#1e1e1e] text-2xl md:text-4xl font-bold tracking-tighter">Foto</h2>
                 </div>
 
                 <div class="grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4" data-aos="fade-up">
@@ -375,8 +375,8 @@
                 <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -left-10 top-0 w-24 opacity-30 pointer-events-none" alt="">
                 <img src="{{ asset('assets/image/theme-6-awan.png') }}" class="absolute -right-10 top-0 w-24 opacity-30 transform -scale-x-100 pointer-events-none" alt="">
 
-                <h2 class="font-serif text-[#1e1e1e] text-4xl md:text-6xl font-bold mb-4 tracking-tighter" data-aos="fade-up">Hadiah Pernikahan</h2>
-                <p class="font-serif text-[#1e1e1e] text-sm md:text-base italic mb-10 px-4" data-aos="fade-up">Bagi Bapak/Ibu yang ingin memberikan tanda kasih untuk kedua mempelai</p>
+                <h2 class="font-serif text-[#1e1e1e] text-2xl md:text-4xl font-bold mb-4 tracking-tighter" data-aos="fade-up">Hadiah Pernikahan</h2>
+                <p class="font-serif text-[#1e1e1e] text-[10px] md:text-xs italic mb-10 px-4" data-aos="fade-up">Bagi Bapak/Ibu yang ingin memberikan tanda kasih untuk kedua mempelai</p>
 
                 <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
                     @if($invitation->bank_account)
@@ -410,7 +410,7 @@
         <section id="adab" class="py-24 px-4 relative bg-transparent text-center overflow-hidden">
             <div class="container mx-auto max-w-5xl relative z-10">
                 <div class="mb-12" data-aos="fade-up">
-                    <h2 class="font-serif text-[#1e1e1e] text-4xl md:text-6xl font-bold tracking-tighter">Adab Walimah</h2>
+                    <h2 class="font-serif text-[#1e1e1e] text-2xl md:text-4xl font-bold tracking-tighter">Adab Walimah</h2>
                     <p class="font-serif text-[#1e1e1e] text-sm md:text-base italic mt-2 px-4 leading-relaxed">Etika Dalam Menghadiri Acara Pernikahan</p>
                 </div>
 
@@ -519,7 +519,7 @@
         <!-- UCAPAN & DOA SECTION -->
         <section id="ucapan" class="pt-24 pb-40 px-4 relative bg-transparent overflow-hidden">
             <div class="container mx-auto max-w-2xl relative z-10 text-center">
-                <h2 class="font-serif text-[#1e1e1e] text-4xl md:text-6xl font-bold mb-12 tracking-tighter" data-aos="fade-up">Ucapan & Doa</h2>
+                <h2 class="font-serif text-[#1e1e1e] text-2xl md:text-4xl font-bold mb-12 tracking-tighter" data-aos="fade-up">Ucapan & Doa</h2>
                 
                 <div class="max-h-[600px] overflow-y-auto custom-scrollbar px-2">
                     <div id="rsvpList" class="space-y-6 pb-12">
