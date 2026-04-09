@@ -433,9 +433,7 @@
                                         01
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Untuk pertama kalinya kedua pihak bertemu. Sebatas pertemuan sederhana nan biasa.
-                                        Saat nota reimburse diserahkan, pihak laki-laki merasakan debar halus—seolah hatinya
-                                        mulai diuji.
+                                        Untuk pertama kalinya kedua pihak bertemu.Sebatas pertemuan sederhana nan biasa. Saat nota reimburse pasca Hamdun dari lombok diserahkan kepada Muthia sebagai penanggungjawab finance.
                                     </p>
                                 </div>
                             </div>
@@ -469,9 +467,7 @@
                                         02
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Pihak perempuan kembali hadir. Tanpa saling mengenal dan saling mengetahui. Keduanya
-                                        bertemu dalam sesi foto tim akhwat finance, dengan pihak laki-laki di balik
-                                        lensa—Hatinya berdebar dan mulai kembali diuji.
+                                        Pihak perempuan kembali hadir. Tanpa saling mengenal dan saling mengetahui. Keduanya tak sengaja bertemu lagi dalam sesi foto tim akhwat, pada saat itu pihak laki-laki di balik lensa sebagai juru foto—kejadiannya begitu cepat dan pihak laki-laki timbuk kecenderungan.
                                     </p>
                                 </div>
                             </div>
@@ -494,8 +490,7 @@
                                         03
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Sebuah keberanian dilakukan. Hamdun melangkah dengan niat yakin, mengajukan ta'aruf
-                                        kepada Muthia melalui salah satu Asatidz Cinta Quran Foundation.
+                                        "Selama kurang lebih 3 pekan, Hamdun gelisah dan mulai kepo. Hingga akhirnya cek sosial media dan yap, tidak ada postingan apa-apa saat itu. Maka sebuah keberanian dilakukan Hamdun melangkah dengan niat mengajukan ta’aruf kepada Muthia melalui sala satu Asatidz Cinta Quran Foundation.
                                     </p>
                                 </div>
                             </div>
@@ -529,8 +524,7 @@
                                         04
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Di selasar Masjid Raya Al-Muttaqin, Kota Bogor, menjadi awal pertemuan kedua pihak
-                                        dengan pendampingan dua perantara.
+                                        Menjelang magrib di selasar Masjid Raya Al-Muttaqin, Kota Bogor.  Masjid kubah hijau dengan parkiran yang luas menjadi saksi, awal pertemuan kedua pihak dengan pendampingan dua perantara. Saat itulah kami lebih mulai mengenal.
                                     </p>
                                 </div>
                             </div>
@@ -553,8 +547,7 @@
                                         05
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Pukul 8 malam, sebuah pertemuan bersama orang tua Muthia. 2 jam penuh doa, diskusi
-                                        dan pertanyaan. Menjadi langkah awal untuk saling meyakinkan niat.
+                                        Pagi hari, Hamdun dapat kabar dari perantara bahwa pukul 8 malam, diundang oleh ayah dari Muthia untuk ke rumahnya. Sebuah pertemuan 2 jam yang penuh doa dan pertanyaan dari kedua orang tua Muthia. Pertemuan itu menjadi langkah awal untuk meyakinkan kedua orang tua Muthia.
                                     </p>
                                 </div>
                             </div>
@@ -587,8 +580,8 @@
                                         06
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Hari demi hari penuh pertimbangan. 27 Desember, Hamdun kembali diundang untuk
-                                        diperkenalkan kepada keluarga besar Muthia.
+                                        Hari demi hari penuh pertimbangan. 
+                                        Pada 27 Desember, Hamdun kembali diundang sendirian untuk diperkenalkan kepada keluarga besar Muthia, keluarga besar pengen tahu katanya, tapi banyak ditanya-tanya ternyata (hhe).
                                     </p>
                                 </div>
                             </div>
@@ -611,8 +604,8 @@
                                         07
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Atas izin Allah, kedua orang tua kami dipertemukan. Sebuah khitbah menjadi pengikat
-                                        niat, doa, dan masa depan kami.
+                                        Alhamdulillah..atas izin Allah, beberapa hari sebelumnya niat baik Hamdun diterima dan kedua orang tua kami dipertemukan.
+                                        Sebuah khitbah menjadi pengikat niat, doa, dan masa depan kami.
                                     </p>
                                 </div>
                             </div>
@@ -646,7 +639,7 @@
                                         08
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Masa jeda yang kami isi dengan menata kembali diri, memperdalam kualitas ibadah.
+                                        Masa jeda yang kami isi dengan menata kembali diri, memperdalam kualitas ibadah dan persiapan lainnya.
                                     </p>
                                 </div>
                             </div>
@@ -668,9 +661,7 @@
                                         09
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Salah satu hari dan momen terindah yang terjadi di hidup kami. Ya, hari akad itu
-                                        dimulai. Insyaallah kami berdua akan melaksanakan "Mitsaqan Ghaliza" (Perjanjian
-                                        Agung) yang akan mempersatukan tujuan mulia itu.
+                                        Salah satu hari dan momen terindah yang terjadi di hidup kami. Ya, hari akad itu diimulai. Insyaallah kami berdua akan melaksanakan "Mitsaqan Ghaliza" (Perjanjian Agung) yang akan mempersatukan tujuan mulia itu.
                                     </p>
                                 </div>
                             </div>
