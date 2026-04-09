@@ -581,7 +581,7 @@
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
                                         Hari demi hari penuh pertimbangan. 
-                                        Pada 27 Desember, Hamdun kembali diundang sendirian untuk diperkenalkan kepada keluarga besar Muthia, keluarga besar pengen tahu katanya, tapi banyak ditanya-tanya ternyata (hhe).
+                                        Pada 27 Desember, Hamdun kembali diundang sendirian untuk diperkenalkan kepada keluarga besar Muthia, keluarga besar pengen tahu dan tanya-tanya katanya (hhe).
                                     </p>
                                 </div>
                             </div>
