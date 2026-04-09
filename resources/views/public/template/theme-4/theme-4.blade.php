@@ -467,7 +467,7 @@
                                         02
                                     </div>
                                     <p class="text-[#f7e7ce] font-light leading-relaxed text-sm">
-                                        Pihak perempuan kembali hadir. Tanpa saling mengenal dan saling mengetahui. Keduanya tak sengaja bertemu lagi dalam sesi foto tim akhwat, pada saat itu pihak laki-laki di balik lensa sebagai juru foto—kejadiannya begitu cepat dan pihak laki-laki timbuk kecenderungan.
+                                        Pihak perempuan kembali hadir. Tanpa saling mengenal dan saling mengetahui. Keduanya tak sengaja bertemu lagi dalam sesi foto tim akhwat, pada saat itu pihak laki-laki di balik lensa sebagai juru foto—kejadiannya begitu cepat dan pihak laki-laki timbul kecenderungan.
                                     </p>
                                 </div>
                             </div>
