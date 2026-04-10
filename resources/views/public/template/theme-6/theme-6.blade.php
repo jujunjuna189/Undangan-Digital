@@ -34,7 +34,7 @@
             <div class="text-center px-4" data-aos="fade-up" data-aos-duration="1500">
                 <p class="font-serif text-[#1e1e1e] text-[10px] md:text-sm tracking-wide mb-1">The Wedding Of</p>
                 <h1 class="font-script text-2xl md:text-4xl text-[#1e1e1e] mb-2 drop-shadow-sm font-bold">
-                    {{ $invitation->bride_name }} & {{ $invitation->groom_name }}
+                    {{ $invitation->bride_name }} & </br>{{ $invitation->groom_name }}
                 </h1>
 
                 <div class="space-y-0.5 mb-4">
