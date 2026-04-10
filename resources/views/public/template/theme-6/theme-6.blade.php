@@ -328,7 +328,7 @@
                         <div class="space-y-4">
                             <div>
                                 <p class="font-script text-xl md:text-2xl text-[#1e1e1e] font-bold italic">Pukul :
-                                    {{ $invitation->akad_time ?? '08.00' }} WIB - Selesai</p>
+                                    {{ $invitation->akad_time ?? '08.00' }}</p>
                             </div>
                             <div class="space-y-0.5">
                                 <p class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold">Lokasi</p>
@@ -375,7 +375,7 @@
                         <div class="space-y-4">
                             <div>
                                 <p class="font-script text-xl md:text-2xl text-[#1e1e1e] font-bold italic">Pukul :
-                                    {{ $invitation->resepsi_time ?? '11.00' }} WIB - Selesai</p>
+                                    {{ $invitation->resepsi_time ?? '11.00' }}</p>
                             </div>
                             <div class="space-y-0.5">
                                 <p class="font-serif text-[#1e1e1e] text-lg md:text-xl font-bold">Lokasi</p>
