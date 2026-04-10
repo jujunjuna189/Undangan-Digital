@@ -255,6 +255,19 @@
                 document.body.style.overflow = '';
             }
         }
+
+        // Global WhatsApp number formatter
+        document.addEventListener('input', function (e) {
+            const target = e.target;
+            const phoneFieldNames = ['phone', 'whatsapp', 'wa', 'wa_number', 'no_hp', 'no_wa', 'nomor_wa'];
+            if (phoneFieldNames.includes(target.name)) {
+                let value = target.value;
+                // Replace leading 0 with 62
+                if (value.startsWith('0')) {
+                    target.value = '62' + value.substring(1);
+                }
+            }
+        });
     </script>
     @stack('scripts')
 </body>
