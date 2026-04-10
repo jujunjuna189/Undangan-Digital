@@ -28,7 +28,7 @@
                 </div>
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest">No. WhatsApp (Opsional)</label>
-                    <input type="text" name="phone" placeholder="Contoh: 08123456789" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-sm focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
+                    <input type="text" name="phone" placeholder="Contoh: 628123456789" class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 text-sm focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all">
                 </div>
                 <button type="submit" class="w-full bg-rose-500 text-white py-4 rounded-2xl font-bold text-sm shadow-lg shadow-rose-100 hover:bg-rose-600 transition-all">
                     Simpan Tamu

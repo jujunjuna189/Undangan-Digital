@@ -230,7 +230,7 @@
                 <div class="grid md:grid-cols-2 gap-6">
                     <div class="space-y-2">
                         <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-4">No. WhatsApp</label>
-                        <input type="text" name="phone" placeholder="Contoh: 0812345..." class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all" required>
+                        <input type="text" name="phone" placeholder="Contoh: 62812345..." class="w-full bg-gray-50 border border-gray-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-rose-500 focus:outline-none transition-all" required>
                     </div>
                     <div class="space-y-2">
                         <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-4">Email (Opsional)</label>
