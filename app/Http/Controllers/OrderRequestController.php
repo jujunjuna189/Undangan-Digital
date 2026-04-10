@@ -19,6 +19,17 @@ class OrderRequestController extends Controller
 
         OrderRequest::create($validated);
 
-        return back()->with('success', 'Permintaan pesanan Anda telah terkirim! Tim kami akan segera menghubungi Anda.');
+        // Redirect to WhatsApp
+        $adminPhone = '6285179792137';
+        $message = "Halo Admin, saya ingin memesan paket *{$request->package_name}*.\n\n"
+                 . "*Data Pemesan:*\n"
+                 . "• Nama: {$request->name}\n"
+                 . "• WhatsApp: {$request->phone}\n"
+                 . "• Email: " . ($request->email ?? '-') . "\n"
+                 . "• Catatan: " . ($request->notes ?? '-');
+
+        $url = "https://wa.me/{$adminPhone}?text=" . rawurlencode($message);
+        
+        return redirect()->away($url);
     }
 }
